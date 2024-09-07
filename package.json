@@ -23,5 +23,9 @@
   "bugs": {
     "url": "https://github.com/ubivera/ui/issues"
   },
-  "homepage": "https://github.com/ubivera/ui#readme"
+  "homepage": "https://github.com/ubivera/ui#readme",
+  "devDependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
 }
