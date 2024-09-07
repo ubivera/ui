@@ -1,7 +1,9 @@
 import React from 'react';
 
-type ButtonProps = React.HTMLAttributes<HTMLButtonElement>;
+type ButtonProps = React.HTMLAttributes<HTMLButtonElement> & {
+    variant: 'primary' | 'secondary';
+};
 
-export default function Button(props: ButtonProps) {
-    return <button {...props} />;
+export default function Button({ className, variant, ...props }: ButtonProps) {
+    return <button {...props} className={variant} />;
 }
