@@ -1,0 +1,27 @@
+{
+  "name": "@ubivera/ui",
+  "version": "1.0.0",
+  "description": "A beautifully crafted open-source UI component library built in Typescript.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ubivera/ui.git"
+  },
+  "keywords": [
+    "open-source",
+    "library",
+    "typescript",
+    "ui",
+    "component",
+    "ubivera"
+  ],
+  "author": "Ubivera",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ubivera/ui/issues"
+  },
+  "homepage": "https://github.com/ubivera/ui#readme"
+}
