@@ -1,10 +1,11 @@
 {
   "name": "@ubivera/ui",
   "version": "1.0.0",
+  "private": true,
   "description": "A beautifully crafted open-source UI component library built in Typescript.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"No test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -27,5 +28,10 @@
   "devDependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
-  }
+  },
+  "peerDependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "dependencies": {}
 }
