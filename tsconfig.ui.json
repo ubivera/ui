@@ -1,0 +1,32 @@
+{
+    "compilerOptions": {
+      "target": "ESNext",
+      "useDefineForClassFields": true,
+      "lib": ["ESNext", "DOM", "DOM.Iterable"],
+      "module": "ESNext",
+      "jsx": "react",
+      "skipLibCheck": true,
+  
+      /* Output */
+      "moduleResolution": "node",
+      "allowImportingTsExtensions": true,
+      "allowSyntheticDefaultImports": true,
+      "isolatedModules": true,
+      "moduleDetection": "force",
+      "declaration": true,
+      "declarationDir": "dist/esm/types",
+      "sourceMap": true,
+      "outDir": "dist",
+      "emitDeclarationOnly": true,
+
+      /* Allow JS and TSX */
+      "allowJs": true,
+  
+      /* Linting */
+      "strict": true,
+      "noUnusedLocals": true,
+      "noUnusedParameters": true,
+      "noFallthroughCasesInSwitch": true
+    },
+    "include": ["src/**/*.ts", "src/**/*.tsx"]
+}
