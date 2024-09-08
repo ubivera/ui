@@ -2,7 +2,7 @@
     "compilerOptions": {
       "target": "ESNext",
       "useDefineForClassFields": true,
-      "lib": ["ES2020", "DOM", "DOM.Iterable"],
+      "lib": ["ESNext", "DOM", "DOM.Iterable"],
       "module": "ESNext",
       "jsx": "react",
       "skipLibCheck": true,
@@ -14,10 +14,13 @@
       "isolatedModules": true,
       "moduleDetection": "force",
       "declaration": true,
-      "declarationDir": "types",
+      "declarationDir": "dist/esm/types",
       "sourceMap": true,
       "outDir": "dist",
       "emitDeclarationOnly": true,
+
+      /* Allow JS and TSX */
+      "allowJs": true,
   
       /* Linting */
       "strict": true,
@@ -25,5 +28,5 @@
       "noUnusedParameters": true,
       "noFallthroughCasesInSwitch": true
     },
-    "include": ["src"]
+    "include": ["src/**/*.ts", "src/**/*.tsx"]
 }
