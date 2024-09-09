@@ -1,28 +1,57 @@
-import React, { useEffect, useRef } from 'react';
-import ButtonLogic from './Button.logic';
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Ubivera. All rights reserved.
+ *  Licensed under the MIT License. See LICENSE.md in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
 
-type ButtonProps = React.HTMLAttributes<HTMLButtonElement> & {
-    variant?: 'primary' | 'secondary' | 'optional';
-    onLogicClick?: (event: MouseEvent) => void;
+import React, { forwardRef } from 'react';
+import type ButtonVariant from '@utils/buttonVariants';
+import type ButtonSize from '@utils/buttonSizes';
+import classNames from 'classnames';
+
+const sizeClasses: Record<ButtonSize, string> = {
+    small: 'px-2 py-1 text-sm',
+    medium: 'px-4 py-2 text-base',
+    large: 'px-6 py-3 text-lg',
 };
 
-export default function Button({ className, variant, onLogicClick, ...props }: ButtonProps) {
-    const buttonRef = useRef<HTMLButtonElement>(null);
-    let buttonLogic: ButtonLogic | null = null;
+const variantClasses: Record<ButtonVariant, string> = {
+    primary: 'bg-blue-500 text-white hover:bg-blue-600',
+    secondary: 'bg-gray-500 text-white hover:bg-gray-600'
+};
 
-    useEffect(() => {
-        if (buttonRef.current) {
-            buttonLogic = new ButtonLogic(buttonRef.current);
+type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+    variant?: ButtonVariant;
+    size?: ButtonSize;
+    isLoading?: boolean;
+    startIcon?: React.ReactNode;
+    endIcon?: React.ReactNode;
+};
 
-            if (onLogicClick) {
-                buttonLogic.setOnClickHandler(onLogicClick);
-            }
-        }
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+    ({ className, variant = 'primary', size = 'medium', isLoading = false, startIcon, endIcon, children, disabled, ...props }, ref) => {
+        const classes = classNames(
+            sizeClasses[size],
+            variantClasses[variant],
+            { 'cursor-not-allowed opacity-50': disabled || isLoading },
+            className
+        );
 
-        return () => {
-            buttonLogic?.destroy();
-        };
-    }, [onLogicClick]);
+        return (
+            <button
+                {...props}
+                className={classes}
+                disabled={disabled || isLoading}
+                aria-disabled={disabled || isLoading}
+                aria-busy={isLoading}
+                ref={ref}
+            >
+                {startIcon && <span className="mr-2">{startIcon}</span>}
+                {isLoading ? <span>Loading...</span> : children}
+                {endIcon && <span className="ml-2">{endIcon}</span>}
+            </button>
+        );
+    }
+);
 
-    return <button ref={buttonRef} {...props} className={variant} />;
-}
+Button.displayName = 'Button';
+export default Button;

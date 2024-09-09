@@ -6,6 +6,13 @@
       "module": "ESNext",
       "jsx": "react",
       "skipLibCheck": true,
+
+      /* Paths */
+      "baseUrl": "src",
+      "paths": {
+        "@utils/*": ["utils/*"]
+      },
+      "forceConsistentCasingInFileNames": true,
   
       /* Output */
       "moduleResolution": "node",
