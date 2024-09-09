@@ -4,7 +4,7 @@
   "private": true,
   "description": "A beautifully crafted open-source react component library built in Typescript.",
   "scripts": {
-    "rollup": "rollup --config --bundleConfigAsCjs"
+    "build": "tsc -b && rollup -c --bundleConfigAsCjs"
   },
   "repository": {
     "type": "git",
@@ -33,6 +33,7 @@
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-typescript": "^11.1.6",
+    "@types/node": "^22.5.4",
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
     "eslint": "^9.10.0",

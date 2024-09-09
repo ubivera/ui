@@ -5,9 +5,10 @@ import { babel } from '@rollup/plugin-babel';
 import { dts } from 'rollup-plugin-dts';
 import json from '@rollup/plugin-json';
 
-const packageJson = require('./package.json');
+import { defineConfig } from 'rollup';
+import * as packageJson from './package.json';
 
-export default [
+export default defineConfig([
     {
         input: 'src/index.ts',
         output: [
@@ -43,6 +44,6 @@ export default [
     {
         input: 'dist/esm/types/index.d.ts',
         output: [{ file: 'dist/index.d.ts', format: 'esm' }],
-        plugins: [ dts() ],
+        plugins: [dts()],
     }
-];
+]);
