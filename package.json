@@ -4,7 +4,8 @@
   "private": true,
   "description": "A beautifully crafted open-source react component library built in Typescript.",
   "scripts": {
-    "build": "tsc -b && rollup -c --bundleConfigAsCjs"
+    "build": "tsc -b && rollup -c --bundleConfigAsCjs",
+    "build:watch": "tsc -b --watch && rollup -c --bundleConfigAsCjs --watch"
   },
   "repository": {
     "type": "git",
@@ -36,6 +37,8 @@
     "@types/node": "^22.5.4",
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
+    "classnames": "^2.5.1",
+    "npm": "^10.8.3",
     "eslint": "^9.10.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -55,7 +58,5 @@
     "dist"
   ],
   "types": "dist/index.d.ts",
-  "dependencies": {
-    "npm": "^10.8.3"
-  }
+  "dependencies": {}
 }
