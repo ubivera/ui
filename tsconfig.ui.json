@@ -9,9 +9,6 @@
 
       /* Paths */
       "baseUrl": "src",
-      "paths": {
-        "@utils/*": ["utils/*"]
-      },
       "forceConsistentCasingInFileNames": true,
   
       /* Output */
