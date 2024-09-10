@@ -1,6 +1,7 @@
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
+import postcss from 'rollup-plugin-postcss';
 import { babel } from '@rollup/plugin-babel';
 import { dts } from 'rollup-plugin-dts';
 import json from '@rollup/plugin-json';
@@ -29,6 +30,12 @@ export default defineConfig([
             typescript({ 
                 tsconfig: './tsconfig.json',
                 jsx: 'react'
+            }),
+            postcss({
+                extensions: ['.css', '.scss'],
+                extract: true,
+                minimize: true,
+                use: ['sass'],
             }),
             babel({
                 babelHelpers: 'bundled',

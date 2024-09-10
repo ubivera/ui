@@ -9,20 +9,20 @@ import type ButtonSize from '../../utils/buttonSizes';
 import classNames from 'classnames';
 
 /**
+ * Predefined variant classes for the Button component.
+ */
+const variantClasses: Record<ButtonVariant, string> = {
+    primary: 'bg-blue-500 text-white hover:bg-blue-600',
+    secondary: 'button secondary'
+};
+
+/**
  * Predefined size classes for the Button component.
  */
 const sizeClasses: Record<ButtonSize, string> = {
     small: 'px-2 py-1 text-sm',
     medium: 'px-4 py-2 text-base',
     large: 'px-6 py-3 text-lg',
-};
-
-/**
- * Predefined variant classes for the Button component.
- */
-const variantClasses: Record<ButtonVariant, string> = {
-    primary: 'bg-blue-500 text-white hover:bg-blue-600',
-    secondary: 'bg-gray-500 text-white hover:bg-gray-600'
 };
 
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
