@@ -7,13 +7,14 @@ import React, { forwardRef } from 'react';
 import type ButtonVariant from '../../utils/buttonVariants';
 import type ButtonSize from '../../utils/buttonSizes';
 import classNames from 'classnames';
+import styles from './Button.module.scss';
 
 /**
  * Predefined variant classes for the Button component.
  */
 const variantClasses: Record<ButtonVariant, string> = {
     primary: 'bg-blue-500 text-white hover:bg-blue-600',
-    secondary: 'button secondary'
+    secondary: styles['button']
 };
 
 /**
