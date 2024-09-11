@@ -5,8 +5,6 @@ $button-text-color: hsla(0, 0%, 100%, 0.87);
 $button-border-color: hsl(0, 0%, 32%);
 $button-hover-background-color: hsl(0, 0%, 27%);
 $button-hover-border-color: hsl(0, 0%, 40%);
-$button-active-background-color: hsl(0, 0%, 13%);
-$button-active-border-color: hsl(0, 0%, 27%);
 $button-focus-shadow-color: hsla(0, 0%, 100%, 0.5);
 
 $button-font-size: 1rem;
@@ -16,7 +14,6 @@ $button-padding-horizontal: 1rem;
 .button {
     @include transition;
 
-    background-color: $button-background-color;
     color: $button-text-color;
     border: 1px solid $button-border-color;
     border-radius: 6px;
@@ -31,17 +28,36 @@ $button-padding-horizontal: 1rem;
     box-shadow: $box-shadow;
     background-clip: padding-box;
 
-    &:hover {
+    &:hover,
+    &:active {
         background-color: $button-hover-background-color;
         border-color: $button-hover-border-color;
-    }
-    
-    &:active {
-        background-color: $button-active-background-color;
-        border-color: $button-active-border-color;
     }
 
     &:focus-visible {
         outline: 1px solid $primary-color-hover;
+    }
+}
+
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    transform: scale(0);
+    animation: ripple 0.45s linear;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.primary {
+    background-color: $primary-color;
+}
+
+.secondary {
+    background-color: $button-background-color;
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
     }
 }
