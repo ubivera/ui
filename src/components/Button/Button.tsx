@@ -47,7 +47,6 @@ function createRipple(event: React.MouseEvent<HTMLButtonElement>) {
         }
 
         button.appendChild(circle);
-        console.log('Reached end.');
     } catch (error) {
         console.error('An error occurred while creating the ripple effect: ', error);
     }
