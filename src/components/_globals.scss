@@ -1,5 +1,27 @@
+@import url('../web/inter.css');
+
 $primary-color: #3498db;
 $secondary-color: #2ecc71;
+
+:root {
+    font-family: Inter, system-ui, Helvetica, Arial, sans-serif;
+    font-feature-settings: 'liga' 1, 'calt' 1;
+    line-height: 1.5;
+    font-weight: 400;
+
+    color-scheme: light dark;
+    color: rgba(255, 255, 255, 0.87);
+    background-color: #242424;
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+@supports (font-variation-settings: normal) {
+    :root { font-family: InterVariable, sans-serif; }
+}
 
 @mixin flex-center {
   display: flex;
