@@ -1,8 +1,47 @@
 @import '../globals';
 
+$button-background-color: hsl(0, 0%, 16%);
+$button-text-color: hsla(0, 0%, 100%, 0.87);
+$button-border-color: hsl(0, 0%, 32%);
+$button-hover-background-color: hsl(0, 0%, 27%);
+$button-hover-border-color: hsl(0, 0%, 40%);
+$button-active-background-color: hsl(0, 0%, 13%);
+$button-active-border-color: hsl(0, 0%, 27%);
+$button-focus-shadow-color: hsla(0, 0%, 100%, 0.5);
+
+$button-font-size: 1rem;
+$button-padding-vertical: 0.5rem;
+$button-padding-horizontal: 1rem;
+
 .button {
-    background-color: $primary-color;
-    color: red;
-    padding: 10px 20px;
-    border-radius: 5px;
+    @include transition;
+
+    background-color: $button-background-color;
+    color: $button-text-color;
+    border: 1px solid $button-border-color;
+    border-radius: 6px;
+    padding: $button-padding-vertical $button-padding-horizontal;
+    font-size: $button-font-size;
+    text-shadow: $text-shadow;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+    box-shadow: $box-shadow;
+    background-clip: padding-box;
+
+    &:hover {
+        background-color: $button-hover-background-color;
+        border-color: $button-hover-border-color;
+    }
+    
+    &:active {
+        background-color: $button-active-background-color;
+        border-color: $button-active-border-color;
+    }
+
+    &:focus-visible {
+        outline: 1px solid $primary-color-hover;
+    }
 }
