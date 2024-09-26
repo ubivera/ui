@@ -1,3 +1,4 @@
+import copy from 'rollup-plugin-copy';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
@@ -27,6 +28,11 @@ export default defineConfig([
         plugins: [
             resolve(),
             commonjs(),
+            copy({
+                targets: [
+                    { src: 'src/web/**/*', dest: 'dist/web' }
+                ]
+            }),
             typescript({ 
                 tsconfig: './tsconfig.json',
                 jsx: 'react'

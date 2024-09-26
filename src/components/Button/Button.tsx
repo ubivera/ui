@@ -10,14 +10,6 @@ import classNames from 'classnames';
 import styles from './Button.module.scss';
 
 /**
- * Predefined variant classes for the Button component.
- */
-const variantClasses: Record<ButtonVariant, string> = {
-    primary: 'bg-blue-500 text-white hover:bg-blue-600',
-    secondary: styles['button']
-};
-
-/**
  * Predefined size classes for the Button component.
  */
 const sizeClasses: Record<ButtonSize, string> = {
@@ -25,6 +17,40 @@ const sizeClasses: Record<ButtonSize, string> = {
     medium: 'px-4 py-2 text-base',
     large: 'px-6 py-3 text-lg',
 };
+
+/**
+ * Creates a ripple effect on button click with type safety and error handling.
+ * 
+ * @param {React.MouseEvent<HTMLButtonElement>} event - The click event.
+ */
+function createRipple(event: React.MouseEvent<HTMLButtonElement>) {
+    try {
+        const button = event.currentTarget as HTMLButtonElement | null;
+
+        if (!button) {
+            console.error('Ripple effect failed: The event target is not a button element.');
+            return;
+        }
+
+        const circle = document.createElement('span');
+        const diameter = Math.max(button.clientWidth, button.clientHeight);
+        const radius = diameter / 2;
+
+        circle.style.width = circle.style.height = `${diameter}px`;
+        circle.style.left = `${event.clientX - button.offsetLeft - radius}px`;
+        circle.style.top = `${event.clientY - button.offsetTop - radius}px`;
+        circle.classList.add(styles['ripple']);
+
+        const existingRipple = button.getElementsByClassName(styles['ripple'])[0];
+        if (existingRipple) {
+            existingRipple.remove();
+        }
+
+        button.appendChild(circle);
+    } catch (error) {
+        console.error('An error occurred while creating the ripple effect: ', error);
+    }
+}
 
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
     variant?: ButtonVariant;
@@ -62,13 +88,22 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
  * @see [Wiki](https://github.com/ubivera/ui/wiki/Button)
  */
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-    ({ className, variant = 'primary', size = 'medium', isLoading = false, startIcon, endIcon, children, disabled, ...props }, ref) => {
+    ({ className, variant = 'primary', size = 'medium', isLoading = false, startIcon, endIcon, children, disabled, onClick, ...props }, ref) => {
         const classes = classNames(
+            styles['button'],
+            styles[variant],
             sizeClasses[size],
-            variantClasses[variant],
             { 'cursor-not-allowed opacity-50': disabled || isLoading },
             className
         );
+
+        const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+            createRipple(event); 
+            
+            if (onClick) {
+                onClick(event); 
+            }
+        };
 
         return (
             <button
@@ -77,6 +112,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
                 disabled={disabled || isLoading}
                 aria-disabled={disabled || isLoading}
                 aria-busy={isLoading}
+                onClick={handleClick}
                 ref={ref}
             >
                 {startIcon && <span className="mr-2">{startIcon}</span>}
