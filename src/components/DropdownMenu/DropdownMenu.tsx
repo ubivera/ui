@@ -5,11 +5,13 @@
 
 import React, { createContext, useState, useCallback } from 'react';
 
-const DropdownContext = createContext({
-    isOpen: false,
-    toggleDropdown: () => {},
-    closeDropdown: () => {}
-});
+type DropdownContextType = {
+    isOpen: boolean;
+    toggleDropdown: () => void;
+    closeDropdown: () => void;
+};
+
+export const DropdownContext = createContext<DropdownContextType | undefined>(undefined);
 
 type DropdownMenuProps = React.HTMLAttributes<HTMLDivElement>;
 
