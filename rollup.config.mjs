@@ -17,13 +17,17 @@ export default defineConfig([
             {
                 file: packageJson.main,
                 format: 'cjs',
-                sourcemap: true,
+                sourcemap: true
             },
             {
                 file: packageJson.module,
                 format: 'esm',
-                sourcemap: true,
+                sourcemap: true
             },
+        ],
+        external: [
+            'react',
+            'react-dom'
         ],
         plugins: [
             resolve(),
