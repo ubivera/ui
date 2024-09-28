@@ -78,7 +78,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({ children, ...props }) => {
 
     return (
         <DropdownContext.Provider value={value}>
-            <div {...props}>{children}</div>
+            <div className='dropdown-menu' {...props}>{children}</div>
         </DropdownContext.Provider>
     );
 };
