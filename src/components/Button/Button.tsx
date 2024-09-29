@@ -52,12 +52,29 @@ function createRipple(event: React.MouseEvent<HTMLButtonElement>) {
     }
 }
 
+/**
+ * ButtonProps Type
+ *
+ * This defines the props that can be passed to the `Button` component. It extends the default 
+ * `ButtonHTMLAttributes` provided by React for a standard HTML button element, and adds additional
+ * properties such as `variant`, `size`, `isLoading`, `startIcon`, `endIcon`, and `active`.
+ *
+ * @typedef {React.ButtonHTMLAttributes<HTMLButtonElement>} ButtonProps - The base props for the button component.
+ *
+ * @property {ButtonVariant} [variant='primary'] - Specifies the visual style of the button (e.g., primary, secondary).
+ * @property {ButtonSize} [size='medium'] - Defines the size of the button (e.g., small, medium, large).
+ * @property {boolean} [isLoading=false] - Indicates whether the button is in a loading state (disables the button and shows a loader).
+ * @property {React.ReactNode} [startIcon] - Adds an icon element before the button text.
+ * @property {React.ReactNode} [endIcon] - Adds an icon element after the button text.
+ * @property {boolean} [active=false] - Specifies if the button is in an active state. If true, adds the 'active' class.
+ */
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
     variant?: ButtonVariant;
     size?: ButtonSize;
     isLoading?: boolean;
     startIcon?: React.ReactNode;
     endIcon?: React.ReactNode;
+    active?: boolean;
 };
 
 /**
@@ -82,18 +99,21 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
  * @param {React.ReactNode} [props.startIcon] - Icon to be placed at the start of the button text.
  * @param {React.ReactNode} [props.endIcon] - Icon to be placed at the end of the button text.
  * @param {boolean} [props.disabled] - If true, disables the button.
+ * @param {boolean} [props.active] - If true, applies the 'active' class to the button.
  * @param {React.ButtonHTMLAttributes<HTMLButtonElement>} props - The default button HTML props.
  *
  * @returns {JSX.Element} A customizable button component.
  * @see [Wiki](https://github.com/ubivera/ui/wiki/Button)
  */
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-    ({ className, variant = 'primary', size = 'medium', isLoading = false, startIcon, endIcon, children, disabled, onClick, ...props }, ref) => {
+    ({ className, variant = 'primary', size = 'medium', isLoading = false, startIcon, endIcon, active, children, disabled, onClick, ...props }, ref) => {
         const classes = classNames(
             styles['button'],
             styles[variant],
             sizeClasses[size],
-            { 'cursor-not-allowed opacity-50': disabled || isLoading },
+            { 'cursor-not-allowed opacity-50': disabled || isLoading,
+                [styles.active]: active
+             },
             className
         );
 

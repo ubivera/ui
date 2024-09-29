@@ -60,6 +60,7 @@ const DropdownTrigger: React.FC<DropdownTriggerProps> = ({ children, asChild = f
     if (asChild && React.isValidElement(children)) {
         return cloneElement(children as ReactElement, {
             ref: triggerRef,
+            active: isOpen,
             onClick: handleClick,
             ...props,
         });

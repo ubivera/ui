@@ -3,6 +3,7 @@
 $button-background-color: hsl(0, 0%, 16%);
 $button-text-color: hsla(0, 0%, 100%, 0.87);
 $button-border-color: hsl(0, 0%, 32%);
+$button-active-color: hsl(215, 57%, 51%);
 $button-hover-background-color: hsl(0, 0%, 27%);
 $button-hover-border-color: hsl(0, 0%, 40%);
 $button-focus-shadow-color: hsla(0, 0%, 100%, 0.5);
@@ -45,6 +46,10 @@ $button-padding-horizontal: 1rem;
     transform: scale(0);
     animation: ripple 0.45s linear;
     background-color: rgba(255, 255, 255, 0.3);
+}
+
+.active {
+    border-color: $button-active-color;
 }
 
 .primary {
