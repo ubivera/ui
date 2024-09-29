@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See LICENSE.md in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import React, { createContext, useState, useCallback } from 'react';
+import React, { createContext, useState, useCallback, useRef } from 'react';
 
 /**
  * DropdownContext
@@ -22,11 +22,13 @@ import React, { createContext, useState, useCallback } from 'react';
  * @property {boolean} isOpen - Indicates whether the dropdown is currently open.
  * @property {() => void} toggleDropdown - Function to toggle the dropdown's visibility.
  * @property {() => void} closeDropdown - Function to close the dropdown.
+ * @property {HTMLElement} triggerRef - A reference to the dropdown menu's trigger component.
  */
 interface DropdownContextType {
     isOpen: boolean;
     toggleDropdown: () => void;
     closeDropdown: () => void;
+    triggerRef: React.RefObject<HTMLElement>;
 };
 
 export const DropdownContext = createContext<DropdownContextType | undefined>(undefined);
@@ -61,6 +63,7 @@ type DropdownMenuProps = React.HTMLAttributes<HTMLDivElement>;
  */
 const DropdownMenu: React.FC<DropdownMenuProps> = ({ children, ...props }) => {
     const [isOpen, setIsOpen] = useState(false);
+    const triggerRef = useRef<HTMLElement>(null);
 
     const toggleDropdown = useCallback(() => {
         setIsOpen((prev) => !prev);
@@ -74,11 +77,12 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({ children, ...props }) => {
         isOpen,
         toggleDropdown,
         closeDropdown,
+        triggerRef,
     };
 
     return (
         <DropdownContext.Provider value={value}>
-            <div {...props}>{children}</div>
+            <div className='dropdown-menu' {...props}>{children}</div>
         </DropdownContext.Provider>
     );
 };

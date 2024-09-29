@@ -36,14 +36,18 @@ const DropdownMenuContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ c
         throw new Error('DropdownMenuContent must be used within a DropdownMenu');
     }
 
-    const { isOpen, closeDropdown } = context;
+    const { isOpen, closeDropdown, triggerRef } = context;
     const contentRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
-            if (contentRef.current && !contentRef.current.contains(event.target as Node)) {
-                closeDropdown();
+            const target = event.target as Node;
+
+            if (contentRef.current?.contains(target) || triggerRef.current?.contains(target)) {
+                return;
             }
+
+            closeDropdown();
         };
 
         if (isOpen) {
@@ -60,7 +64,7 @@ const DropdownMenuContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ c
     }
 
     return (
-        <div ref={contentRef} {...props}>
+        <div className='dropdown-menu-content' ref={contentRef} {...props}>
             {children}
         </div>
     );

@@ -45,17 +45,29 @@ const DropdownTrigger: React.FC<DropdownTriggerProps> = ({ children, asChild = f
         throw new Error('DropdownTrigger must be used within a DropdownMenu');
     }
 
-    const { toggleDropdown } = context;
+    const { isOpen, toggleDropdown, closeDropdown, triggerRef } = context;
+
+    const handleClick = (event: React.MouseEvent) => {
+        event.preventDefault();
+        
+        if (isOpen) {
+            closeDropdown();
+        } else {
+            toggleDropdown();
+        }
+    };
 
     if (asChild && React.isValidElement(children)) {
         return cloneElement(children as ReactElement, {
-            onClick: toggleDropdown,
+            ref: triggerRef,
+            onClick: handleClick,
             ...props,
         });
     }
 
     return (
-        <div onClick={toggleDropdown} {...props}>
+        <div className='dropdown-menu-trigger' onClick={handleClick} 
+              ref={triggerRef as React.RefObject<HTMLDivElement>} {...props}>
             {children}
         </div>
     );
