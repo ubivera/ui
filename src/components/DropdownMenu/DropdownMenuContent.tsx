@@ -36,17 +36,14 @@ const DropdownMenuContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ c
         throw new Error('DropdownMenuContent must be used within a DropdownMenu');
     }
 
-    const { isOpen, closeDropdown } = context;
+    const { isOpen, closeDropdown, triggerRef } = context;
     const contentRef = useRef<HTMLDivElement>(null);
-    const triggerRef = useRef<HTMLElement | null>(null);
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
-            if (contentRef.current && contentRef.current.contains(event.target as Node)) {
-                return;
-            }
+            const target = event.target as Node;
 
-            if (triggerRef.current && triggerRef.current.contains(event.target as Node)) {
+            if (contentRef.current?.contains(target) || triggerRef.current?.contains(target)) {
                 return;
             }
 
