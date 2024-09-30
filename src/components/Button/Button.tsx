@@ -111,8 +111,9 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             styles['button'],
             styles[variant],
             sizeClasses[size],
-            { 'cursor-not-allowed opacity-50': disabled || isLoading,
-                [styles.active]: active
+            {
+                'cursor-not-allowed opacity-50': disabled || isLoading,
+                [styles['active']]: active
              },
             className
         );
