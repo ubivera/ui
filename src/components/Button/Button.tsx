@@ -7,7 +7,6 @@ import React, { forwardRef } from 'react';
 import type ButtonVariant from '../../utils/buttonVariants';
 import type ButtonSize from '../../utils/buttonSizes';
 import classNames from 'classnames';
-import styles from './Button.module.scss';
 
 /**
  * Predefined size classes for the Button component.
@@ -16,6 +15,11 @@ const sizeClasses: Record<ButtonSize, string> = {
     small: 'px-2 py-1 text-sm',
     medium: 'px-4 py-2 text-base',
     large: 'px-6 py-3 text-lg',
+};
+
+const variantClasses: Record<ButtonVariant, string> = {
+    primary: 'bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white border border-blue-700',
+    secondary: 'bg-gray-800 hover:bg-gray-700 active:bg-gray-600 text-white border border-gray-700',
 };
 
 /**
@@ -39,9 +43,9 @@ function createRipple(event: React.MouseEvent<HTMLButtonElement>) {
         circle.style.width = circle.style.height = `${diameter}px`;
         circle.style.left = `${event.clientX - button.offsetLeft - radius}px`;
         circle.style.top = `${event.clientY - button.offsetTop - radius}px`;
-        circle.classList.add(styles['ripple']);
+        circle.classList.add('.ripple');
 
-        const existingRipple = button.getElementsByClassName(styles['ripple'])[0];
+        const existingRipple = button.getElementsByClassName('.ripple')[0];
         if (existingRipple) {
             existingRipple.remove();
         }
@@ -108,13 +112,13 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ({ className, variant = 'primary', size = 'medium', isLoading = false, startIcon, endIcon, active, children, disabled, onClick, ...props }, ref) => {
         const classes = classNames(
-            styles['button'],
-            styles[variant],
+            'transition duration-300 ease-in-out rounded-md text-center inline-block shadow-md cursor-pointer relative', // Basic styling
             sizeClasses[size],
+            variantClasses[variant],
             {
-                'cursor-not-allowed opacity-50': disabled || isLoading,
-                [styles['active']]: active
-             },
+                'opacity-50 cursor-not-allowed': disabled || isLoading,
+                'outline-none ring-2 ring-blue-300': active,
+            },
             className
         );
 
