@@ -5,6 +5,7 @@
 
 import React, { useContext, cloneElement, ReactElement } from 'react';
 import { DropdownContext } from './DropdownMenu';
+import classNames from 'classnames';
 
 type DropdownTriggerProps = React.HTMLAttributes<HTMLDivElement> & {
     asChild?: boolean;
@@ -23,7 +24,7 @@ type DropdownTriggerProps = React.HTMLAttributes<HTMLDivElement> & {
  * ```tsx
  * <DropdownMenu>
  *   <DropdownTrigger asChild>
- *     <button>Open Dropdown</button>
+ *     <Button>Open Dropdown</Button>
  *   </DropdownTrigger>
  *   <DropdownMenuContent>
  *     <p>Menu Content</p>
@@ -60,14 +61,18 @@ const DropdownTrigger: React.FC<DropdownTriggerProps> = ({ children, asChild = f
     if (asChild && React.isValidElement(children)) {
         return cloneElement(children as ReactElement, {
             ref: triggerRef,
+            active: isOpen,
             onClick: handleClick,
             ...props,
         });
     }
 
     return (
-        <div className='dropdown-menu-trigger' onClick={handleClick} 
-              ref={triggerRef as React.RefObject<HTMLDivElement>} {...props}>
+        <div
+            className={classNames('dropdown-menu-trigger', { 'active': isOpen })}
+            onClick={handleClick} 
+            ref={triggerRef as React.RefObject<HTMLDivElement>} {...props}
+        >
             {children}
         </div>
     );
