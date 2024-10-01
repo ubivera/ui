@@ -18,8 +18,8 @@ const sizeClasses: Record<ButtonSize, string> = {
 };
 
 const variantClasses: Record<ButtonVariant, string> = {
-    primary: 'bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white border border-blue-700',
-    secondary: 'bg-gray-800 hover:bg-gray-700 active:bg-gray-600 text-white border border-gray-700',
+    primary: 'primary text-white border-blue-700',
+    secondary: 'secondary text-white border-gray-700',
 };
 
 /**
@@ -43,7 +43,7 @@ function createRipple(event: React.MouseEvent<HTMLButtonElement>) {
         circle.style.width = circle.style.height = `${diameter}px`;
         circle.style.left = `${event.clientX - button.offsetLeft - radius}px`;
         circle.style.top = `${event.clientY - button.offsetTop - radius}px`;
-        circle.classList.add('.ripple');
+        circle.classList.add('ripple');
 
         const existingRipple = button.getElementsByClassName('.ripple')[0];
         if (existingRipple) {
@@ -112,12 +112,12 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ({ className, variant = 'primary', size = 'medium', isLoading = false, startIcon, endIcon, active, children, disabled, onClick, ...props }, ref) => {
         const classes = classNames(
-            'transition duration-300 ease-in-out rounded-md text-center inline-block shadow-md cursor-pointer relative', // Basic styling
+            'button inline-block cursor-pointer relative',
             sizeClasses[size],
             variantClasses[variant],
             {
-                'opacity-50 cursor-not-allowed': disabled || isLoading,
-                'outline-none ring-2 ring-blue-300': active,
+                'disabled cursor-not-allowed': disabled || isLoading,
+                'active': active,
             },
             className
         );
