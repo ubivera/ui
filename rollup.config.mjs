@@ -40,7 +40,8 @@ export default defineConfig([
             }),
             scss({
                 fileName: 'index.css',
-                sass: require('sass')
+                sass: require('sass'),
+                outputStyle: 'compressed'
             }),
             babel({
                 babelHelpers: 'bundled',
