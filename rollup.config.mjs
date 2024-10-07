@@ -1,8 +1,8 @@
-import copy from 'rollup-plugin-copy';
+import scss from 'rollup-plugin-scss';
+import terser from '@rollup/plugin-terser';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
-import postcss from 'rollup-plugin-postcss';
 import { babel } from '@rollup/plugin-babel';
 import { dts } from 'rollup-plugin-dts';
 import json from '@rollup/plugin-json';
@@ -17,12 +17,14 @@ export default defineConfig([
             {
                 file: packageJson.main,
                 format: 'cjs',
-                sourcemap: true
+                sourcemap: true,
+                assetFileNames: '[name][extname]'
             },
             {
                 file: packageJson.module,
                 format: 'esm',
-                sourcemap: true
+                sourcemap: true,
+                assetFileNames: '[name][extname]'
             },
         ],
         external: [
@@ -32,20 +34,13 @@ export default defineConfig([
         plugins: [
             resolve(),
             commonjs(),
-            copy({
-                targets: [
-                    { src: 'src/web/**/*', dest: 'dist/web' }
-                ]
-            }),
             typescript({ 
                 tsconfig: './tsconfig.json',
                 jsx: 'react'
             }),
-            postcss({
-                extensions: ['.css', '.scss'],
-                extract: true,
-                minimize: true,
-                use: ['sass'],
+            scss({
+                fileName: 'index.css',
+                sass: require('sass')
             }),
             babel({
                 babelHelpers: 'bundled',
@@ -55,12 +50,21 @@ export default defineConfig([
                     '@babel/preset-typescript'
                 ]
             }),
-            json()
-        ],
+            json(),
+            terser()
+        ]
     },
     {
         input: 'dist/esm/types/index.d.ts',
         output: [{ file: 'dist/index.d.ts', format: 'esm' }],
-        plugins: [dts()],
+        plugins: [
+            scss({
+                fileName: 'index.css',
+                sass: require('sass')
+            }),
+            dts({
+                exclude: [/\.scss$/]
+            })
+        ],
     }
 ]);

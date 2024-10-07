@@ -1,1 +1,8 @@
-@import '../globals';
+@import '../_globals';
+
+.dropdown-menu-content {
+    @include border-primary;
+
+    color: $text-color-primary;
+    background-color: $background-color-primary;
+}

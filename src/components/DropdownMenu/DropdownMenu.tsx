@@ -4,6 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import React, { createContext, useState, useCallback, useRef } from 'react';
+import './DropdownMenu.scss';
 
 /**
  * DropdownContext

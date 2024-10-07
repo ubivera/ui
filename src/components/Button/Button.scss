@@ -1,29 +1,12 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Ubivera. All rights reserved.
- *  Licensed under the MIT License. See LICENSE.md in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
-
-@import '../globals';
-
-$button-background-color: hsl(0, 0%, 16%);
-$button-text-color: hsla(0, 0%, 100%, 0.87);
-$button-border-color: hsl(0, 0%, 32%);
-$button-hover-background-color: hsl(0, 0%, 27%);
-$button-hover-border-color: hsl(0, 0%, 40%);
-$button-focus-shadow-color: hsla(0, 0%, 100%, 0.5);
-
-$button-font-size: 1rem;
-$button-padding-vertical: 0.5rem;
-$button-padding-horizontal: 1rem;
+@import '../_globals';
 
 .button {
     @include transition;
+    @include border-primary;
 
-    color: $button-text-color;
-    border: 1px solid $button-border-color;
-    border-radius: 6px;
-    padding: $button-padding-vertical $button-padding-horizontal;
-    font-size: $button-font-size;
+    color: $text-color-primary;
+    padding: $padding-vertical-primary $padding-horizontal-primary;
+    font-size: $font-size-base;
     text-shadow: $text-shadow;
     overflow: hidden;
     position: relative;
@@ -35,8 +18,8 @@ $button-padding-horizontal: 1rem;
 
     &:hover,
     &:active {
-        background-color: $button-hover-background-color;
-        border-color: $button-hover-border-color;
+        background-color: $background-color-primary-hover;
+        border-color: $border-color-primary-hover;
     }
 
     &:focus-visible {
@@ -61,7 +44,7 @@ $button-padding-horizontal: 1rem;
 }
 
 .secondary {
-    background-color: $button-background-color;
+    background-color: $background-color-primary;
 }
 
 @keyframes ripple {

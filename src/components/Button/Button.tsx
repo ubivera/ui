@@ -7,6 +7,7 @@ import React, { forwardRef } from 'react';
 import type ButtonVariant from '../../utils/buttonVariants';
 import type ButtonSize from '../../utils/buttonSizes';
 import classNames from 'classnames';
+import './Button.scss';
 
 /**
  * Predefined size classes for the Button component.
@@ -18,8 +19,8 @@ const sizeClasses: Record<ButtonSize, string> = {
 };
 
 const variantClasses: Record<ButtonVariant, string> = {
-    primary: 'primary text-white border-blue-700',
-    secondary: 'secondary text-white border-gray-700',
+    primary: 'primary',
+    secondary: 'secondary',
 };
 
 /**
@@ -112,7 +113,7 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ({ className, variant = 'primary', size = 'medium', isLoading = false, startIcon, endIcon, active, children, disabled, onClick, ...props }, ref) => {
         const classes = classNames(
-            'button inline-block cursor-pointer relative',
+            'button',
             sizeClasses[size],
             variantClasses[variant],
             {
