@@ -57,11 +57,15 @@ export default defineConfig([
     },
     {
         input: 'dist/esm/types/index.d.ts',
-        output: [{ file: 'dist/index.d.ts', format: 'esm' }],
+        output: [{
+            file: 'dist/index.d.ts',
+            format: 'esm'
+        }],
         plugins: [
             scss({
                 fileName: 'index.css',
-                sass: require('sass')
+                sass: require('sass'),
+                outputStyle: 'compressed'
             }),
             dts({
                 exclude: [/\.scss$/]

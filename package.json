@@ -4,7 +4,7 @@
   "private": true,
   "description": "A beautifully crafted open-source react component library built in Typescript.",
   "scripts": {
-    "build": "tsc -b && node copy-scss.js && node copy-web.js && rollup -c --bundleConfigAsCjs",
+    "build": "tsc -b && node utils/copy-scss.js && node utils/copy-web.js && rollup -c --bundleConfigAsCjs && node utils/minify-dts.js",
     "build:watch": "tsc -b --watch && rollup -c --bundleConfigAsCjs --watch"
   },
   "repository": {

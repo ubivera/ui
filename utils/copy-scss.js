@@ -3,8 +3,8 @@ const fs = require('fs-extra');
 const path = require('path');
 const { glob } = require('glob');
 
-const srcDir = path.resolve(__dirname, 'src');
-const destDir = path.resolve(__dirname, 'dist/esm/types');
+const srcDir = path.resolve(__dirname, '../src');
+const destDir = path.resolve(__dirname, '../dist/esm/types');
 
 function copySCSSFiles() {
     try {
