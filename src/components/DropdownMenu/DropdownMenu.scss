@@ -1,1 +1,27 @@
-@import '../globals';
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Ubivera. All rights reserved.
+ *  Licensed under the MIT License. See LICENSE.md in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.dropdown-menu {
+    position: relative;
+
+    .dropdown-menu-content {
+        @include border-primary;
+        
+        z-index: 100;
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        
+        margin-top: 15px;
+        transform-origin: center;
+        backface-visibility: hidden;
+        animation: drop-in 0.3s $transition-function;
+
+        box-shadow: $box-shadow;
+        color: $text-color-primary;
+        background-color: $background-color-primary;
+        padding: $padding-vertical-primary $padding-horizontal-primary;
+    }
+}
