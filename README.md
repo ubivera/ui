@@ -4,3 +4,10 @@
 
 The Ubivera UI framework is designed to be simple and extensible while being easy to use in your projects to easily
 provide a wonderful frontend experience for your users.
+
+To compile this library, run the following commands:
+```
+gh repo clone ubivera/ui
+npm i
+npm run build
+```
