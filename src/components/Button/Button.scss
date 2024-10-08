@@ -1,3 +1,8 @@
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Ubivera. All rights reserved.
+ *  Licensed under the MIT License. See LICENSE.md in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
 .button {
     @include transition;
     @include border-primary;
@@ -6,6 +11,7 @@
     padding: $padding-vertical-primary $padding-horizontal-primary;
     font-size: $font-size-base;
     text-shadow: $text-shadow;
+    outline: 1px solid transparent;
     overflow: hidden;
     position: relative;
     cursor: pointer;
@@ -21,11 +27,11 @@
     }
 
     &:focus-visible {
-        outline: 1px solid $primary-color-hover;
+        outline-color: $primary-color-hover;
     }
 
     &.active {
-        outline: 1px solid $primary-color-active;
+        box-shadow: $box-shadow-active;
     }
 
     &.primary {

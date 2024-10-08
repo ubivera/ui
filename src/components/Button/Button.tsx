@@ -28,7 +28,7 @@ const variantClasses: Record<ButtonVariant, string> = {
  * 
  * @param {React.MouseEvent<HTMLButtonElement>} event - The click event.
  */
-function createRipple(event: React.MouseEvent<HTMLButtonElement>) {
+function createRipple(event: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement>) {
     try {
         const button = event.currentTarget as HTMLButtonElement | null;
 
@@ -42,16 +42,31 @@ function createRipple(event: React.MouseEvent<HTMLButtonElement>) {
         const radius = diameter / 2;
 
         circle.style.width = circle.style.height = `${diameter}px`;
-        circle.style.left = `${event.clientX - button.offsetLeft - radius}px`;
-        circle.style.top = `${event.clientY - button.offsetTop - radius}px`;
+        const buttonRect = button.getBoundingClientRect();
+
+        if (event.type === 'click') {
+            const mouseEvent = event as React.MouseEvent;
+            circle.style.left = `${mouseEvent.clientX - buttonRect.left - radius}px`;
+            circle.style.top = `${mouseEvent.clientY - buttonRect.top - radius}px`;
+        } else if (event.type === 'keydown' && ((event as React.KeyboardEvent).key === 'Enter' || (event as React.KeyboardEvent).key === ' ')) {
+            circle.style.left = `${buttonRect.width / 2 - radius}px`;
+            circle.style.top = `${buttonRect.height / 2 - radius}px`;
+        } else {
+            return;
+        }
+
         circle.classList.add('ripple');
 
-        const existingRipple = button.getElementsByClassName('.ripple')[0];
+        const existingRipple = button.getElementsByClassName('ripple')[0];
         if (existingRipple) {
             existingRipple.remove();
         }
 
         button.appendChild(circle);
+
+        setTimeout(() => {
+            circle.remove();
+        }, 1500);
     } catch (error) {
         console.error('An error occurred while creating the ripple effect: ', error);
     }
@@ -131,6 +146,12 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             }
         };
 
+        const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                createRipple(event);
+            }
+        };
+
         return (
             <button
                 {...props}
@@ -139,6 +160,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
                 aria-disabled={disabled || isLoading}
                 aria-busy={isLoading}
                 onClick={handleClick}
+                onKeyDown={handleKeyDown}
                 ref={ref}
             >
                 {startIcon && <span className="mr-2">{startIcon}</span>}
