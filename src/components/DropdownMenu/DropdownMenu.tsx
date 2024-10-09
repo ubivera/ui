@@ -6,6 +6,10 @@
 import React, { createContext, useState, useCallback, useRef } from 'react';
 import './DropdownMenu.scss';
 
+interface DropdownMenuProps extends React.HTMLAttributes<HTMLDivElement> {
+    placeAbove?: boolean;
+}
+
 /**
  * DropdownContext
  *
@@ -38,8 +42,6 @@ interface DropdownContextType {
 
 export const DropdownContext = createContext<DropdownContextType | undefined>(undefined);
 
-type DropdownMenuProps = React.HTMLAttributes<HTMLDivElement>;
-
 /**
  * DropdownMenu Component
  *
@@ -66,7 +68,7 @@ type DropdownMenuProps = React.HTMLAttributes<HTMLDivElement>;
  *
  * @returns {JSX.Element} A context provider component for the dropdown menu.
  */
-const DropdownMenu: React.FC<DropdownMenuProps> = ({ children, ...props }) => {
+const DropdownMenu: React.FC<DropdownMenuProps> = ({ children, placeAbove = false, ...props }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [isClosing, setIsClosing] = useState(false);
     const triggerRef = useRef<HTMLElement>(null);
@@ -91,8 +93,28 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({ children, ...props }) => {
             closeDropdown();
         } else {
             setIsOpen(true);
+
+            setTimeout(() => {
+                if (triggerRef.current && contentRef.current) {
+                    const triggerRect = triggerRef.current.getBoundingClientRect();
+                    const contentRect = contentRef.current.getBoundingClientRect();
+                    const viewportWidth = window.innerWidth;
+
+                    let top = placeAbove 
+                        ? - contentRect.height - 20
+                        : triggerRect.height + 10;
+                    let left = triggerRect.left - 10;
+
+                    if (triggerRect.left + contentRect.width > viewportWidth) {
+                        left = viewportWidth - contentRect.width - 10;
+                    }
+
+                    contentRef.current.style.top = `${top}px`;
+                    contentRef.current.style.left = `${left}px`;
+                }
+            }, 0);
         }
-    }, [isOpen]);
+    }, [isOpen, placeAbove, closeDropdown]);
 
     const value = {
         isOpen,
@@ -105,7 +127,9 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({ children, ...props }) => {
 
     return (
         <DropdownContext.Provider value={value}>
-            <div className='dropdown-menu' {...props}>{children}</div>
+            <div className='dropdown-menu' {...props}>
+                {children}
+            </div>
         </DropdownContext.Provider>
     );
 };
