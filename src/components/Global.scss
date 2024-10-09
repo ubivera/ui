@@ -79,23 +79,59 @@ $box-shadow-active:
     }
 }
 
+$drop-from: 0.9;
+$drop-to: $drop-from;
+$drop-tail: translate3d(0, 0, 0) perspective(1px);
+$drop-resting: scale(1) $drop-tail;
+$drop-in: scale($drop-from) $drop-tail;
+$drop-out: scale($drop-to) $drop-tail;
+
 @keyframes drop-in {
     from {
-        -webkit-transform: scale(1.1) translate3d( 0, 0, 0) perspective(1px);
-        -moz-transform: scale(1.1) translate3d( 0, 0, 0) perspective(1px);
-        -o-transform: scale(1.1) translate3d( 0, 0, 0) perspective(1px);
-        -ms-transform: scale(1.1) translate3d( 0, 0, 0) perspective(1px);
-            transform: scale(1.1) translate3d( 0, 0, 0) perspective(1px);
+        -webkit-transform: $drop-in;
+        -moz-transform: $drop-in;
+        -o-transform: $drop-in;
+        -ms-transform: $drop-in;
+            transform: $drop-in;
         opacity: 0;
     }
     to {
-        -webkit-transform: scale(1) translate3d( 0, 0, 0) perspective(1px);
-        -moz-transform: scale(1) translate3d( 0, 0, 0) perspective(1px);
-        -o-transform: scale(1) translate3d( 0, 0, 0) perspective(1px);
-        -ms-transform: scale(1) translate3d( 0, 0, 0) perspective(1px);
-            transform: scale(1) translate3d( 0, 0, 0) perspective(1px);
+        -webkit-transform: $drop-resting;
+        -moz-transform: $drop-resting;
+        -o-transform: $drop-resting;
+        -ms-transform: $drop-resting;
+            transform: $drop-resting;
         opacity: 1;
     }
+}
+
+@keyframes drop-out {
+    from {
+        -webkit-transform: $drop-resting;
+        -moz-transform: $drop-resting;
+        -o-transform: $drop-resting;
+        -ms-transform: $drop-resting;
+            transform: $drop-resting;
+        opacity: 1;
+    }
+    to {
+        -webkit-transform: $drop-out;
+        -moz-transform: $drop-out;
+        -o-transform: $drop-out;
+        -ms-transform: $drop-out;
+            transform: $drop-out;
+        opacity: 0;
+    }
+}
+
+.drop-in {
+    animation-name: drop-in;
+    animation-duration: 0.2s;
+}
+  
+.drop-out {
+    animation-name: drop-out;
+    animation-duration: 0.1s;
 }
 
 span.ripple {

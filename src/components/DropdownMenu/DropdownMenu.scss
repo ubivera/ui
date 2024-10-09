@@ -17,7 +17,8 @@
         margin-top: 15px;
         transform-origin: center;
         backface-visibility: hidden;
-        animation: drop-in 0.2s $transition-function;
+        animation-fill-mode: both;
+        animation-timing-function: $transition-function;
 
         box-shadow: $box-shadow;
         color: $text-color-primary;
