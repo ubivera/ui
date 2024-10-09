@@ -7,12 +7,12 @@ import React, { useContext, cloneElement, ReactElement } from 'react';
 import { DropdownContext } from './DropdownMenu';
 import classNames from 'classnames';
 
-type DropdownTriggerProps = React.HTMLAttributes<HTMLDivElement> & {
+type DropdownMenuTriggerProps = React.HTMLAttributes<HTMLDivElement> & {
     asChild?: boolean;
 };
 
 /**
- * DropdownTrigger Component
+ * DropdownMenuTrigger Component
  *
  * This component acts as the clickable element that toggles the visibility of the dropdown menu.
  * It can either render its child element directly (using the `asChild` prop) or wrap it inside
@@ -23,45 +23,42 @@ type DropdownTriggerProps = React.HTMLAttributes<HTMLDivElement> & {
  * @example
  * ```tsx
  * <DropdownMenu>
- *   <DropdownTrigger asChild>
+ *   <DropdownMenuTrigger asChild>
  *     <Button>Open Dropdown</Button>
- *   </DropdownTrigger>
+ *   </DropdownMenuTrigger>
  *   <DropdownMenuContent>
  *     <p>Menu Content</p>
  *   </DropdownMenuContent>
  * </DropdownMenu>
  * ```
  *
- * @param {DropdownTriggerProps} props - The props for the DropdownTrigger component.
+ * @param {DropdownTriggerProps} props - The props for the DropdownMenuTrigger component.
  * @param {boolean} [props.asChild=false] - If true, renders the child directly without a wrapping element.
  * @param {React.ReactNode} props.children - The child element that serves as the clickable trigger.
  * @param {React.HTMLAttributes<HTMLDivElement>} props - The default HTML props for the trigger container (if applicable).
  *
  * @returns {JSX.Element} A clickable component that toggles the dropdown menu.
  */
-const DropdownTrigger: React.FC<DropdownTriggerProps> = ({ children, asChild = false, ...props }) => {
+const DropdownMenuTrigger: React.FC<DropdownMenuTriggerProps> = ({ children, asChild = false, ...props }) => {
     const context = useContext(DropdownContext);
 
     if (!context) {
         throw new Error('DropdownTrigger must be used within a DropdownMenu');
     }
 
-    const { isOpen, toggleDropdown, closeDropdown, triggerRef } = context;
+    const { isOpen, isClosing, toggleDropdown, triggerRef } = context;
 
     const handleClick = (event: React.MouseEvent) => {
         event.preventDefault();
-        
-        if (isOpen) {
-            closeDropdown();
-        } else {
-            toggleDropdown();
-        }
+        toggleDropdown();
     };
+
+    const isActive = isOpen && !isClosing;
 
     if (asChild && React.isValidElement(children)) {
         return cloneElement(children as ReactElement, {
             ref: triggerRef,
-            active: isOpen,
+            className: classNames(children.props.className, { active: isActive }),
             onClick: handleClick,
             ...props,
         });
@@ -69,7 +66,7 @@ const DropdownTrigger: React.FC<DropdownTriggerProps> = ({ children, asChild = f
 
     return (
         <div
-            className={classNames('dropdown-menu-trigger', { 'active': isOpen })}
+            className={classNames('dropdown-menu-trigger', { 'active': isActive })}
             onClick={handleClick} 
             ref={triggerRef as React.RefObject<HTMLDivElement>} {...props}
         >
@@ -78,4 +75,4 @@ const DropdownTrigger: React.FC<DropdownTriggerProps> = ({ children, asChild = f
     );
 };
 
-export default DropdownTrigger;
+export default DropdownMenuTrigger;

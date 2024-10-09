@@ -62,10 +62,11 @@ const DropdownMenuContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ c
   
     const startClosingAnimation = () => {
         setIsClosing(true);
+
         setTimeout(() => {
             closeDropdown();
             setIsClosing(false);
-        }, 300);
+        }, 100);
     };
   
     if (!isOpen && !isClosing) {

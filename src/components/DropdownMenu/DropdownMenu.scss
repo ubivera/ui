@@ -17,7 +17,7 @@
         margin-top: 15px;
         transform-origin: center;
         backface-visibility: hidden;
-        animation-fill-mode: both;
+        animation-fill-mode: forwards;
         animation-timing-function: $transition-function;
 
         box-shadow: $box-shadow;

@@ -21,12 +21,14 @@ import './DropdownMenu.scss';
  *
  * @interface {object} DropdownContextType
  * @property {boolean} isOpen - Indicates whether the dropdown is currently open.
+ * @property {boolean} isClosing - Indicates whether the dropdown is currently closing.
  * @property {() => void} toggleDropdown - Function to toggle the dropdown's visibility.
  * @property {() => void} closeDropdown - Function to close the dropdown.
  * @property {HTMLElement} triggerRef - A reference to the dropdown menu's trigger component.
  */
 interface DropdownContextType {
     isOpen: boolean;
+    isClosing: boolean;
     toggleDropdown: () => void;
     closeDropdown: () => void;
     triggerRef: React.RefObject<HTMLElement>;
@@ -64,21 +66,36 @@ type DropdownMenuProps = React.HTMLAttributes<HTMLDivElement>;
  */
 const DropdownMenu: React.FC<DropdownMenuProps> = ({ children, ...props }) => {
     const [isOpen, setIsOpen] = useState(false);
+    const [isClosing, setIsClosing] = useState(false);
     const triggerRef = useRef<HTMLElement>(null);
 
     const toggleDropdown = useCallback(() => {
-        setIsOpen((prev) => !prev);
-    }, []);
+        if (isOpen) {
+            startClosing();
+        } else {
+            setIsOpen(true);
+        }
+    }, [isOpen]);
+
+    const startClosing = () => {
+        setIsOpen(false);
+        setIsClosing(true);
+
+        setTimeout(() => {
+            setIsClosing(false);
+        }, 100);
+    };
 
     const closeDropdown = useCallback(() => {
-        setIsOpen(false);
+        startClosing();
     }, []);
 
     const value = {
         isOpen,
+        isClosing,
         toggleDropdown,
         closeDropdown,
-        triggerRef,
+        triggerRef
     };
 
     return (
