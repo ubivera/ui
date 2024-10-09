@@ -3,8 +3,9 @@
  *  Licensed under the MIT License. See LICENSE.md in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { DropdownContext } from './DropdownMenu';
+import classNames from 'classnames';
 
 /**
  * DropdownMenuContent Component
@@ -31,14 +32,13 @@ import { DropdownContext } from './DropdownMenu';
  */
 const DropdownMenuContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
     const context = useContext(DropdownContext);
-    const [isClosing, setIsClosing] = useState(false);
-    const contentRef = useRef<HTMLDivElement>(null);
+    const [isClosing] = useState(false);
   
     if (!context) {
         throw new Error('DropdownMenuContent must be used within a DropdownMenu');
     }
   
-    const { isOpen, closeDropdown, triggerRef } = context;
+    const { isOpen, closeDropdown, triggerRef, contentRef } = context;
   
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -48,7 +48,7 @@ const DropdownMenuContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ c
                 return;
             }
     
-            startClosingAnimation();
+            closeDropdown();
         };
     
         if (isOpen) {
@@ -60,23 +60,14 @@ const DropdownMenuContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ c
         };
     }, [isOpen, closeDropdown]);
   
-    const startClosingAnimation = () => {
-        setIsClosing(true);
-
-        setTimeout(() => {
-            closeDropdown();
-            setIsClosing(false);
-        }, 100);
-    };
-  
     if (!isOpen && !isClosing) {
         return null;
     }
   
     return (
         <div
-            className={`dropdown-menu-content ${isClosing ? 'drop-out' : 'drop-in'}`}
-            ref={contentRef}
+            className={classNames('dropdown-menu-content', { 'drop-in': !isClosing })}
+            ref={contentRef as React.RefObject<HTMLDivElement>}
             {...props}
         >
             {children}

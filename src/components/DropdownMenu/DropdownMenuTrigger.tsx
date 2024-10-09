@@ -68,7 +68,8 @@ const DropdownMenuTrigger: React.FC<DropdownMenuTriggerProps> = ({ children, asC
         <div
             className={classNames('dropdown-menu-trigger', { 'active': isActive })}
             onClick={handleClick} 
-            ref={triggerRef as React.RefObject<HTMLDivElement>} {...props}
+            ref={triggerRef as React.RefObject<HTMLDivElement>}
+            {...props}
         >
             {children}
         </div>

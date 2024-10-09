@@ -25,6 +25,7 @@ import './DropdownMenu.scss';
  * @property {() => void} toggleDropdown - Function to toggle the dropdown's visibility.
  * @property {() => void} closeDropdown - Function to close the dropdown.
  * @property {HTMLElement} triggerRef - A reference to the dropdown menu's trigger component.
+ * @property {HTMLElement} contentRef - A reference to the drop down menu's content component.
  */
 interface DropdownContextType {
     isOpen: boolean;
@@ -32,6 +33,7 @@ interface DropdownContextType {
     toggleDropdown: () => void;
     closeDropdown: () => void;
     triggerRef: React.RefObject<HTMLElement>;
+    contentRef: React.RefObject<HTMLElement>;
 };
 
 export const DropdownContext = createContext<DropdownContextType | undefined>(undefined);
@@ -68,34 +70,37 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({ children, ...props }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [isClosing, setIsClosing] = useState(false);
     const triggerRef = useRef<HTMLElement>(null);
+    const contentRef = useRef<HTMLElement>(null);
+
+    const closeDropdown = useCallback(() => {
+        setIsClosing(true);
+
+        if (contentRef.current) {
+            contentRef.current.classList.remove('drop-in');
+            contentRef.current.classList.add('drop-out');
+        }
+
+        setTimeout(() => {
+            setIsOpen(false);
+            setIsClosing(false);
+        }, 100);
+    }, []);
 
     const toggleDropdown = useCallback(() => {
         if (isOpen) {
-            startClosing();
+            closeDropdown();
         } else {
             setIsOpen(true);
         }
     }, [isOpen]);
-
-    const startClosing = () => {
-        setIsOpen(false);
-        setIsClosing(true);
-
-        setTimeout(() => {
-            setIsClosing(false);
-        }, 100);
-    };
-
-    const closeDropdown = useCallback(() => {
-        startClosing();
-    }, []);
 
     const value = {
         isOpen,
         isClosing,
         toggleDropdown,
         closeDropdown,
-        triggerRef
+        triggerRef,
+        contentRef
     };
 
     return (
