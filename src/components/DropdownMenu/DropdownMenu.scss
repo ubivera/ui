@@ -22,26 +22,39 @@
         box-shadow: $box-shadow;
         color: $text-color-primary;
         background-color: $background-color-primary;
-        padding: $padding-vertical-primary $padding-horizontal-primary;
+        padding: $padding-tertiary;
     }
 
     .dropdown-menu-action {
-        padding: 10px;
-        width: 100%;
-        text-align: left;
-        background: none;
+        @include transition;
+
         border: none;
         cursor: pointer;
+        text-align: left;
+        background-color: transparent;
+        border: 1px solid transparent;
+        outline: 1px solid transparent;
+        padding: $padding-secondary $padding-primary;
+        border-radius: $border-radius-primary;
 
         &:hover {
-            background-color: gray;
+            background-color: $background-color-primary-hover;
+        }
+
+        &:active {
+            background-color: $background-color-primary-active;
+        }
+
+        &:focus-visible {
+            border-color: $accent-color-primary-hover;
+            background-color: $background-color-primary-hover;
         }
     }
 
     .dropdown-menu-separator {
         border: 0;
         height: 1px;
-        background: #ccc;
+        background: $border-color-primary;
         margin: 8px 0;
     }
 
@@ -68,7 +81,7 @@
         box-shadow: $box-shadow;
         color: $text-color-primary;
         background-color: $background-color-primary;
-        padding: $padding-vertical-primary $padding-horizontal-primary;
+        padding: $padding-tertiary;
     }
     
     .align-left {
