@@ -66,7 +66,7 @@ function createRipple(event: React.MouseEvent<HTMLButtonElement> | React.Keyboar
 
         setTimeout(() => {
             circle.remove();
-        }, 1500);
+        }, 380);
     } catch (error) {
         console.error('An error occurred while creating the ripple effect: ', error);
     }

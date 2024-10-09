@@ -17,11 +17,68 @@
         margin-top: 15px;
         transform-origin: center;
         backface-visibility: hidden;
-        animation: drop-in 0.3s $transition-function;
+        animation-fill-mode: forwards;
+        animation-timing-function: $transition-function;
 
         box-shadow: $box-shadow;
         color: $text-color-primary;
         background-color: $background-color-primary;
         padding: $padding-vertical-primary $padding-horizontal-primary;
+    }
+
+    .dropdown-menu-action {
+        padding: 10px;
+        width: 100%;
+        text-align: left;
+        background: none;
+        border: none;
+        cursor: pointer;
+
+        &:hover {
+            background-color: gray;
+        }
+    }
+
+    .dropdown-menu-separator {
+        border: 0;
+        height: 1px;
+        background: #ccc;
+        margin: 8px 0;
+    }
+
+    .dropdown-menu-submenu-wrapper {
+        position: relative;
+        display: inline-block;
+    }
+      
+    .dropdown-menu-submenu-label {
+        padding: 10px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: gray;
+        }
+    }
+      
+    .dropdown-menu-submenu {
+        @include border-primary;
+
+        top: 0;
+        z-index: 100;
+        position: absolute;
+        box-shadow: $box-shadow;
+        color: $text-color-primary;
+        background-color: $background-color-primary;
+        padding: $padding-vertical-primary $padding-horizontal-primary;
+    }
+      
+    .align-right {
+        left: 100%;
+        margin-left: 10px;
+    }
+      
+    .align-left {
+        right: 100%;
+        margin-right: 10px;
     }
 }

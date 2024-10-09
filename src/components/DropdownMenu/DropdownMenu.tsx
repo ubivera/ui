@@ -21,15 +21,19 @@ import './DropdownMenu.scss';
  *
  * @interface {object} DropdownContextType
  * @property {boolean} isOpen - Indicates whether the dropdown is currently open.
+ * @property {boolean} isClosing - Indicates whether the dropdown is currently closing.
  * @property {() => void} toggleDropdown - Function to toggle the dropdown's visibility.
  * @property {() => void} closeDropdown - Function to close the dropdown.
  * @property {HTMLElement} triggerRef - A reference to the dropdown menu's trigger component.
+ * @property {HTMLElement} contentRef - A reference to the drop down menu's content component.
  */
 interface DropdownContextType {
     isOpen: boolean;
+    isClosing: boolean;
     toggleDropdown: () => void;
     closeDropdown: () => void;
     triggerRef: React.RefObject<HTMLElement>;
+    contentRef: React.RefObject<HTMLElement>;
 };
 
 export const DropdownContext = createContext<DropdownContextType | undefined>(undefined);
@@ -64,21 +68,39 @@ type DropdownMenuProps = React.HTMLAttributes<HTMLDivElement>;
  */
 const DropdownMenu: React.FC<DropdownMenuProps> = ({ children, ...props }) => {
     const [isOpen, setIsOpen] = useState(false);
+    const [isClosing, setIsClosing] = useState(false);
     const triggerRef = useRef<HTMLElement>(null);
-
-    const toggleDropdown = useCallback(() => {
-        setIsOpen((prev) => !prev);
-    }, []);
+    const contentRef = useRef<HTMLElement>(null);
 
     const closeDropdown = useCallback(() => {
-        setIsOpen(false);
+        setIsClosing(true);
+
+        if (contentRef.current) {
+            contentRef.current.classList.remove('drop-in');
+            contentRef.current.classList.add('drop-out');
+        }
+
+        setTimeout(() => {
+            setIsOpen(false);
+            setIsClosing(false);
+        }, 100);
     }, []);
+
+    const toggleDropdown = useCallback(() => {
+        if (isOpen) {
+            closeDropdown();
+        } else {
+            setIsOpen(true);
+        }
+    }, [isOpen]);
 
     const value = {
         isOpen,
+        isClosing,
         toggleDropdown,
         closeDropdown,
         triggerRef,
+        contentRef
     };
 
     return (

@@ -3,8 +3,9 @@
  *  Licensed under the MIT License. See LICENSE.md in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { DropdownContext } from './DropdownMenu';
+import classNames from 'classnames';
 
 /**
  * DropdownMenuContent Component
@@ -31,40 +32,44 @@ import { DropdownContext } from './DropdownMenu';
  */
 const DropdownMenuContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, ...props }) => {
     const context = useContext(DropdownContext);
-
+    const [isClosing] = useState(false);
+  
     if (!context) {
         throw new Error('DropdownMenuContent must be used within a DropdownMenu');
     }
-
-    const { isOpen, closeDropdown, triggerRef } = context;
-    const contentRef = useRef<HTMLDivElement>(null);
-
+  
+    const { isOpen, closeDropdown, triggerRef, contentRef } = context;
+  
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             const target = event.target as Node;
-
+    
             if (contentRef.current?.contains(target) || triggerRef.current?.contains(target)) {
                 return;
             }
-
+    
             closeDropdown();
         };
-
+    
         if (isOpen) {
             document.addEventListener('mousedown', handleClickOutside);
         }
-
+  
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, [isOpen, closeDropdown]);
-
-    if (!isOpen) {
+  
+    if (!isOpen && !isClosing) {
         return null;
     }
-
+  
     return (
-        <div className='dropdown-menu-content' ref={contentRef} {...props}>
+        <div
+            className={classNames('dropdown-menu-content', { 'drop-in': !isClosing })}
+            ref={contentRef as React.RefObject<HTMLDivElement>}
+            {...props}
+        >
             {children}
         </div>
     );
