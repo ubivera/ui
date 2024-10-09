@@ -45,7 +45,10 @@ export default defineConfig([
             }),
             babel({
                 babelHelpers: 'bundled',
-                extensions: ['.ts', '.tsx'],
+                extensions: [
+                    '.ts',
+                    '.tsx'
+                ],
                 presets: [
                     '@babel/preset-react',
                     '@babel/preset-typescript'
