@@ -27,7 +27,7 @@
     }
 
     &:focus-visible {
-        outline-color: $primary-color-hover;
+        outline-color: $accent-color-primary-hover;
     }
 
     &.active {
@@ -35,7 +35,7 @@
     }
 
     &.primary {
-        background-color: $primary-color;
+        background-color: $accent-color-primary;
     }
 
     &.secondary {
