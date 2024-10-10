@@ -20,7 +20,7 @@ interface DropdownMenuSubMenuProps {
  * The submenu remains aligned to the right by default but switches to the left if there isn't enough space on the right side of the viewport.
  * The alignment is recalculated on window resize.
  *
- * ### Example Usage:
+ * @example
  * ```tsx
  * <DropdownMenuSubMenu label="More Options">
  *   <DropdownMenuAction label="Action 1" onAction={handleAction1} />

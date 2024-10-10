@@ -9,14 +9,17 @@ $accent-color-primary: hsl(220, 97%, 56%);
 $accent-color-primary-hover: hsl(215, 100%, 58%);
 $accent-color-primary-active: hsl(215, 57%, 51%);
 
-$font-size-base: 1rem;
-$padding-vertical-primary: 0.5rem;
-$padding-horizontal-primary: 1rem;
+$font-size-base: 14px;
+$padding-primary: 1rem;
+$padding-secondary: 0.5rem;
+$padding-tertiary: 0.25rem;
+$border-radius-primary: 6px;
 $text-shadow: 1px 1px 1px hsla(0, 0%, 0%, 0.5);
 $transition-function: cubic-bezier(0.4, 0, 0.2, 1);
 
 $background-color-primary: hsl(0, 0%, 16%);
 $background-color-primary-hover: scale-color($background-color-primary, $lightness: 11%);
+$background-color-primary-active: scale-color($background-color-primary, $lightness: 21%);
 $border-color-primary: scale-color($background-color-primary, $lightness: 21%);
 $border-color-primary-hover: scale-color($border-color-primary, $lightness: 9%);
 $focus-shadow-color-primary: hsla(0, 0%, 1%, 0.5);
@@ -46,6 +49,10 @@ $box-shadow-active:
     -moz-osx-font-smoothing: grayscale;
 }
 
+html, body {
+    font-size: $font-size-base;
+}
+
 ::after, ::before {
 	box-sizing: border-box;
 }
@@ -61,7 +68,7 @@ $box-shadow-active:
 }
 
 @mixin border-primary {
-    border-radius: 6px;
+    border-radius: $border-radius-primary;
     border: 1px solid $border-color-primary;
 }
 
