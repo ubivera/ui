@@ -9,7 +9,7 @@ $accent-color-primary: hsl(220, 97%, 56%);
 $accent-color-primary-hover: hsl(215, 100%, 58%);
 $accent-color-primary-active: hsl(215, 57%, 51%);
 
-$font-size-base: 1rem;
+$font-size-base: 14px;
 $padding-primary: 1rem;
 $padding-secondary: 0.5rem;
 $padding-tertiary: 0.25rem;
@@ -47,6 +47,10 @@ $box-shadow-active:
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+    font-size: $font-size-base;
 }
 
 ::after, ::before {

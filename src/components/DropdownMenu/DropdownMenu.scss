@@ -25,7 +25,8 @@
         padding: $padding-tertiary;
     }
 
-    .dropdown-menu-action {
+    .dropdown-menu-action,
+    .dropdown-menu-submenu-label {
         @include transition;
 
         border: none;
@@ -63,20 +64,13 @@
         display: inline-block;
     }
       
-    .dropdown-menu-submenu-label {
-        padding: 10px;
-        cursor: pointer;
-
-        &:hover {
-            background-color: gray;
-        }
-    }
-      
     .dropdown-menu-submenu {
         @include border-primary;
 
         top: 0;
         z-index: 100;
+        display: flex;
+        flex-direction: column;
         position: absolute;
         box-shadow: $box-shadow;
         color: $text-color-primary;
