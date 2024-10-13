@@ -3,12 +3,13 @@
  *  Licensed under the MIT License. See LICENSE.md in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import React, { useContext, cloneElement, ReactElement, useEffect } from 'react';
+import React, { useState, useContext, cloneElement, ReactElement, useEffect } from 'react';
 import { DropdownContext } from './DropdownMenu';
 import classNames from 'classnames';
 
 type DropdownMenuTriggerProps = React.HTMLAttributes<HTMLDivElement> & {
     asChild?: boolean;
+    defaultText: string;
 };
 
 /**
@@ -39,14 +40,23 @@ type DropdownMenuTriggerProps = React.HTMLAttributes<HTMLDivElement> & {
  *
  * @returns {JSX.Element} A clickable component that toggles the dropdown menu.
  */
-const DropdownMenuTrigger: React.FC<DropdownMenuTriggerProps> = ({ children, asChild = false, ...props }) => {
+const DropdownMenuTrigger: React.FC<DropdownMenuTriggerProps> = ({ asChild = false, defaultText, children, ...props }) => {
     const context = useContext(DropdownContext);
+    const [triggerText, setTriggerText] = useState(defaultText);
+    const [data, setData] = useState<string | null>(null);
+    const [showReset, setShowReset] = useState(false);
 
     if (!context) {
         throw new Error('DropdownTrigger must be used within a DropdownMenu');
     }
 
     const { isOpen, isClosing, toggleDropdown, triggerRef, contentRef } = context;
+
+    const resetTrigger = () => {
+        setTriggerText(defaultText);
+        setData(null);
+        setShowReset(false);
+    };
 
     const handleClick = (event: React.MouseEvent) => {
         event.preventDefault();
@@ -83,22 +93,37 @@ const DropdownMenuTrigger: React.FC<DropdownMenuTriggerProps> = ({ children, asC
             ref: triggerRef,
             tabIndex: 0,
             ...props,
+            'data-trigger': data
         });
     }
 
     return (
-        <div
-            role='button'
-            aria-haspopup='true'
-            aria-expanded={isOpen}
-            className={classNames('dropdown-menu-trigger', { 'active': isActive })}
-            onKeyDown={handleKeyDown}
-            onClick={handleClick}
-            ref={triggerRef as React.RefObject<HTMLDivElement>}
-            tabIndex={0}
-            {...props}
-        >
-            {children}
+        <div className="dropdown-trigger-wrapper" style={{ display: 'flex', alignItems: 'center' }}>
+            <div
+                role='button'
+                aria-haspopup='true'
+                aria-expanded={isOpen}
+                className={classNames('dropdown-menu-trigger', { 'active': isActive })}
+                onKeyDown={handleKeyDown}
+                onClick={handleClick}
+                ref={triggerRef as React.RefObject<HTMLDivElement>}
+                tabIndex={0}
+                {...props}
+                data-trigger={data}
+            >
+                {triggerText}
+            </div>
+
+            {showReset && (
+                <button
+                    type="button"
+                    className="reset-button"
+                    onClick={resetTrigger}
+                    style={{ marginLeft: '10px' }}
+                >
+                    Reset
+                </button>
+            )}
         </div>
     );
 };
