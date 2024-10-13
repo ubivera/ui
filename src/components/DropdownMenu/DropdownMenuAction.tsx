@@ -11,11 +11,15 @@ import { DropdownContext } from './DropdownMenu';
  *
  * @typedef {Object} DropdownMenuActionProps
  * @property {() => void} onAction - Callback function to be executed when the button is clicked.
+ * @property {React.ReactNode} [startIcon] - Icon element to be displayed on the left side of the button.
+ * @property {React.ReactNode} [endIcon] - Icon element to be displayed on the right side of the button.
  * @property {React.ButtonHTMLAttributes<HTMLButtonElement>} [props] - Additional button attributes from React's ButtonHTMLAttributes.
  * @property {boolean} autoClose - Should the button automatically close the dropdown menu when clicked. Defaults to true.
  */
 interface DropdownMenuActionProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     onAction: () => void;
+    startIcon?: React.ReactNode;
+    endIcon?: React.ReactNode;
     autoClose?: boolean;
 }
 
@@ -41,7 +45,7 @@ interface DropdownMenuActionProps extends React.ButtonHTMLAttributes<HTMLButtonE
  *
  * @returns {JSX.Element} A button component for actions within the dropdown menu.
  */
-const DropdownMenuAction: React.FC<DropdownMenuActionProps> = ({ onAction, autoClose = true, children, ...props }) => {
+const DropdownMenuAction: React.FC<DropdownMenuActionProps> = ({ onAction, autoClose = true, startIcon, endIcon, children, ...props }) => {
     const { closeDropdown } = useContext(DropdownContext) || {};
     
     const handleClick = () => {
@@ -67,7 +71,11 @@ const DropdownMenuAction: React.FC<DropdownMenuActionProps> = ({ onAction, autoC
             tabIndex={0}
             {...props}
         >
-            {children}
+            <div className="dropdown-menu-action-content">
+                { (startIcon || endIcon) && <span className="dropdown-menu-action-icon left">{startIcon}</span>}
+                <span className="dropdown-menu-action-label">{children}</span>
+                { (startIcon || endIcon) && <span className="dropdown-menu-action-icon right">{endIcon}</span>}
+            </div>
         </button>
     );
 };
