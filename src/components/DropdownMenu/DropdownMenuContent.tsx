@@ -39,6 +39,30 @@ const DropdownMenuContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ c
     }
   
     const { isOpen, closeDropdown, triggerRef, contentRef } = context;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+        const focusableElements = contentRef.current?.querySelectorAll<HTMLElement>(
+            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+
+        if (!focusableElements || focusableElements.length === 0) {
+            return;
+        }
+
+        const currentIndex = Array.from(focusableElements).indexOf(document.activeElement as HTMLElement);
+
+        if (event.key === 'ArrowDown') {
+            event.preventDefault();
+            const nextIndex = currentIndex === focusableElements.length - 1 ? 0 : currentIndex + 1;
+            focusableElements[nextIndex]?.focus();
+        } else if (event.key === 'ArrowUp') {
+            event.preventDefault();
+            const prevIndex = currentIndex === 0 ? focusableElements.length - 1 : currentIndex - 1;
+            focusableElements[prevIndex]?.focus();
+        } else if (event.key === 'Escape') {
+            closeDropdown();
+        }
+    };
   
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -53,10 +77,12 @@ const DropdownMenuContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ c
     
         if (isOpen) {
             document.addEventListener('mousedown', handleClickOutside);
+            document.addEventListener('keydown', handleKeyDown);
         }
   
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
+            document.removeEventListener('keydown', handleKeyDown);
         };
     }, [isOpen, closeDropdown]);
   

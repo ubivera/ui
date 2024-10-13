@@ -71,8 +71,7 @@ export const DropdownContext = createContext<DropdownContextType | undefined>(un
  * @returns {JSX.Element} A context provider component for the dropdown menu.
  */
 const DropdownMenu: React.FC<DropdownMenuProps> = ({ children, isOpen: externalIsOpen, onToggle, placeAbove = false, ...props }) => {
-    const [internalIsOpen, setInternalIsOpen] = useState(false);
-    const isOpen = externalIsOpen !== undefined ? externalIsOpen : internalIsOpen;
+    const [isOpen, setIsOpen] = useState(false);
     const [isClosing, setIsClosing] = useState(false);
     const triggerRef = useRef<HTMLElement>(null);
     const contentRef = useRef<HTMLElement>(null);
@@ -86,17 +85,16 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({ children, isOpen: externalI
         }
 
         setTimeout(() => {
-            setInternalIsOpen(false);
+            setIsOpen(false);
             setIsClosing(false);
         }, 100);
     }, []);
 
     const toggleDropdown = useCallback(() => {
-        if (externalIsOpen !== undefined && onToggle) {
-            onToggle(!isOpen);
+        if (isOpen) {
             closeDropdown();
         } else {
-            setInternalIsOpen(!isOpen);
+            setIsOpen(!isOpen);
 
             setTimeout(() => {
                 if (triggerRef.current && contentRef.current) {
