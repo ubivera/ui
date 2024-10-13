@@ -65,9 +65,8 @@ const DropdownMenuTrigger: React.FC<DropdownMenuTriggerProps> = ({ children, asC
             const firstInteractiveElement = contentRef.current.querySelector<HTMLElement>(
                 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
             );
+            
             firstInteractiveElement?.focus();
-        } else if (!isOpen && triggerRef.current) {
-            triggerRef.current.focus();
         }
     }, [isOpen]);
 
