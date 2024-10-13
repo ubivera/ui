@@ -11,3 +11,4 @@ export { DropdownMenuTrigger as DropdownMenuTrigger } from './DropdownMenu';
 export { DropdownMenuAction as DropdownMenuAction } from './DropdownMenu';
 export { DropdownMenuSeparator as DropdownMenuSeparator } from './DropdownMenu';
 export { DropdownMenuSubMenu as DropdownMenuSubMenu } from './DropdownMenu';
+export { default as DatePicker } from './DatePicker'
