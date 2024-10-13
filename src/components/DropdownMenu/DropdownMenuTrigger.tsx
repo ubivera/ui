@@ -53,13 +53,21 @@ const DropdownMenuTrigger: React.FC<DropdownMenuTriggerProps> = ({ children, asC
         toggleDropdown();
     };
 
+    const handleKeyDown = (event: React.KeyboardEvent) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            toggleDropdown();
+        }
+    };
+
     const isActive = isOpen && !isClosing;
 
     if (asChild && React.isValidElement(children)) {
         return cloneElement(children as ReactElement, {
-            ref: triggerRef,
             className: classNames(children.props.className, { active: isActive }),
+            onKeyDown: handleKeyDown,
             onClick: handleClick,
+            ref: triggerRef,
             ...props,
         });
     }
@@ -67,7 +75,8 @@ const DropdownMenuTrigger: React.FC<DropdownMenuTriggerProps> = ({ children, asC
     return (
         <div
             className={classNames('dropdown-menu-trigger', { 'active': isActive })}
-            onClick={handleClick} 
+            onKeyDown={handleKeyDown}
+            onClick={handleClick}
             ref={triggerRef as React.RefObject<HTMLDivElement>}
             {...props}
         >
