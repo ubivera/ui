@@ -7,6 +7,8 @@ import React, { createContext, useState, useCallback, useRef } from 'react';
 import './DropdownMenu.scss';
 
 interface DropdownMenuProps extends React.HTMLAttributes<HTMLDivElement> {
+    isOpen?: boolean;
+    onToggle?: (isOpen: boolean) => void;
     placeAbove?: boolean;
 }
 
@@ -68,7 +70,7 @@ export const DropdownContext = createContext<DropdownContextType | undefined>(un
  *
  * @returns {JSX.Element} A context provider component for the dropdown menu.
  */
-const DropdownMenu: React.FC<DropdownMenuProps> = ({ children, placeAbove = false, ...props }) => {
+const DropdownMenu: React.FC<DropdownMenuProps> = ({ children, isOpen: externalIsOpen, onToggle, placeAbove = false, ...props }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [isClosing, setIsClosing] = useState(false);
     const triggerRef = useRef<HTMLElement>(null);
@@ -92,7 +94,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({ children, placeAbove = fals
         if (isOpen) {
             closeDropdown();
         } else {
-            setIsOpen(true);
+            setIsOpen(!isOpen);
 
             setTimeout(() => {
                 if (triggerRef.current && contentRef.current) {

@@ -3,19 +3,20 @@
  *  Licensed under the MIT License. See LICENSE.md in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import React from 'react';
+import React, { useContext } from 'react';
+import { DropdownContext } from './DropdownMenu';
 
 /**
  * Props for the DropdownMenuAction component.
  *
  * @typedef {Object} DropdownMenuActionProps
- * @property {string} label - The text to be displayed inside the action button.
  * @property {() => void} onAction - Callback function to be executed when the button is clicked.
  * @property {React.ButtonHTMLAttributes<HTMLButtonElement>} [props] - Additional button attributes from React's ButtonHTMLAttributes.
+ * @property {boolean} autoClose - Should the button automatically close the dropdown menu when clicked. Defaults to true.
  */
 interface DropdownMenuActionProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-    label: string;
     onAction: () => void;
+    autoClose?: boolean;
 }
 
 /**
@@ -40,10 +41,33 @@ interface DropdownMenuActionProps extends React.ButtonHTMLAttributes<HTMLButtonE
  *
  * @returns {JSX.Element} A button component for actions within the dropdown menu.
  */
-const DropdownMenuAction: React.FC<DropdownMenuActionProps> = ({ label, onAction, ...props }) => {
+const DropdownMenuAction: React.FC<DropdownMenuActionProps> = ({ onAction, autoClose = true, children, ...props }) => {
+    const { closeDropdown } = useContext(DropdownContext) || {};
+    
+    const handleClick = () => {
+        onAction();
+
+        if (autoClose && closeDropdown) {
+            closeDropdown();
+        }
+    };
+
+    const handleKeyDown = (event: React.KeyboardEvent) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            handleClick();
+        }
+    };
+    
     return (
-        <button className="dropdown-menu-action" onClick={onAction} {...props}>
-            {label}
+        <button className='dropdown-menu-action'
+            onKeyDown={handleKeyDown}
+            onClick={handleClick} 
+            role='menuitem'
+            tabIndex={0}
+            {...props}
+        >
+            {children}
         </button>
     );
 };

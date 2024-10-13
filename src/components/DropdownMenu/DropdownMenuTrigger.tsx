@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See LICENSE.md in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import React, { useContext, cloneElement, ReactElement } from 'react';
+import React, { useContext, cloneElement, ReactElement, useEffect } from 'react';
 import { DropdownContext } from './DropdownMenu';
 import classNames from 'classnames';
 
@@ -46,29 +46,56 @@ const DropdownMenuTrigger: React.FC<DropdownMenuTriggerProps> = ({ children, asC
         throw new Error('DropdownTrigger must be used within a DropdownMenu');
     }
 
-    const { isOpen, isClosing, toggleDropdown, triggerRef } = context;
+    const { isOpen, isClosing, toggleDropdown, triggerRef, contentRef } = context;
 
     const handleClick = (event: React.MouseEvent) => {
         event.preventDefault();
         toggleDropdown();
     };
 
+    const handleKeyDown = (event: React.KeyboardEvent) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            toggleDropdown();
+        }
+    };
+
+    useEffect(() => {
+        if (isOpen && contentRef.current) {
+            const firstInteractiveElement = contentRef.current.querySelector<HTMLElement>(
+                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+            );
+            
+            firstInteractiveElement?.focus();
+        }
+    }, [isOpen]);
+
     const isActive = isOpen && !isClosing;
 
     if (asChild && React.isValidElement(children)) {
         return cloneElement(children as ReactElement, {
-            ref: triggerRef,
+            role: 'button',
+            'aria-haspopup': 'true',
+            'aria-expanded': isOpen,
             className: classNames(children.props.className, { active: isActive }),
+            onKeyDown: handleKeyDown,
             onClick: handleClick,
+            ref: triggerRef,
+            tabIndex: 0,
             ...props,
         });
     }
 
     return (
         <div
+            role='button'
+            aria-haspopup='true'
+            aria-expanded={isOpen}
             className={classNames('dropdown-menu-trigger', { 'active': isActive })}
-            onClick={handleClick} 
+            onKeyDown={handleKeyDown}
+            onClick={handleClick}
             ref={triggerRef as React.RefObject<HTMLDivElement>}
+            tabIndex={0}
             {...props}
         >
             {children}
