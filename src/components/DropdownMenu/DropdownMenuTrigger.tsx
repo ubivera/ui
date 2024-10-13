@@ -75,20 +75,28 @@ const DropdownMenuTrigger: React.FC<DropdownMenuTriggerProps> = ({ children, asC
 
     if (asChild && React.isValidElement(children)) {
         return cloneElement(children as ReactElement, {
+            role: 'button',
+            'aria-haspopup': 'true',
+            'aria-expanded': isOpen,
             className: classNames(children.props.className, { active: isActive }),
             onKeyDown: handleKeyDown,
             onClick: handleClick,
             ref: triggerRef,
+            tabIndex: 0,
             ...props,
         });
     }
 
     return (
         <div
+            role='button'
+            aria-haspopup='true'
+            aria-expanded={isOpen}
             className={classNames('dropdown-menu-trigger', { 'active': isActive })}
             onKeyDown={handleKeyDown}
             onClick={handleClick}
             ref={triggerRef as React.RefObject<HTMLDivElement>}
+            tabIndex={0}
             {...props}
         >
             {children}
