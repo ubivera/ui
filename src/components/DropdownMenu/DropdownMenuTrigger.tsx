@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See LICENSE.md in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import React, { useContext, cloneElement, ReactElement } from 'react';
+import React, { useContext, cloneElement, ReactElement, useEffect } from 'react';
 import { DropdownContext } from './DropdownMenu';
 import classNames from 'classnames';
 
@@ -46,7 +46,7 @@ const DropdownMenuTrigger: React.FC<DropdownMenuTriggerProps> = ({ children, asC
         throw new Error('DropdownTrigger must be used within a DropdownMenu');
     }
 
-    const { isOpen, isClosing, toggleDropdown, triggerRef } = context;
+    const { isOpen, isClosing, toggleDropdown, triggerRef, contentRef } = context;
 
     const handleClick = (event: React.MouseEvent) => {
         event.preventDefault();
@@ -59,6 +59,17 @@ const DropdownMenuTrigger: React.FC<DropdownMenuTriggerProps> = ({ children, asC
             toggleDropdown();
         }
     };
+
+    useEffect(() => {
+        if (isOpen && contentRef.current) {
+            const firstInteractiveElement = contentRef.current.querySelector<HTMLElement>(
+                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+            );
+            firstInteractiveElement?.focus();
+        } else if (!isOpen && triggerRef.current) {
+            triggerRef.current.focus();
+        }
+    }, [isOpen]);
 
     const isActive = isOpen && !isClosing;
 
