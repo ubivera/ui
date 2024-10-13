@@ -72,9 +72,9 @@ const DropdownMenuAction: React.FC<DropdownMenuActionProps> = ({ onAction, autoC
             {...props}
         >
             <div className="dropdown-menu-action-content">
-                <span className="dropdown-menu-action-icon left">{startIcon}</span>
+                { (startIcon || endIcon) && <span className="dropdown-menu-action-icon left">{startIcon}</span>}
                 <span className="dropdown-menu-action-label">{children}</span>
-                <span className="dropdown-menu-action-icon right">{endIcon}</span>
+                { (startIcon || endIcon) && <span className="dropdown-menu-action-icon right">{endIcon}</span>}
             </div>
         </button>
     );

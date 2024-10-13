@@ -51,8 +51,6 @@ function createRipple(event: React.MouseEvent<HTMLButtonElement> | React.Keyboar
         } else if (event.type === 'keydown' && ((event as React.KeyboardEvent).key === 'Enter' || (event as React.KeyboardEvent).key === ' ')) {
             circle.style.left = `${buttonRect.width / 2 - radius}px`;
             circle.style.top = `${buttonRect.height / 2 - radius}px`;
-        } else {
-            return;
         }
 
         circle.classList.add('ripple');

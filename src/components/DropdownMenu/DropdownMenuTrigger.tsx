@@ -9,7 +9,7 @@ import classNames from 'classnames';
 
 type DropdownMenuTriggerProps = React.HTMLAttributes<HTMLDivElement> & {
     asChild?: boolean;
-    defaultText: string;
+    defaultText?: string;
 };
 
 /**
