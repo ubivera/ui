@@ -3,4 +3,53 @@
  *  Licensed under the MIT License. See LICENSE.md in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
- 
+.date-picker-trigger-button {
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 0.25rem;
+}
+
+.date-picker-panel {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    background-color: white;
+    padding: 1rem;
+    width: 300px;
+}
+
+.date-picker-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.date-picker-day-labels, .datepicker-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.25rem;
+}
+
+.date-picker-day {
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+}
+
+.date-picker-day-outside {
+    background-color: #f0f0f0;
+    color: #aaa;
+}
+
+.date-picker-day-selected {
+    background-color: #007bff;
+    color: white;
+}
+
+.date-picker-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
