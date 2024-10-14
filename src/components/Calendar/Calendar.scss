@@ -6,6 +6,7 @@
 .calendar {
     display: flex;
     flex-direction: column;
+    width: fit-content;
     overflow: hidden;
 
     .calendar-header {
@@ -23,15 +24,21 @@
     .calendar-body {
         display: grid;
         grid-template-columns: repeat(7, 1fr);
-        gap: 5px;
-        padding: 10px;
+        padding: $padding-secondary;
+        gap: $padding-tertiary;
 
         .calendar-day {
-            height: 60px;
+            @include transition;
+
+            --squared: 30px;
+            width: var(--squared);
+            height: var(--squared);
+
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid #ddd;
+            border: 1px solid transparent;
+            border-radius: $border-radius-primary;
             cursor: pointer;
 
             &.empty {
@@ -40,7 +47,7 @@
             }
 
             &:hover {
-                background-color: #eaeaea;
+                background-color: $background-color-primary-hover;
             }
         }
     }
