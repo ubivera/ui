@@ -26,7 +26,7 @@
     margin-bottom: 1rem;
 }
 
-.date-picker-day-labels, .datepicker-days {
+.date-picker-day-labels, .date-picker-days {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 0.25rem;

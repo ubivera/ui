@@ -3,4 +3,45 @@
  *  Licensed under the MIT License. See LICENSE.md in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
- 
+.calendar {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    .calendar-header {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        padding: 10px 0;
+        font-weight: bold;
+        text-align: center;
+
+        .calendar-header-day {
+            padding: 10px;
+        }
+    }
+
+    .calendar-body {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 5px;
+        padding: 10px;
+
+        .calendar-day {
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ddd;
+            cursor: pointer;
+
+            &.empty {
+                background-color: transparent;
+                cursor: default;
+            }
+
+            &:hover {
+                background-color: #eaeaea;
+            }
+        }
+    }
+}
