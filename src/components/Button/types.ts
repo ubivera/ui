@@ -16,3 +16,7 @@ export const defaultButtonProps = (overrides: Partial<ButtonProps> = {}): Button
   className: '',
   ...overrides,
 });
+
+export interface LabelProps {
+  text: string;
+}

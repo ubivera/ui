@@ -16,6 +16,10 @@ export const useClickTriggerHandle = debounce((
     event: MouseEvent<HTMLButtonElement>,
     onClick?: (event: MouseEvent<HTMLButtonElement>) => void
 ) => {
+    if (event.detail === 0) {
+        return;
+    }
+    
     triggerAction(onClick, event);
 }, DEBOUNCE_TIME);
 
@@ -26,6 +30,7 @@ export const useKeyTriggerHandle = debounce((
 ) => {
     if ((event.key === 'Enter' || event.key === ' ') && !disabled) {
         event.preventDefault();
+        event.stopPropagation();
         triggerAction(onClick, event);
     }
 }, DEBOUNCE_TIME);

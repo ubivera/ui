@@ -1,12 +1,11 @@
-import React, { forwardRef, useRef } from 'react';
+import React, { forwardRef, useRef, ReactNode, Children, isValidElement } from 'react';
 import { useClickTriggerHandle, useKeyTriggerHandle, useImperativeButtonHandle } from './handlers';
 import { ButtonProps, defaultButtonProps } from './types';
 import './styles.scss';
 
-export const Button =
-    forwardRef<
-        { click: () => void; },
-        ButtonProps
+export const Button = forwardRef<
+    { click: () => void; },
+    ButtonProps & { children: ReactNode }
     >(( {
         children, onClick, disabled, type = 'button', variant = 'secondary', className = ''
     }, ref) => {
@@ -26,7 +25,12 @@ export const Button =
                 onClick={(event) => useClickTriggerHandle(event, buttonProps.onClick)}
                 onKeyDown={(event) => useKeyTriggerHandle(event, buttonProps.onClick, buttonProps.disabled)}
             >
-                {buttonProps.children}
+                {Children.map(buttonProps.children, (child) => {
+                    if (isValidElement(child)) {
+                        return child;
+                    }
+                    return null;
+                })}
             </button>
         );
     }
