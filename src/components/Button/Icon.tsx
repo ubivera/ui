@@ -1,11 +1,5 @@
 import React, { FC } from 'react';
-
-export interface IconProps {
-    src: string;
-    alt?: string;
-    visible?: boolean;
-    className?: string;
-}
+import { IconProps } from './types';
 
 const Icon: FC<IconProps> = ({ src, alt = '', visible = true, className = '' }) => {
     if (!visible) return null;

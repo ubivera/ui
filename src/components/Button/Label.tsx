@@ -1,4 +1,4 @@
-import React, { useRef, useImperativeHandle, forwardRef } from 'react';
+import React, { useRef, useImperativeHandle, useEffect, forwardRef } from 'react';
 import { LabelProps } from './types';
 
 export interface LabelRef {
@@ -6,7 +6,7 @@ export interface LabelRef {
     setText: (newText: string) => void;
 }
 
-export const Label = forwardRef<LabelRef, LabelProps>(({ text }, ref) => {
+export const Label = forwardRef<LabelRef, LabelProps>(({ text = '', inheritLabel = false }, ref) => {
     const labelRef = useRef<string>(text);
 
     useImperativeHandle(ref, () => ({
@@ -15,6 +15,12 @@ export const Label = forwardRef<LabelRef, LabelProps>(({ text }, ref) => {
             labelRef.current = newText;
         },
     }));
+
+    useEffect(() => {
+        if (inheritLabel) {
+            labelRef.current = text;
+        }
+    }, [text, inheritLabel]);
 
     return <span className="btn-label">{labelRef.current}</span>;
 });
