@@ -1,9 +1,4 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Ubivera. All rights reserved.
- *  Licensed under the MIT License. See LICENSE.md in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
-
-.button {
+.btn {
     @include transition;
     @include border-primary;
 
@@ -34,11 +29,31 @@
         box-shadow: $box-shadow-active;
     }
 
-    &.primary {
+    &.pri {
         background-color: $accent-color-primary;
     }
 
-    &.secondary {
+    &.snd {
         background-color: $background-color-primary;
+    }
+
+    &.suc {
+        background-color: green;
+    }
+
+    &.dgr {
+        background-color: red;
+    }
+
+    &.wrn {
+        background-color: yellow;
+    }
+
+    &.inf {
+        background-color: cyan;
+    }
+
+    &.ghs {
+        background-color: transparent;
     }
 }
