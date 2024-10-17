@@ -8,9 +8,9 @@ const Icon: FC<IconProps> = ({ src, alt = '', visible = true, className = '' }) 
 };
 
 export const LeftIcon: FC<IconProps> = (props) => {
-    return <Icon {...props} className={`btn-icon-left ${props.className}`} />;
+    return <Icon {...props} className={`btn-icon-left`} />;
 };
 
 export const RightIcon: FC<IconProps> = (props) => {
-    return <Icon {...props} className={`btn-icon-right ${props.className}`} />;
+    return <Icon {...props} className={`btn-icon-right`} />;
 };
