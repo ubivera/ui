@@ -7,6 +7,7 @@ type ButtonBaseProps = ControlProps & {
     Content?: string | React.ReactNode;
     Click?: () => void;
     ClickMode?: ClickMode;
+    Command?: () => void;
     Style?: 'Primary' | 'Secondary' | 'Accent';
     children?: React.ReactNode;
 };
@@ -15,6 +16,7 @@ class ButtonBase extends Control<ButtonBaseProps> {
     private _clickHandler?: () => void;
     private _clickMode: ClickMode;
     private _content: string | React.ReactNode;
+    private _command?: () => void;
     private _style: 'Primary' | 'Secondary' | 'Accent';
 
     constructor(props: ButtonBaseProps)
@@ -23,6 +25,7 @@ class ButtonBase extends Control<ButtonBaseProps> {
         this._clickHandler = props.Click;
         this._clickMode = props.ClickMode ?? 'Release';
         this._content = props.Content || props.children || '';
+        this._command = props.Command;
         this._style = props.Style ?? 'Primary';
     }
 
@@ -52,6 +55,11 @@ class ButtonBase extends Control<ButtonBaseProps> {
         {
             this._clickHandler();
         }
+
+        if (this._command)
+        {
+            this._command();
+        }
     };
 
     protected handleMouseDown = () =>
@@ -60,6 +68,11 @@ class ButtonBase extends Control<ButtonBaseProps> {
         {
             this._clickHandler();
         }
+
+        if (this._command)
+        {
+            this._command();
+        }
     };
 
     protected handleMouseEnter = () =>
@@ -67,6 +80,11 @@ class ButtonBase extends Control<ButtonBaseProps> {
         if (this.getIsEnabled() && this._clickHandler && this._clickMode === 'Hover')
         {
             this._clickHandler();
+        }
+
+        if (this._command)
+        {
+            this._command();
         }
     };
 
@@ -80,6 +98,11 @@ class ButtonBase extends Control<ButtonBaseProps> {
             {
                 this._clickHandler();
             }
+        }
+
+        if (this._command)
+        {
+            this._command();
         }
     };
 }
