@@ -1,19 +1,17 @@
 import React from 'react';
+import Control, { ControlProps } from './Control';
 
 type ClickMode = 'Release' | 'Press' | 'Hover';
 
-type ButtonBaseProps = {
+type ButtonBaseProps = ControlProps & {
     Content?: string | React.ReactNode;
     Click?: () => void;
-    IsEnabled?: boolean;
     ClickMode?: ClickMode;
     Style?: 'Primary' | 'Secondary' | 'Accent';
     children?: React.ReactNode;
 };
 
-class ButtonBase extends React.Component<ButtonBaseProps>
-{
-    private _isEnabled: boolean;
+class ButtonBase extends Control<ButtonBaseProps> {
     private _clickHandler?: () => void;
     private _clickMode: ClickMode;
     private _content: string | React.ReactNode;
@@ -22,12 +20,15 @@ class ButtonBase extends React.Component<ButtonBaseProps>
     constructor(props: ButtonBaseProps)
     {
         super(props);
-        this._isEnabled = props.IsEnabled !== undefined ? props.IsEnabled : true;
         this._clickHandler = props.Click;
         this._clickMode = props.ClickMode ?? 'Release';
         this._content = props.Content || props.children || '';
         this._style = props.Style ?? 'Primary';
     }
+
+    static defaultProps = {
+        ClickMode: 'Release'
+    };
 
     public getContent(): string | React.ReactNode
     {
@@ -47,7 +48,7 @@ class ButtonBase extends React.Component<ButtonBaseProps>
 
     protected handleClick = () =>
     {
-        if (this._isEnabled && this._clickHandler && this._clickMode === 'Release')
+        if (this.getIsEnabled() && this._clickHandler && this._clickMode === 'Release')
         {
             this._clickHandler();
         }
@@ -55,7 +56,7 @@ class ButtonBase extends React.Component<ButtonBaseProps>
 
     protected handleMouseDown = () =>
     {
-        if (this._isEnabled && this._clickHandler && this._clickMode === 'Press')
+        if (this.getIsEnabled() && this._clickHandler && this._clickMode === 'Press')
         {
             this._clickHandler();
         }
@@ -63,7 +64,7 @@ class ButtonBase extends React.Component<ButtonBaseProps>
 
     protected handleMouseEnter = () =>
     {
-        if (this._isEnabled && this._clickHandler && this._clickMode === 'Hover')
+        if (this.getIsEnabled() && this._clickHandler && this._clickMode === 'Hover')
         {
             this._clickHandler();
         }
@@ -71,7 +72,7 @@ class ButtonBase extends React.Component<ButtonBaseProps>
 
     protected handleKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) =>
     {
-        if (this._isEnabled && this._clickHandler && (e.key === 'Enter' || e.key === ' '))
+        if (this.getIsEnabled() && this._clickHandler && (e.key === 'Enter' || e.key === ' '))
         {
             e.preventDefault();
 
