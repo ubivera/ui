@@ -1,49 +1,27 @@
 import React from 'react';
-import ContentControl from '../ContentControl';
+import ButtonBase from '../ButtonBase';
 import './styles.scss';
 
-type ButtonProps =
-{
+type ButtonProps = {
     Content?: string | React.ReactNode;
     Click?: () => void;
     IsEnabled?: boolean;
     Style?: 'Primary' | 'Secondary' | 'Accent';
+    ClickMode?: 'Release' | 'Press' | 'Hover';
     children?: React.ReactNode;
 };
 
-class Button extends React.Component<ButtonProps>
+class Button extends ButtonBase
 {
-    private _isEnabled: boolean;
-    private _style: 'Primary' | 'Secondary' | 'Accent';
-    private _clickHandler?: () => void;
-
     constructor(props: ButtonProps)
     {
         super(props);
-        const contentControl = new ContentControl(props.Content || props.children);
-        this._isEnabled = props.IsEnabled ?? true;
-        this._style = props.Style ?? 'Primary';
-        this._clickHandler = props.Click;
-
-        this.getContent = contentControl.getContent.bind(contentControl);
-        this.setContent = contentControl.setContent.bind(contentControl);
     }
 
-    private handleClick = () =>
-    {
-        if (this._isEnabled && this._clickHandler)
-            {
-            this._clickHandler();
-        }
-    };
-
-    private handleKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) =>
-    {
-        if (this._isEnabled && this._clickHandler && (e.key === 'Enter' || e.key === ' '))
-            {
-            e.preventDefault();
-            this._clickHandler();
-        }
+    static defaultProps = {
+        IsEnabled: true,
+        Style: 'Primary',
+        ClickMode: 'Release'
     };
 
     public render(): JSX.Element
@@ -51,18 +29,16 @@ class Button extends React.Component<ButtonProps>
         return (
             <button
                 onClick={this.handleClick}
+                onMouseDown={this.handleMouseDown}
+                onMouseEnter={this.handleMouseEnter}
                 onKeyDown={this.handleKeyPress}
-                className={this._style}
-                disabled={!this._isEnabled}
-                tabIndex={0}
+                className={this.props.Style}
+                disabled={!this.props.IsEnabled}
             >
-                {this.getContent()} {/* Inherited from ContentControl */}
+                {this.getContent()}
             </button>
         );
     }
-
-    public getContent!: () => string | React.ReactNode;
-    public setContent!: (content: string | React.ReactNode) => void;
 }
 
 export default Button;
