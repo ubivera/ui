@@ -57,3 +57,21 @@
         background-color: transparent;
     }
 }
+
+.button-content-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.button-image-wrapper {
+    margin-right: 8px;
+}
+
+.button-text-wrapper {
+    font-size: 16px;
+}
+
+.button-image {
+    width: 20px;
+    height: 20px;
+}

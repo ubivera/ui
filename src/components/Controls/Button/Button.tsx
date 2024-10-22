@@ -11,10 +11,16 @@ type ButtonProps = {
     children?: React.ReactNode;
 };
 
-class Button extends ButtonBase
-{
-    constructor(props: ButtonProps)
-    {
+type ButtonImageProps = {
+    Source: string;
+};
+
+const ButtonImage: React.FC<ButtonImageProps> = ({ Source }) => {
+    return <img src={Source} alt="Button Image" className="button-image" />;
+};
+
+class Button extends ButtonBase {
+    constructor(props: ButtonProps) {
         super(props);
     }
 
@@ -24,8 +30,16 @@ class Button extends ButtonBase
         ClickMode: 'Release'
     };
 
-    public render(): JSX.Element
-    {
+    public render(): JSX.Element {
+        const { children } = this.props;
+        let imageElement = null;
+
+        React.Children.forEach(children, (child) => {
+            if (React.isValidElement(child) && child.type === ButtonImage) {
+                imageElement = child;
+            }
+        });
+
         return (
             <button
                 onClick={this.handleClick}
@@ -35,10 +49,15 @@ class Button extends ButtonBase
                 className={this.props.Style}
                 disabled={!this.props.IsEnabled}
             >
-                {this.getContent()}
+                <span className='button-content-wrapper'>
+                    {imageElement && <span className='button-image-wrapper'>{imageElement}</span>}
+                    <span className='button-text-wrapper'>{this.getContent()}</span>
+                </span>
             </button>
         );
     }
+
+    static Image = ButtonImage;
 }
 
 export default Button;

@@ -19,8 +19,7 @@ class ButtonBase extends Control<ButtonBaseProps> {
     private _command?: () => void;
     private _style: 'Primary' | 'Secondary' | 'Accent';
 
-    constructor(props: ButtonBaseProps)
-    {
+    constructor(props: ButtonBaseProps) {
         super(props);
         this._clickHandler = props.Click;
         this._clickMode = props.ClickMode ?? 'Release';
@@ -33,75 +32,59 @@ class ButtonBase extends Control<ButtonBaseProps> {
         ClickMode: 'Release'
     };
 
-    public getContent(): string | React.ReactNode
-    {
+    public getContent(): string | React.ReactNode {
         return this._content;
     }
 
-    public setContent(content: string | React.ReactNode): void
-    {
+    public setContent(content: string | React.ReactNode): void {
         this._content = content;
         this.forceUpdate();
     }
 
-    public getStyle(): string
-    {
+    public getStyle(): string {
         return this._style;
     }
 
-    protected handleClick = () =>
-    {
-        if (this.getIsEnabled() && this._clickHandler && this._clickMode === 'Release')
-        {
+    protected handleClick = () => {
+        if (this.getIsEnabled() && this._clickHandler && this._clickMode === 'Release') {
             this._clickHandler();
         }
 
-        if (this._command)
-        {
+        if (this._command) {
             this._command();
         }
     };
 
-    protected handleMouseDown = () =>
-    {
-        if (this.getIsEnabled() && this._clickHandler && this._clickMode === 'Press')
-        {
+    protected handleMouseDown = () => {
+        if (this.getIsEnabled() && this._clickHandler && this._clickMode === 'Press') {
             this._clickHandler();
         }
 
-        if (this._command)
-        {
+        if (this._command) {
             this._command();
         }
     };
 
-    protected handleMouseEnter = () =>
-    {
-        if (this.getIsEnabled() && this._clickHandler && this._clickMode === 'Hover')
-        {
+    protected handleMouseEnter = () => {
+        if (this.getIsEnabled() && this._clickHandler && this._clickMode === 'Hover') {
             this._clickHandler();
         }
 
-        if (this._command)
-        {
+        if (this._command) {
             this._command();
         }
     };
 
-    protected handleKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) =>
-    {
-        if (this.getIsEnabled() && this._clickHandler && (e.key === 'Enter' || e.key === ' '))
-        {
+    protected handleKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+        if (this.getIsEnabled() && this._clickHandler && (e.key === 'Enter' || e.key === ' ')) {
             e.preventDefault();
 
-            if (this._clickMode === 'Press' || this._clickMode === 'Release')
-            {
+            if (this._clickMode === 'Press' || this._clickMode === 'Release') {
                 this._clickHandler();
             }
         }
 
-        if (this._command)
-        {
+        if (this._command) {
             this._command();
         }
     };
