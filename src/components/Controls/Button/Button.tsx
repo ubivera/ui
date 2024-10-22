@@ -19,6 +19,14 @@ const ButtonImage: React.FC<ButtonImageProps> = ({ Source }) => {
     return <img src={Source} alt="Button Image" className="button-image" />;
 };
 
+type ButtonContentProps = {
+    children: React.ReactNode;
+};
+
+const ButtonContent: React.FC<ButtonContentProps> = ({ children }) => {
+    return <span className="button-text-wrapper">{children}</span>;
+};
+
 class Button extends ButtonBase {
     constructor(props: ButtonProps) {
         super(props);
@@ -33,10 +41,16 @@ class Button extends ButtonBase {
     public render(): JSX.Element {
         const { children } = this.props;
         let imageElement = null;
+        let contentElement = null;
 
         React.Children.forEach(children, (child) => {
-            if (React.isValidElement(child) && child.type === ButtonImage) {
-                imageElement = child;
+            if (React.isValidElement(child)) {
+                if (child.type === ButtonImage) {
+                    imageElement = child;
+                }
+                if (child.type === ButtonContent) {
+                    contentElement = child;
+                }
             }
         });
 
@@ -49,15 +63,20 @@ class Button extends ButtonBase {
                 className={this.props.Style}
                 disabled={!this.props.IsEnabled}
             >
-                <span className='button-content-wrapper'>
-                    {imageElement && <span className='button-image-wrapper'>{imageElement}</span>}
-                    <span className='button-text-wrapper'>{this.getContent()}</span>
+                <span className="button-content-wrapper">
+                    {imageElement && <span className="button-image-wrapper">{imageElement}</span>}
+                    {contentElement ? (
+                        contentElement
+                    ) : (
+                        <span className="button-text-wrapper">{this.getContent()}</span>
+                    )}
                 </span>
             </button>
         );
     }
 
     static Image = ButtonImage;
+    static Content = ButtonContent;
 }
 
 export default Button;
