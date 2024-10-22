@@ -1,0 +1,17 @@
+.flyout-content {
+    position: absolute;
+    background-color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 4px;
+    z-index: 1000;
+    transition: opacity 0.2s ease;
+}
+
+.flyout-hidden {
+    display: none;
+}
+
+.flyout-visible {
+    display: block;
+}
