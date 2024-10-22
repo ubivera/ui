@@ -39,6 +39,7 @@ export default defineConfig([
                 jsx: 'react'
             }),
             scss({
+                api: 'modern',
                 fileName: 'index.css',
                 sass: require('sass'),
                 outputStyle: 'compressed'

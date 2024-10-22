@@ -1,8 +1,10 @@
 import React from 'react';
+import Names from '../../Names';
 import ButtonBase from '../ButtonBase';
 import './styles.scss';
 
 type ButtonProps = {
+    Name?: string;
     Content?: string | React.ReactNode;
     Click?: () => void;
     IsEnabled?: boolean;
@@ -28,8 +30,11 @@ const ButtonContent: React.FC<ButtonContentProps> = ({ children }) => {
 };
 
 class Button extends ButtonBase {
+    private buttonRef: React.RefObject<HTMLButtonElement>;
+
     constructor(props: ButtonProps) {
         super(props);
+        this.buttonRef = React.createRef();
     }
 
     static defaultProps = {
@@ -37,6 +42,12 @@ class Button extends ButtonBase {
         Style: 'Primary',
         ClickMode: 'Release'
     };
+
+    componentDidMount() {
+        if (this.props.Name && this.buttonRef.current) {
+            new Names(this.props.Name, this.buttonRef.current);
+        }
+    }
 
     public render(): JSX.Element {
         const { children } = this.props;
@@ -56,6 +67,7 @@ class Button extends ButtonBase {
 
         return (
             <button
+                ref={this.buttonRef}
                 onClick={this.handleClick}
                 onMouseDown={this.handleMouseDown}
                 onMouseEnter={this.handleMouseEnter}
