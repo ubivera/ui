@@ -4,6 +4,7 @@ import Control, { ControlProps } from './Control';
 type ClickMode = 'Release' | 'Press' | 'Hover';
 
 type ButtonBaseProps = ControlProps & {
+    Name?: string;
     Content?: string | React.ReactNode;
     Click?: () => void;
     ClickMode?: ClickMode;
