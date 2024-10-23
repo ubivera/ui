@@ -47,7 +47,7 @@ export class UIElement {
         );
     }
 
-    private Initialize(): void {
+    protected Initialize(): void {
         this.BeginPropertyInitialization();
         this.neverMeasured = true;
         this.neverArranged = true;
