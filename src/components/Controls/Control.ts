@@ -1,16 +1,154 @@
 import { FrameworkElement } from '../FrameworkElement';
 import { ControlTemplate } from './ControlTemplate';
-import { ControlBoolFlags } from '../../enums';
+import { HorizontalAlignment, VerticalAlignment } from '../../enums';
+
+type Brush = string;
+type FontFamily = string;
+type FontWeight = string;
+type FontStyle = string;
+type FontStretch = string;
+type Thickness = { left: number, right: number, top: number, bottom: number };
+type Size = { width: number, height: number };
 
 export class Control extends FrameworkElement {
+    private _borderBrush: Brush | null = null;
+    private _background: Brush | null = null;
+    private _foreground: Brush | null = null;
+    private _fontFamily: FontFamily | null = null;
+    private _fontSize: number = 12;
+    private _fontWeight: FontWeight | null = null;
+    private _fontStyle: FontStyle | null = null;
+    private _fontStretch: FontStretch | null = null;
+    private _horizontalContentAlignment: HorizontalAlignment = HorizontalAlignment.Left;
+    private _verticalContentAlignment: VerticalAlignment = VerticalAlignment.Top;
+    private _padding: Thickness = { left: 0, right: 0, top: 0, bottom: 0 };
     private _templateCache: ControlTemplate | null = null;
-    private _controlBoolField: ControlBoolFlags = ControlBoolFlags.DefaultState;
 
-    constructor() {
-        super();
-        this.Initialize();
+    // Property getters/setters
+    public get BorderBrush(): Brush | null {
+        return this._borderBrush;
     }
 
+    public set BorderBrush(value: Brush | null) {
+        this._borderBrush = value;
+        this.InvalidateVisual();
+    }
+
+    public get Background(): Brush | null {
+        return this._background;
+    }
+
+    public set Background(value: Brush | null) {
+        this._background = value;
+        this.InvalidateVisual();
+    }
+
+    public get Foreground(): Brush | null {
+        return this._foreground;
+    }
+
+    public set Foreground(value: Brush | null) {
+        this._foreground = value;
+        this.InvalidateVisual();
+    }
+
+    public get FontFamily(): FontFamily | null {
+        return this._fontFamily;
+    }
+
+    public set FontFamily(value: FontFamily | null) {
+        this._fontFamily = value;
+        this.InvalidateVisual();
+    }
+
+    public get FontSize(): number {
+        return this._fontSize;
+    }
+
+    public set FontSize(value: number) {
+        this._fontSize = value;
+        this.InvalidateMeasure();
+    }
+
+    public get FontWeight(): FontWeight | null {
+        return this._fontWeight;
+    }
+
+    public set FontWeight(value: FontWeight | null) {
+        this._fontWeight = value;
+        this.InvalidateMeasure();
+    }
+
+    public get FontStyle(): FontStyle | null {
+        return this._fontStyle;
+    }
+
+    public set FontStyle(value: FontStyle | null) {
+        this._fontStyle = value;
+        this.InvalidateMeasure();
+    }
+
+    public get FontStretch(): FontStretch | null {
+        return this._fontStretch;
+    }
+
+    public set FontStretch(value: FontStretch | null) {
+        this._fontStretch = value;
+        this.InvalidateMeasure();
+    }
+
+    protected InvalidateVisual(): void {
+        // This is a placeholder for visual invalidation
+    }
+
+    private _visualChildren: FrameworkElement[] = []; // Collection of visual children
+
+    protected GetVisualChild(index: number): FrameworkElement | null {
+        if (index < 0 || index >= this._visualChildren.length) {
+            return null;
+        }
+        return this._visualChildren[index];
+    }
+
+    protected AddVisualChild(child: FrameworkElement): void {
+        this._visualChildren.push(child);
+    }
+
+    protected RemoveVisualChild(child: FrameworkElement): void {
+        const index = this._visualChildren.indexOf(child);
+        if (index >= 0) {
+            this._visualChildren.splice(index, 1);
+        }
+    }
+
+    public get HorizontalContentAlignment(): HorizontalAlignment {
+        return this._horizontalContentAlignment;
+    }
+
+    public set HorizontalContentAlignment(value: HorizontalAlignment) {
+        this._horizontalContentAlignment = value;
+        this.InvalidateArrange();
+    }
+
+    public get VerticalContentAlignment(): VerticalAlignment {
+        return this._verticalContentAlignment;
+    }
+
+    public set VerticalContentAlignment(value: VerticalAlignment) {
+        this._verticalContentAlignment = value;
+        this.InvalidateArrange();
+    }
+
+    public get Padding(): Thickness {
+        return this._padding;
+    }
+
+    public set Padding(value: Thickness) {
+        this._padding = value;
+        this.InvalidateArrange();
+    }
+
+    // Template handling
     public get Template(): ControlTemplate | null {
         return this._templateCache;
     }
@@ -19,95 +157,15 @@ export class Control extends FrameworkElement {
         if (this._templateCache !== value) {
             const oldTemplate = this._templateCache;
             this._templateCache = value;
-
-            if (oldTemplate !== null && value !== null)
-                this.OnTemplateChanged(oldTemplate, value);
+            this.OnTemplateChanged(oldTemplate, value);
         }
     }
 
-    protected OnTemplateChangedprivate(oldTemplate: ControlTemplate, newTemplate?: ControlTemplate): void {
-        this.OnTemplateChanged(oldTemplate, newTemplate);
+    protected OnTemplateChanged(_oldTemplate: ControlTemplate | null, _newTemplate: ControlTemplate | null): void {
+        // Logic to handle what happens when the template changes
     }
 
-    public OnTemplateChanged(_oldTemplate?: ControlTemplate, _newTemplate?: ControlTemplate): void {
-        // Template changed logic
-    }
-
-    // Properties
-    public get BorderBrush(): Brush {
-        return this.GetValue(BorderBrushProperty);
-    }
-
-    public set BorderBrush(value: Brush) {
-        this.SetValue(BorderBrushProperty, value);
-    }
-
-    public get Background(): Brush {
-        return this.GetValue(BackgroundProperty);
-    }
-
-    public set Background(value: Brush) {
-        this.SetValue(BackgroundProperty, value);
-    }
-
-    public get Foreground(): Brush {
-        return this.GetValue(ForegroundProperty);
-    }
-
-    public set Foreground(value: Brush) {
-        this.SetValue(ForegroundProperty, value);
-    }
-
-    public get FontFamily(): FontFamily {
-        return this.GetValue(FontFamilyProperty);
-    }
-
-    public set FontFamily(value: FontFamily) {
-        this.SetValue(FontFamilyProperty, value);
-    }
-
-    public get FontSize(): number {
-        return this.GetValue(FontSizeProperty);
-    }
-
-    public set FontSize(value: number) {
-        this.SetValue(FontSizeProperty, value);
-    }
-
-    public get FontWeight(): FontWeight {
-        return this.GetValue(FontWeightProperty);
-    }
-
-    public set FontWeight(value: FontWeight) {
-        this.SetValue(FontWeightProperty, value);
-    }
-
-    public get HorizontalContentAlignment(): HorizontalAlignment {
-        return this.GetValue(HorizontalContentAlignmentProperty);
-    }
-
-    public set HorizontalContentAlignment(value: HorizontalAlignment) {
-        this.SetValue(HorizontalContentAlignmentProperty, value);
-    }
-
-    public get VerticalContentAlignment(): VerticalAlignment {
-        return this.GetValue(VerticalContentAlignmentProperty);
-    }
-
-    public set VerticalContentAlignment(value: VerticalAlignment) {
-        this.SetValue(VerticalContentAlignmentProperty, value);
-    }
-
-    public get Padding(): Thickness {
-        return this.GetValue(PaddingProperty);
-    }
-
-    public set Padding(value: Thickness) {
-        this.SetValue(PaddingProperty, value);
-    }
-
-    // Methods
-
+    // Layout overrides (measure and arrange)
     protected MeasureOverride(constraint: Size): Size {
         const count = this.VisualChildrenCount;
         if (count > 0) {
@@ -131,60 +189,39 @@ export class Control extends FrameworkElement {
         return arrangeBounds;
     }
 
-    public static HandleDoubleClick(sender: Control, e: MouseButtonEventArgs): void {
-        if (e.ClickCount === 2) {
+    // Example of handling double-clicks
+    public static HandleDoubleClick(sender: Control, e: MouseEvent): void {
+        if (e.detail === 2) {
             const ctrl = sender;
-            const doubleClick = new MouseButtonEventArgs(e.MouseDevice, e.Timestamp, e.ChangedButton, e.StylusDevice);
-
-            if (e.RoutedEvent === UIElement.PreviewMouseLeftButtonDownEvent || e.RoutedEvent === UIElement.PreviewMouseRightButtonDownEvent) {
-                doubleClick.RoutedEvent = Control.PreviewMouseDoubleClickEvent;
-                doubleClick.Source = e.OriginalSource;
-                ctrl.OnPreviewMouseDoubleClick(doubleClick);
-            } else {
-                doubleClick.RoutedEvent = Control.MouseDoubleClickEvent;
-                doubleClick.Source = e.OriginalSource;
-                ctrl.OnMouseDoubleClick(doubleClick);
-            }
-
-            if (doubleClick.Handled) {
-                e.Handled = true;
-            }
+            ctrl.OnMouseDoubleClick(e);
         }
     }
 
-    protected OnPreviewMouseDoubleClick(e: MouseButtonEventArgs): void {
-        this.RaiseEvent(e);
+    protected OnMouseDoubleClick(_e: MouseEvent): void {
+        // Raise double-click event
     }
 
-    protected OnMouseDoubleClick(e: MouseButtonEventArgs): void {
-        this.RaiseEvent(e);
+    // Sealing and flag methods
+    protected Seal(): void {
+        // If the control is sealed, we make it immutable
     }
 
-    private VisualStateChangeSuspended(): boolean {
-        return this.ReadControlFlag(ControlBoolFlags.VisualStateChangeSuspended);
+    protected ReadControlFlag(_flag: number): boolean {
+        // Logic for reading control flags
+        return false; // Simplified logic for flags
     }
 
-    private WriteControlFlag(flag: ControlBoolFlags, value: boolean): void {
-        if (value) {
-            this._controlBoolField |= flag;
-        } else {
-            this._controlBoolField &= ~flag;
-        }
+    protected WriteControlFlag(_flag: number, _value: boolean): void {
+        // Logic for writing control flags
     }
 
+    // State handling (for visual states, etc.)
     protected ChangeVisualState(useTransitions: boolean): void {
+        // Change the visual state
         this.ChangeValidationVisualState(useTransitions);
     }
 
-    protected ChangeValidationVisualState(useTransitions: boolean): void {
-        if (Validation.GetHasError(this)) {
-            if (this.IsKeyboardFocused) {
-                VisualStateManager.GoToState(this, "StateInvalidFocused", useTransitions);
-            } else {
-                VisualStateManager.GoToState(this, "StateInvalidUnfocused", useTransitions);
-            }
-        } else {
-            VisualStateManager.GoToState(this, "StateValid", useTransitions);
-        }
+    protected ChangeValidationVisualState(_useTransitions: boolean): void {
+        // Handle validation state changes
     }
 }

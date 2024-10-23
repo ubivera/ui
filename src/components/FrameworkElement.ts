@@ -1,11 +1,24 @@
 import { UIElement } from "./UIElement";
 
+type Size = {
+    width: number;
+    height: number;
+};
+
+type Rect = {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+};
+
 export class FrameworkElement extends UIElement {
     private _style: any = null;
     private _useLayoutRounding: boolean = false;
     private _overridesDefaultStyle: boolean = false;
     private hasTemplateGeneratedSubTree: boolean = false;
     private _templateChild: UIElement | null = null;
+    private _desiredSize: Size = { width: 0, height: 0 };
 
     constructor() {
         super();
@@ -63,6 +76,27 @@ export class FrameworkElement extends UIElement {
 
     protected OnPostApplyTemplate(): void {
         // Custom logic to be executed after applying the template
+    }
+
+    public get DesiredSize(): Size {
+        return this._desiredSize;
+    }
+
+    // The Measure method calculates the desired size of the element
+    public Measure(availableSize: Size): void {
+        // Logic to calculate the desired size based on availableSize and content
+        // For now, we'll set the DesiredSize to the availableSize as a default behavior
+        this._desiredSize = this.MeasureCore(availableSize);
+    }
+
+    // MeasureCore provides a place to define how the element determines its size
+    protected MeasureCore(availableSize: Size): Size {
+        // Placeholder logic - in reality, this would depend on the element's content
+        return availableSize;  // Default to the available size
+    }
+
+    public Arrange(_finalRect: Rect): void {
+        // Arrange logic goes here
     }
 
     public BeginStoryboard(storyboard: any): void {
