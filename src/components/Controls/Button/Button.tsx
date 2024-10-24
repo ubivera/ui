@@ -1,94 +1,153 @@
-import React from 'react';
-import Names from '../../Names';
-import ButtonBase from '../ButtonBase';
-import './styles.scss';
+import React, { forwardRef, useImperativeHandle, useRef, ReactNode } from 'react';
+import ButtonContent, { ButtonContentProps } from './Button.Content';
+import ButtonImage, { ButtonImageProps } from './Button.Image';
 
-type ButtonProps = {
+interface ButtonProps {
     Name?: string;
-    Content?: string | React.ReactNode;
-    Click?: () => void;
-    IsEnabled?: boolean;
-    Style?: 'Primary' | 'Secondary' | 'Accent';
+    Click?: ( event: | React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement> ) => void;
     ClickMode?: 'Release' | 'Press' | 'Hover';
-    children?: React.ReactNode;
-};
-
-type ButtonImageProps = {
-    Source: string;
-};
-
-const ButtonImage: React.FC<ButtonImageProps> = ({ Source }) => {
-    return <img src={Source} alt="Button Image" className="button-image" />;
-};
-
-type ButtonContentProps = {
-    children: React.ReactNode;
-};
-
-const ButtonContent: React.FC<ButtonContentProps> = ({ children }) => {
-    return <span className="button-text-wrapper">{children}</span>;
-};
-
-class Button extends ButtonBase {
-    private buttonRef: React.RefObject<HTMLButtonElement>;
-
-    constructor(props: ButtonProps) {
-        super(props);
-        this.buttonRef = React.createRef();
-    }
-
-    static defaultProps = {
-        IsEnabled: true,
-        Style: 'Primary',
-        ClickMode: 'Release'
-    };
-
-    componentDidMount() {
-        if (this.props.Name && this.buttonRef.current) {
-            new Names(this.props.Name, this.buttonRef.current);
-        }
-    }
-
-    public render(): JSX.Element {
-        const { children } = this.props;
-        let imageElement = null;
-        let contentElement = null;
-
-        React.Children.forEach(children, (child) => {
-            if (React.isValidElement(child)) {
-                if (child.type === ButtonImage) {
-                    imageElement = child;
-                }
-                if (child.type === ButtonContent) {
-                    contentElement = child;
-                }
-            }
-        });
-
-        return (
-            <button
-                ref={this.buttonRef}
-                onClick={this.handleClick}
-                onMouseDown={this.handleMouseDown}
-                onMouseEnter={this.handleMouseEnter}
-                onKeyDown={this.handleKeyPress}
-                className={this.props.Style}
-                disabled={!this.props.IsEnabled}
-            >
-                <span className="button-content-wrapper">
-                    {imageElement && <span className="button-image-wrapper">{imageElement}</span>}
-                    {contentElement ? (
-                        contentElement
-                    ) : (
-                        <span className="button-text-wrapper">{this.getContent()}</span>
-                    )}
-                </span>
-            </button>
-        );
-    }
-
-    static Image = ButtonImage;
-    static Content = ButtonContent;
+    Style?: string;
+    Disabled?: boolean;
+    Command?: ( event: | React.MouseEvent<HTMLButtonElement>| React.KeyboardEvent<HTMLButtonElement> ) => void;
+    Content?: string;
+    children?: ReactNode;
 }
 
+export interface ButtonRef {
+    getContent: () => string | undefined;
+    setContent: (content: string) => void;
+    getDisabled: () => boolean | undefined;
+    setDisabled: (disabled: boolean) => void;
+    fireClick: () => void;
+    fireCommand: () => void;
+    focusButton: () => void;
+}
+
+interface ButtonComponent extends React.ForwardRefExoticComponent<ButtonProps & React.RefAttributes<ButtonRef>> {
+    Content: React.FC<ButtonContentProps>;
+    Image: React.FC<ButtonImageProps>;
+}
+
+const Button = forwardRef<ButtonRef, ButtonProps>((props, ref) => {
+    const {
+        Name,
+        Click,
+        ClickMode = 'Release',
+        Style = null,
+        Disabled = false,
+        Command,
+        Content,
+        children,
+    } = props;
+
+    const buttonRef = useRef<HTMLButtonElement>(null);
+    const [content, setContent] = React.useState(Content);
+    const [disabled, setDisabled] = React.useState(Disabled);
+
+    useImperativeHandle(ref, () => ({
+        getContent: () => content,
+        setContent: (newContent: string) => setContent(newContent),
+        getDisabled: () => disabled,
+        setDisabled: (newDisabled: boolean) => setDisabled(newDisabled),
+        fireClick: () => {
+            if (Click) Click({} as React.MouseEvent<HTMLButtonElement>);
+        },
+        fireCommand: () => {
+            if (Command) Command({} as React.MouseEvent<HTMLButtonElement>);
+        },
+        focusButton: () => {
+            if (buttonRef.current) buttonRef.current.focus();
+        },
+    }));
+
+    const handleMouseEvent = (event: React.MouseEvent<HTMLButtonElement>) => {
+        if (!disabled && Click) {
+            Click(event);
+        }
+
+        if (Command) {
+            Command(event);
+        }
+    };
+
+    const handleKeyEvent = (event: React.KeyboardEvent<HTMLButtonElement>) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            if (event.key === ' ') {
+                event.preventDefault();
+            }
+
+            if (!disabled && Click) {
+                Click(event);
+            }
+
+            if (Command) {
+                Command(event);
+            }
+        }
+    };
+
+    const eventProps = ClickMode === 'Press' ? {
+        onMouseDown: handleMouseEvent,
+        onKeyDown: handleKeyEvent,
+    } : ClickMode === 'Hover' ? {
+        onMouseEnter: handleMouseEvent,
+    } : {
+        onMouseUp: handleMouseEvent,
+        onKeyUp: handleKeyEvent,
+    };
+
+    const childArray = React.Children.toArray(children);
+
+    const contentChildren = childArray
+        .filter((child) => {
+            return (
+                React.isValidElement(child) &&
+                (child.type as any).displayName === 'ButtonContent'
+            );
+        })
+        .map((child) => {
+            const childElement = child as React.ReactElement<ButtonContentProps>;
+
+            return React.cloneElement(childElement, {
+                content: childElement.props.inheritContent
+                ? content
+                : childElement.props.content,
+            });
+        });
+
+    const imageBefore = childArray.filter((child) => {
+        return (
+            React.isValidElement(child) &&
+            (child.type as any).displayName === 'ButtonImage' &&
+            (child.props as ButtonImageProps).placement === 'Before'
+        );
+    });
+
+    const imageAfter = childArray.filter((child) => {
+        return (
+            React.isValidElement(child) &&
+            (child.type as any).displayName === 'ButtonImage' &&
+            (child.props as ButtonImageProps).placement === 'After'
+        );
+    });
+
+    return (
+        <button
+            ref={buttonRef}
+            id={Name}
+            aria-label={content ? content : 'button'}
+            className={'btn' + (Style ? ' ' + Style : '')}
+            disabled={disabled}
+            aria-disabled={disabled}
+            {...eventProps}
+        >
+            {imageBefore}
+            <span className='lbl'>{contentChildren.length > 0 ? contentChildren : content}</span>
+            {imageAfter}
+        </button>
+    );
+}) as ButtonComponent;
+
+Button.Content = ButtonContent;
+Button.Image = ButtonImage;
 export default Button;
