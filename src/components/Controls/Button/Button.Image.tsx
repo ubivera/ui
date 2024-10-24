@@ -1,12 +1,12 @@
 import React from 'react';
 
 export interface ButtonImageProps {
-  source: string;
-  placement?: 'Before' | 'After';
+  Source: string;
+  Placement?: 'Left' | 'Right';
 }
 
-const ButtonImage: React.FC<ButtonImageProps> = ({ source, placement }) => {
-  const style:string = 'img ' + (placement === 'Before' ? 'lft' : 'rgt');
+const ButtonImage: React.FC<ButtonImageProps> = ({ Source: source, Placement: placement }) => {
+  const style:string = 'img ' + (placement === 'Left' ? 'lft' : 'rgt');
 
   return <img src={source} className={style} alt='' />;
 };

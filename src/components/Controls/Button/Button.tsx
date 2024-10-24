@@ -109,9 +109,9 @@ const Button = forwardRef<ButtonRef, ButtonProps>((props, ref) => {
             const childElement = child as React.ReactElement<ButtonContentProps>;
 
             return React.cloneElement(childElement, {
-                content: childElement.props.inheritContent
+                Content: childElement.props.InheritContent
                 ? content
-                : childElement.props.content,
+                : childElement.props.Content,
             });
         });
 
@@ -119,7 +119,10 @@ const Button = forwardRef<ButtonRef, ButtonProps>((props, ref) => {
         return (
             React.isValidElement(child) &&
             (child.type as any).displayName === 'ButtonImage' &&
-            (child.props as ButtonImageProps).placement === 'Before'
+            (
+                (child.props as ButtonImageProps).Placement === 'Left'
+                || (child.props as ButtonImageProps).Placement === undefined
+            )
         );
     });
 
@@ -127,7 +130,7 @@ const Button = forwardRef<ButtonRef, ButtonProps>((props, ref) => {
         return (
             React.isValidElement(child) &&
             (child.type as any).displayName === 'ButtonImage' &&
-            (child.props as ButtonImageProps).placement === 'After'
+            (child.props as ButtonImageProps).Placement === 'Right'
         );
     });
 
