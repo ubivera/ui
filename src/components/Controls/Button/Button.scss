@@ -1,0 +1,43 @@
+.btn {
+    cursor: pointer;
+    color: var(--TextFillColorPrimaryBrush);
+    background-color: var(--ControlFillColorDefaultBrush);
+    border: 1px solid var(--ControlElevationBorderBrush);
+    border-radius: var(--ControlCornerRadius);
+    transition-property: color, background-color;
+    transition-timing-function: var(--TransitionTimingFunction);
+    transition-duration: var(--TransitionTimingDuration);
+}
+
+.btn:hover {
+    background-color: var(--ControlFillColorSecondaryBrush);
+}
+
+.btn:active {
+    color: var(--TextFillColorTertiaryBrush);
+    background-color: var(--ControlFillColorTertiaryBrush);
+}
+
+.btn:focus-visible {
+    border-color: var(--FocusStrokeColorInnerBrush);
+    outline: 2px solid var(--FocusStrokeColorOuterBrush);
+}
+
+.btn:disabled {
+    background-color: var(--ControlFillColorDisabledBrush);
+}
+
+.btn.accent {
+    color: var(--TextOnAccentFillColorPrimaryBrush);
+    background-color: var(--AccentFillColorDefaultBrush);
+    border-color: var(--AccentFillColorDefaultBrush);
+}
+
+.btn.accent:hover {
+    background-color: var(--AccentFillColorSecondaryBrush);
+}
+
+.btn.accent:active {
+    color: var(--TextOnAccentFillColorSecondaryBrush);
+    background-color: var(--AccentFillColorTertiaryBrush);
+}

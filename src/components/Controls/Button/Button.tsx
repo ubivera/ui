@@ -1,6 +1,7 @@
 import React, { forwardRef, useImperativeHandle, useRef, ReactNode } from 'react';
 import ButtonContent, { ButtonContentProps } from './Button.Content';
 import ButtonImage, { ButtonImageProps } from './Button.Image';
+import './Button.scss';
 
 interface ButtonProps {
     Name?: string;
