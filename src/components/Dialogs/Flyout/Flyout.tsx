@@ -25,12 +25,24 @@ const Flyout = forwardRef<FlyoutRef, FlyoutProps>(({
     children
 }, ref) => {
     const [isOpen, setIsOpen] = useState(IsOpen);
+    const [shouldRender, setShouldRender] = useState(IsOpen);
     const flyoutRef = useRef<HTMLDivElement>(null);
 
     useImperativeHandle(ref, () => ({
         Show: () => setIsOpen(true),
         Hide: () => setIsOpen(false),
     }));
+
+    useEffect(() => {
+        if (isOpen) {
+            setShouldRender(true);
+        } else if (AreOpenCloseAnimationsEnabled) {
+            const timer = setTimeout(() => setShouldRender(false), 300);
+            return () => clearTimeout(timer);
+        } else {
+            setShouldRender(false);
+        }
+    }, [isOpen, AreOpenCloseAnimationsEnabled]);
 
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
@@ -146,7 +158,7 @@ const Flyout = forwardRef<FlyoutRef, FlyoutProps>(({
         ...getFlyoutPosition()
     };
 
-    if (!isOpen) return null;
+    if (!shouldRender) return null;
 
     return (
         <>
