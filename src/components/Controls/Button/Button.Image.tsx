@@ -6,7 +6,7 @@ export interface ButtonImageProps {
 }
 
 const ButtonImage: React.FC<ButtonImageProps> = ({ Source: source, Placement: placement }) => {
-  const style:string = 'img ' + (placement === 'Left' ? 'lft' : 'rgt');
+  const style:string = 'img ' + (placement === 'Right' ? 'rgt' : 'lft');
 
   return <img src={source} className={style} alt='' />;
 };
