@@ -1,43 +1,80 @@
 .btn {
+    @include BodyTextBlockStyle;
+
     cursor: pointer;
+    height: fit-content;
+    display: inline-flex;
+    flex-direction: row;
+
+    padding: var(--SpacingControlsLabels);
     color: var(--TextFillColorPrimaryBrush);
     background-color: var(--ControlFillColorDefaultBrush);
+
     border: 1px solid var(--ControlElevationBorderBrush);
     border-radius: var(--ControlCornerRadius);
+
     transition-property: color, background-color;
     transition-timing-function: var(--TransitionTimingFunction);
     transition-duration: var(--TransitionTimingDuration);
-}
 
-.btn:hover {
-    background-color: var(--ControlFillColorSecondaryBrush);
-}
 
-.btn:active {
-    color: var(--TextFillColorTertiaryBrush);
-    background-color: var(--ControlFillColorTertiaryBrush);
-}
+    &:hover {
+        background-color: var(--ControlFillColorSecondaryBrush);
+    }
 
-.btn:focus-visible {
-    border-color: var(--FocusStrokeColorInnerBrush);
-    outline: 2px solid var(--FocusStrokeColorOuterBrush);
-}
+    &:active {
+        color: var(--TextFillColorTertiaryBrush);
+        background-color: var(--ControlFillColorTertiaryBrush);
+    }
 
-.btn:disabled {
-    background-color: var(--ControlFillColorDisabledBrush);
-}
+    &:focus-visible {
+        border-color: var(--FocusStrokeColorInnerBrush);
+        outline: 2px solid var(--FocusStrokeColorOuterBrush);
+    }
 
-.btn.accent {
-    color: var(--TextOnAccentFillColorPrimaryBrush);
-    background-color: var(--AccentFillColorDefaultBrush);
-    border-color: var(--AccentFillColorDefaultBrush);
-}
+    &:disabled {
+        background-color: var(--ControlFillColorDisabledBrush);
+    }
 
-.btn.accent:hover {
-    background-color: var(--AccentFillColorSecondaryBrush);
-}
+    &.accent {
+        color: var(--TextOnAccentFillColorPrimaryBrush);
+        background-color: var(--AccentFillColorDefaultBrush);
+        border-color: var(--AccentFillColorDefaultBrush);
+    }
 
-.btn.accent:active {
-    color: var(--TextOnAccentFillColorSecondaryBrush);
-    background-color: var(--AccentFillColorTertiaryBrush);
+    &.accent:hover {
+        background-color: var(--AccentFillColorSecondaryBrush);
+    }
+
+    &.accent:active {
+        color: var(--TextOnAccentFillColorSecondaryBrush);
+        background-color: var(--AccentFillColorTertiaryBrush);
+    }
+
+    .img {
+        max-height: 24px;
+        padding: 0 var(--SpacingCompact);
+
+        .lft {
+            align-self: flex-start;
+        }
+
+        .rgt {
+            align-self: flex-end;
+        }
+    }
+
+    .lbl {
+        align-content: center;
+        vertical-align: middle;
+        padding: 0 var(--SpacingCompact);
+    }
+
+    :first-child {
+        padding-left: 0;
+    }
+
+    :last-child {
+        padding-right: 0;
+    }
 }

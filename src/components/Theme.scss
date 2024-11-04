@@ -171,6 +171,48 @@
     background-color: #202020;
 }
 
+@mixin CaptionTextBlockStyle {
+    font-size: 12px;
+}
+
+@mixin BodyTextBlockStyle {
+    font-size: 14px;
+    font-weight: normal;
+}
+
+@mixin BodyStrongTextBlockStyle {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+@mixin SubtitleTextBlockStyle {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+@mixin TitleTextBlockStyle {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+@mixin TitleLargeTextBlockStyle {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+@mixin DisplayTextBlockStyle {
+    font-size: 68px;
+    font-weight: bold;
+}
+
+.caption-txt { @include CaptionTextBlockStyle; }
+.body-txt { @include BodyTextBlockStyle; }
+.body-txt-str { @include BodyStrongTextBlockStyle; }
+.sub-txt { @include SubtitleTextBlockStyle; }
+.tlt-txt { @include TitleTextBlockStyle; }
+.tlt-txt-lg { @include TitleLargeTextBlockStyle; }
+.dsp-txt { @include DisplayTextBlockStyle; }
+
 @media (prefers-color-scheme: light) {
     :root {
         --TextFillColorPrimaryBrush: var(--text-primary-light);
