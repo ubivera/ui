@@ -1,0 +1,8 @@
+.flyout {
+    padding: var(--SpacingControlsLabels);
+    color: var(--TextFillColorPrimaryBrush);
+    background-color: var(--ControlFillColorDefaultBrush);
+
+    border: 1px solid var(--ControlElevationBorderBrush);
+    border-radius: var(--ControlCornerRadius);
+}
