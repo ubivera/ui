@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import MenuFlyout from '../MenuFlyout/MenuFlyout';
 
 const DropDownMenuFlyout: React.FC<{
@@ -6,9 +6,14 @@ const DropDownMenuFlyout: React.FC<{
     onClose?: () => void;
     children?: React.ReactNode;
 }> = ({ Target, onClose, children }) => {
+    const [isOpen, setIsOpen] = useState(true);
+
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
-            if (Target?.current && !Target.current.contains(event.target as Node) && onClose) onClose();
+            if (Target?.current && !Target.current.contains(event.target as Node) && onClose) {
+                setIsOpen(false);
+                onClose();
+            }
         };
 
         document.addEventListener('mousedown', handleClickOutside);
@@ -17,7 +22,7 @@ const DropDownMenuFlyout: React.FC<{
 
     return (
         <MenuFlyout
-            IsOpen={true}
+            IsOpen={isOpen}
             Target={Target}
             Placement="Bottom"
             AllowFocusOnInteraction={true}

@@ -1,5 +1,6 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { Flyout } from '../../Dialogs/Flyout';
+import './MenuFlyout.scss';
 
 interface MenuFlyoutProps {
     IsOpen?: boolean;
@@ -7,14 +8,27 @@ interface MenuFlyoutProps {
     Placement?: any;
     AreOpenCloseAnimationsEnabled?: boolean;
     AllowFocusOnInteraction?: boolean;
-    children?: ReactNode;
+    children?: React.ReactNode;
 }
 
-const MenuFlyout: React.FC<MenuFlyoutProps> = (props) => {
+const MenuFlyout: React.FC<MenuFlyoutProps> = ({
+    IsOpen = false,
+    Target,
+    Placement,
+    AreOpenCloseAnimationsEnabled = true,
+    AllowFocusOnInteraction = true,
+    children,
+}) => {
     return (
-        <Flyout {...props}>
+        <Flyout
+            IsOpen={IsOpen}
+            Target={Target}
+            Placement={Placement}
+            AreOpenCloseAnimationsEnabled={AreOpenCloseAnimationsEnabled}
+            AllowFocusOnInteraction={AllowFocusOnInteraction}
+        >
             <div className="menu-flyout-content">
-                {props.children}
+                {children}
             </div>
         </Flyout>
     );

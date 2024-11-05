@@ -1,4 +1,7 @@
 .flyout {
+    display: flex;
+    flex-direction: row;
+    
     padding: var(--SpacingControlsLabels);
     color: var(--TextFillColorPrimaryBrush);
     background-color: var(--ControlFillColorDefaultBrush);

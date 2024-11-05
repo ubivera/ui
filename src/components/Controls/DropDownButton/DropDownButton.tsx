@@ -1,9 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, ReactNode } from 'react';
 import Button, { ButtonProps, ButtonRef } from '../Button/Button';
 import DropDownMenuFlyout from './DropDownMenu.Flyout';
 
 interface DropDownButtonProps extends ButtonProps {
-    children?: React.ReactNode;
+    children?: ReactNode;
 }
 
 const DropDownButton: React.FC<DropDownButtonProps> & { Flyout: typeof DropDownMenuFlyout } = ({
@@ -17,17 +17,25 @@ const DropDownButton: React.FC<DropDownButtonProps> & { Flyout: typeof DropDownM
         setIsMenuOpen((prev) => !prev);
     };
 
+    const buttonChildren = React.Children.toArray(children).filter(
+        (child) => (child as React.ReactElement).type !== DropDownMenuFlyout
+    );
+
+    const flyoutChild = React.Children.toArray(children).find(
+        (child) => (child as React.ReactElement).type === DropDownMenuFlyout
+    ) as React.ReactElement | undefined;
+
     return (
         <>
             <Button {...buttonProps} Click={handleButtonClick} ref={buttonRef}>
-                {children}
+                {buttonChildren}
             </Button>
-            {isMenuOpen && buttonRef.current?.buttonElement && (
+            {isMenuOpen && buttonRef.current?.buttonElement && flyoutChild && (
                 <DropDownMenuFlyout
-                    Target={{ current: buttonRef.current.buttonElement } as React.RefObject<HTMLElement>} // Create a RefObject from buttonElement
+                    Target={{ current: buttonRef.current.buttonElement }}
                     onClose={() => setIsMenuOpen(false)}
                 >
-                    {children}
+                    {flyoutChild.props.children}
                 </DropDownMenuFlyout>
             )}
         </>
@@ -35,5 +43,4 @@ const DropDownButton: React.FC<DropDownButtonProps> & { Flyout: typeof DropDownM
 };
 
 DropDownButton.Flyout = DropDownMenuFlyout;
-
 export default DropDownButton;
