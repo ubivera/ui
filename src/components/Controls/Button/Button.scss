@@ -5,6 +5,7 @@
     height: fit-content;
     display: inline-flex;
     flex-direction: row;
+    align-items: stretch;
 
     padding: var(--SpacingControlsLabels);
     color: var(--TextFillColorPrimaryBrush);

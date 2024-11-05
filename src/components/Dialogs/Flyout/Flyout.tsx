@@ -37,7 +37,7 @@ const Flyout = forwardRef<FlyoutRef, FlyoutProps>(({
         if (isOpen) {
             setShouldRender(true);
         } else if (AreOpenCloseAnimationsEnabled) {
-            const timer = setTimeout(() => setShouldRender(false), 300);
+            const timer = setTimeout(() => setShouldRender(false), 100);
             return () => clearTimeout(timer);
         } else {
             setShouldRender(false);
@@ -166,7 +166,7 @@ const Flyout = forwardRef<FlyoutRef, FlyoutProps>(({
             <div
                 ref={flyoutRef}
                 tabIndex={-1}
-                className={`flyout${AreOpenCloseAnimationsEnabled ? (isOpen ? ' flyout-open' : ' flyout-close') : ''}`}
+                className={`flyout${AreOpenCloseAnimationsEnabled ? (isOpen ? ' show' : ' hide') : ''}`}
                 style={flyoutStyle}
             >
                 {children}

@@ -5,4 +5,50 @@
 
     border: 1px solid var(--ControlElevationBorderBrush);
     border-radius: var(--ControlCornerRadius);
+
+    clip-path: inset(0 0 100% 0);
+    transition: opacity 0.2s ease-in-out;
+
+    &.show {
+        animation: flyout-slide-down 0.2s ease forwards;
+    }
+
+    &.hide {
+        animation: flyout-slide-up 0.1s ease forwards;
+    }
+}
+
+@keyframes flyout-slide-down {
+    0% {
+        transform: translateY(-16px);
+        clip-path: inset(0 0 -16px 0);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY();
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+@keyframes flyout-slide-up {
+    0% {
+        transform: translateY(0);
+        clip-path: inset(0 0 0 0);
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-16px);
+        clip-path: inset(0 0 16px 0);
+        opacity: 0;
+    }
 }
