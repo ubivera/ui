@@ -3,7 +3,7 @@ import ButtonContent, { ButtonContentProps } from './Button.Content';
 import ButtonImage, { ButtonImageProps } from './Button.Image';
 import './Button.scss';
 
-interface ButtonProps {
+export interface ButtonProps {
     Name?: string;
     Click?: ( event: | React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement> ) => void;
     ClickMode?: 'Release' | 'Press' | 'Hover';
@@ -51,15 +51,15 @@ const Button = forwardRef<ButtonRef, ButtonProps>((props, ref) => {
         getDisabled: () => disabled,
         setDisabled: (newDisabled: boolean) => setDisabled(newDisabled),
         fireClick: () => {
-            if (Click) Click({} as React.MouseEvent<HTMLButtonElement>);
+            if (Click && buttonRef.current) Click({} as React.MouseEvent<HTMLButtonElement>);
         },
         fireCommand: () => {
-            if (Command) Command({} as React.MouseEvent<HTMLButtonElement>);
+            if (Command && buttonRef.current) Command({} as React.MouseEvent<HTMLButtonElement>);
         },
         focusButton: () => {
             if (buttonRef.current) buttonRef.current.focus();
         },
-    }));
+    }), [content, disabled, Click, Command]);
 
     const handleMouseEvent = (event: React.MouseEvent<HTMLButtonElement>) => {
         if (!disabled && Click) {
