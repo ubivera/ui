@@ -22,9 +22,9 @@ const DropDownButton: React.FC<DropDownButtonProps> & { Flyout: typeof DropDownM
             <Button {...buttonProps} Click={handleButtonClick} ref={buttonRef}>
                 {children}
             </Button>
-            {isMenuOpen && (
+            {isMenuOpen && buttonRef.current?.buttonElement && (
                 <DropDownMenuFlyout
-                    Target={buttonRef as unknown as React.RefObject<HTMLElement>}
+                    Target={{ current: buttonRef.current.buttonElement } as React.RefObject<HTMLElement>} // Create a RefObject from buttonElement
                     onClose={() => setIsMenuOpen(false)}
                 >
                     {children}

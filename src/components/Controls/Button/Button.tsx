@@ -22,6 +22,7 @@ export interface ButtonRef {
     fireClick: () => void;
     fireCommand: () => void;
     focusButton: () => void;
+    buttonElement: HTMLButtonElement | null;
 }
 
 interface ButtonComponent extends React.ForwardRefExoticComponent<ButtonProps & React.RefAttributes<ButtonRef>> {
@@ -59,6 +60,7 @@ const Button = forwardRef<ButtonRef, ButtonProps>((props, ref) => {
         focusButton: () => {
             if (buttonRef.current) buttonRef.current.focus();
         },
+        buttonElement: buttonRef.current,
     }), [content, disabled, Click, Command]);
 
     const handleMouseEvent = (event: React.MouseEvent<HTMLButtonElement>) => {
