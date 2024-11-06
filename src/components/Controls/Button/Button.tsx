@@ -1,159 +1,207 @@
-import React, { forwardRef, useImperativeHandle, useRef, ReactNode } from 'react';
+import React, {
+    forwardRef, useImperativeHandle, useRef, ReactNode, useState, useCallback, useMemo, ReactElement
+} from 'react';
 import ButtonContent, { ButtonContentProps } from './Button.Content';
 import ButtonImage, { ButtonImageProps } from './Button.Image';
 import './Button.scss';
 
 export interface ButtonProps {
     Name?: string;
-    Click?: ( event: | React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement> ) => void;
+    Click?: (
+        event: React.MouseEvent<HTMLButtonElement>
+        | React.KeyboardEvent<HTMLButtonElement>
+    ) => void;
+    Command?: (
+        event: React.MouseEvent<HTMLButtonElement>
+        | React.KeyboardEvent<HTMLButtonElement>
+    ) => void;
     ClickMode?: 'Release' | 'Press' | 'Hover';
-    Style?: string;
+    Classes?: React.CSSProperties;
     Disabled?: boolean;
-    Command?: ( event: | React.MouseEvent<HTMLButtonElement>| React.KeyboardEvent<HTMLButtonElement> ) => void;
-    Content?: string;
+    Content?: ReactNode;
     children?: ReactNode;
+    AriaLabel?: string;
+    Style?: string;
 }
 
 export interface ButtonRef {
-    getContent: () => string | undefined;
-    setContent: (content: string) => void;
-    getDisabled: () => boolean | undefined;
-    setDisabled: (disabled: boolean) => void;
-    fireClick: () => void;
-    fireCommand: () => void;
-    focusButton: () => void;
-    buttonElement: HTMLButtonElement | null;
+    GetContent: () => ReactNode;
+    SetContent: (content: ReactNode) => void;
+    GetDisabled: () => boolean | undefined;
+    SetDisabled: (disabled: boolean) => void;
+    FireClick: () => void;
+    FireCommand: () => void;
+    FocusButton: () => void;
+    Element: HTMLButtonElement | null;
 }
 
-interface ButtonComponent extends React.ForwardRefExoticComponent<ButtonProps & React.RefAttributes<ButtonRef>> {
+type ButtonComponent = React.MemoExoticComponent<
+    React.ForwardRefExoticComponent<
+        ButtonProps
+        & React.RefAttributes<ButtonRef>
+    >
+> & {
     Content: React.FC<ButtonContentProps>;
     Image: React.FC<ButtonImageProps>;
-}
+};
 
-const Button = forwardRef<ButtonRef, ButtonProps>((props, ref) => {
-    const {
+const Button = React.memo(
+    forwardRef<ButtonRef, ButtonProps>((props, ref) => {
+      const {
         Name,
-        Click,
+        Click: OnClick,
+        Command: OnCommand,
         ClickMode = 'Release',
-        Style = null,
+        Classes,
         Disabled = false,
-        Command,
         Content,
         children,
-    } = props;
+        AriaLabel,
+        Style,
+      } = props;
 
-    const buttonRef = useRef<HTMLButtonElement>(null);
-    const [content, setContent] = React.useState(Content);
-    const [disabled, setDisabled] = React.useState(Disabled);
+      const buttonRef = useRef<HTMLButtonElement>(null);
+      const [content, SetContent] = useState<ReactNode>(Content);
+      const [disabled, SetDisabled] = useState(Disabled);
 
-    useImperativeHandle(ref, () => ({
-        getContent: () => content,
-        setContent: (newContent: string) => setContent(newContent),
-        getDisabled: () => disabled,
-        setDisabled: (newDisabled: boolean) => setDisabled(newDisabled),
-        fireClick: () => {
-            if (Click && buttonRef.current) Click({} as React.MouseEvent<HTMLButtonElement>);
+    useImperativeHandle(
+        ref,
+        () => ({
+            GetContent: () => content,
+            SetContent: (newContent: ReactNode) => SetContent(newContent),
+            GetDisabled: () => disabled,
+            SetDisabled: (newDisabled: boolean) => SetDisabled(newDisabled),
+            FireClick: () => {
+                if (OnClick && buttonRef.current) {
+                const event = new MouseEvent('click', {
+                    bubbles: true,
+                    cancelable: true,
+                    view: window,
+                });
+                buttonRef.current.dispatchEvent(event);
+                }
+            },
+            FireCommand: () => {
+                if (OnCommand && buttonRef.current) {
+                const event = new MouseEvent('click', {
+                    bubbles: true,
+                    cancelable: true,
+                    view: window,
+                });
+                buttonRef.current.dispatchEvent(event);
+                }
+            },
+            FocusButton: () => {
+                buttonRef.current?.focus();
+            },
+            Element: buttonRef.current,
+        }),
+        [content, disabled, OnClick, OnCommand]
+    );
+
+    const handleMouseEvent = useCallback(
+        (event: React.MouseEvent<HTMLButtonElement>) => {
+            if (!disabled && OnClick) OnClick(event);
+            if (OnCommand) OnCommand(event);
         },
-        fireCommand: () => {
-            if (Command && buttonRef.current) Command({} as React.MouseEvent<HTMLButtonElement>);
+        [disabled, OnClick, OnCommand]
+    );
+
+    const handleKeyEvent = useCallback(
+        (event: React.KeyboardEvent<HTMLButtonElement>) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                if (event.key === ' ') event.preventDefault();
+                if (!disabled && OnClick) OnClick(event);
+                if (OnCommand) OnCommand(event);
+            }
         },
-        focusButton: () => {
-            if (buttonRef.current) buttonRef.current.focus();
-        },
-        buttonElement: buttonRef.current,
-    }), [content, disabled, Click, Command]);
+        [disabled, OnClick, OnCommand]
+    );
 
-    const handleMouseEvent = (event: React.MouseEvent<HTMLButtonElement>) => {
-        if (!disabled && Click) {
-            Click(event);
+    const eventProps = useMemo(() => {
+        if (ClickMode === 'Press') {
+            return {
+                onMouseDown: handleMouseEvent,
+                onKeyDown: handleKeyEvent,
+            };
+        } else if (ClickMode === 'Hover') {
+            return {
+                onMouseEnter: handleMouseEvent,
+            };
+        } else {
+            return {
+                onMouseUp: handleMouseEvent,
+                onKeyUp: handleKeyEvent,
+            };
         }
+    }, [ClickMode, handleMouseEvent, handleKeyEvent]);
 
-        if (Command) {
-            Command(event);
-        }
-    };
+    const childArray = React.Children.toArray(children || []);
 
-    const handleKeyEvent = (event: React.KeyboardEvent<HTMLButtonElement>) => {
-        if (event.key === 'Enter' || event.key === ' ') {
-            if (event.key === ' ') {
-                event.preventDefault();
-            }
-
-            if (!disabled && Click) {
-                Click(event);
-            }
-
-            if (Command) {
-                Command(event);
-            }
-        }
-    };
-
-    const eventProps = ClickMode === 'Press' ? {
-        onMouseDown: handleMouseEvent,
-        onKeyDown: handleKeyEvent,
-    } : ClickMode === 'Hover' ? {
-        onMouseEnter: handleMouseEvent,
-    } : {
-        onMouseUp: handleMouseEvent,
-        onKeyUp: handleKeyEvent,
-    };
-
-    const childArray = React.Children.toArray(children);
+    function isButtonContent(
+        element: ReactNode
+    ): element is ReactElement<ButtonContentProps> {
+        return (
+            React.isValidElement(element) &&
+            (element.type as React.ComponentType).displayName === 'ButtonContent'
+        );
+    }
+  
+    function isButtonImage(
+        element: ReactNode
+    ): element is ReactElement<ButtonImageProps> {
+        return (
+            React.isValidElement(element) &&
+            (element.type as React.ComponentType).displayName === 'ButtonImage'
+        );
+    }
 
     const contentChildren = childArray
-        .filter((child) => {
-            return (
-                React.isValidElement(child) &&
-                (child.type as any).displayName === 'ButtonContent'
-            );
-        })
+        .filter(isButtonContent)
         .map((child) => {
-            const childElement = child as React.ReactElement<ButtonContentProps>;
-
-            return React.cloneElement(childElement, {
-                Content: childElement.props.InheritContent
-                ? content
-                : childElement.props.Content,
-            });
+            return React.cloneElement(child, {
+            Content: child.props.InheritContent ? content : child.props.Content,
         });
-
-    const imageBefore = childArray.filter((child) => {
-        return (
-            React.isValidElement(child) &&
-            (child.type as any).displayName === 'ButtonImage' &&
-            (
-                (child.props as ButtonImageProps).Placement === 'Left'
-                || (child.props as ButtonImageProps).Placement === undefined
-            )
-        );
     });
 
-    const imageAfter = childArray.filter((child) => {
-        return (
-            React.isValidElement(child) &&
-            (child.type as any).displayName === 'ButtonImage' &&
-            (child.props as ButtonImageProps).Placement === 'Right'
-        );
-    });
+    const imageBefore = childArray.filter(
+        (child) =>
+            isButtonImage(child) &&
+            (child.props.Placement === 'Left' || child.props.Placement === undefined)
+    );
+
+    const imageAfter = childArray.filter(
+        (child) => isButtonImage(child) && child.props.Placement === 'Right'
+    );
+
+    const buttonClassName = `btn${Classes ? ' ' + Classes : ''}${
+        Style ? ' ' + Style : ''
+    }`;
 
     return (
         <button
             ref={buttonRef}
             id={Name}
-            aria-label={content ? content : 'button'}
-            className={'btn' + (Style ? ' ' + Style : '')}
-            disabled={disabled}
+            aria-label={
+                AriaLabel ||
+                (typeof content === 'string' ? content : 'Button')
+              }
+            className={buttonClassName}
+            disabled={disabled && !OnCommand}
             aria-disabled={disabled}
+            style={Classes}
             {...eventProps}
         >
             {imageBefore}
-            <span className='lbl'>{contentChildren.length > 0 ? contentChildren : content}</span>
+            <span className='lbl'>
+                {contentChildren.length > 0 ? contentChildren : content}
+            </span>
             {imageAfter}
         </button>
     );
-}) as ButtonComponent;
+})) as ButtonComponent;
 
+Button.displayName = 'Button';
 Button.Content = ButtonContent;
 Button.Image = ButtonImage;
 export default Button;
