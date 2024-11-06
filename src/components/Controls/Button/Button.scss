@@ -6,13 +6,17 @@
     display: inline-flex;
     flex-direction: row;
     align-items: stretch;
+    user-select: var(--GlobalUserSelectDefault);
 
     padding: var(--SpacingControlsLabels);
     color: var(--TextFillColorPrimaryBrush);
+    text-shadow: var(--GlobalTextShadowDefault);
+    backdrop-filter: var(--GlobalBackdropFilterDefault);
     background-color: var(--ControlFillColorDefaultBrush);
 
     border: 1px solid var(--ControlElevationBorderBrush);
     border-radius: var(--ControlCornerRadius);
+    box-shadow: var(--GlobalBoxShadowDefault);
 
     transition-property: color, background-color;
     transition-timing-function: var(--TransitionTimingFunction);
@@ -56,6 +60,7 @@
 
     .img {
         max-height: 24px;
+        pointer-events: none;
         padding: 0 var(--SpacingCompact);
 
         .lft {

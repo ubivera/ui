@@ -158,6 +158,17 @@
     --TransitionTimingFunction: cubic-bezier(0.4, 0, 0.2, 1);
     --TransitionTimingDuration: 150ms;
 
+    --GlobalUserSelectDefault: none;
+    --GlobalBackdropFilterDefault: blur(48px);
+    --GlobalTextShadowDefault: 1px 1px 1px hsla(0, 0%, 0%, 0.502);
+    --GlobalBoxShadowDefault:
+        inset 0 0 1px hsla(0, 0%, 13%, 0.4),
+        0 0 2px 2px hsla(0 0% 0% / 0.102);
+    --GlobalBoxShadowActive:
+        var(--GlobalBoxShadowDefault),
+        0 0 0 2px var(--CardBackgroundFillColorDefaultBrush),
+        0 0 0 4px var(--AccentFillColorDefaultBrush);
+
     font-family: system-ui, Helvetica, Arial, sans-serif;
     font-feature-settings: 'liga' 1, 'calt' 1;
     text-rendering: optimizeLegibility;
@@ -169,6 +180,10 @@
     color-scheme: light dark;
     color: var(--TextFillColorPrimaryBrush);
     background-color: #202020;
+}
+
+::after, ::before {
+	box-sizing: border-box;
 }
 
 @mixin CaptionTextBlockStyle {

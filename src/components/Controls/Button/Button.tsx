@@ -7,11 +7,11 @@ import './Button.scss';
 
 export interface ButtonProps {
     Name?: string;
-    OnClick?: (
+    Click?: (
         event: React.MouseEvent<HTMLButtonElement>
         | React.KeyboardEvent<HTMLButtonElement>
     ) => void;
-    OnCommand?: (
+    Command?: (
         event: React.MouseEvent<HTMLButtonElement>
         | React.KeyboardEvent<HTMLButtonElement>
     ) => void;
@@ -49,8 +49,8 @@ const Button = React.memo(
     forwardRef<ButtonRef, ButtonProps>((props, ref) => {
       const {
         Name,
-        OnClick,
-        OnCommand,
+        Click: OnClick,
+        Command: OnCommand,
         ClickMode = 'Release',
         Classes,
         Disabled = false,
@@ -136,14 +136,14 @@ const Button = React.memo(
         }
     }, [ClickMode, handleMouseEvent, handleKeyEvent]);
 
-    const childArray = React.Children.toArray(children);
+    const childArray = React.Children.toArray(children || []);
 
     function isButtonContent(
         element: ReactNode
     ): element is ReactElement<ButtonContentProps> {
         return (
             React.isValidElement(element) &&
-            (element.type as any).displayName === 'ButtonContent'
+            (element.type as React.ComponentType).displayName === 'ButtonContent'
         );
     }
   
@@ -152,7 +152,7 @@ const Button = React.memo(
     ): element is ReactElement<ButtonImageProps> {
         return (
             React.isValidElement(element) &&
-            (element.type as any).displayName === 'ButtonImage'
+            (element.type as React.ComponentType).displayName === 'ButtonImage'
         );
     }
 
@@ -182,8 +182,12 @@ const Button = React.memo(
         <button
             ref={buttonRef}
             id={Name}
-            aria-label={AriaLabel || (typeof content === 'string' ? content : 'button')}
+            aria-label={
+                AriaLabel ||
+                (typeof content === 'string' ? content : 'Button')
+              }
             className={buttonClassName}
+            disabled={disabled && !OnCommand}
             aria-disabled={disabled}
             style={Classes}
             {...eventProps}
