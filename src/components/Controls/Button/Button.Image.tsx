@@ -4,21 +4,21 @@ export interface ButtonImageProps {
   Source: string;
   Placement?: 'Left' | 'Right';
   Alt?: string;
-  ClassName?: string;
-  Style?: React.CSSProperties;
+  Style?: string;
+  Classes?: React.CSSProperties;
 }
 
 const ButtonImage: React.FC<ButtonImageProps> = ({
   Source: source,
   Placement: placement = 'Left',
   Alt: alt = '',
-  ClassName: className = '',
-  Style: style,
+  Style = '',
+  Classes,
 }) => {
   const positionClass = placement === 'Right' ? 'rgt' : 'lft';
-  const imageClassName = `img ${positionClass}${className ? ' ' + className : ''}`;
+  const imageClassName = `img ${positionClass}${Style ? ' ' + Style : ''}`;
 
-  return <img src={source} className={imageClassName} alt={alt} style={style} />;
+  return <img src={source} className={imageClassName} alt={alt} style={Classes} />;
 };
 
 ButtonImage.displayName = 'ButtonImage';
