@@ -19,11 +19,11 @@
     transition-duration: var(--TransitionTimingDuration);
 
 
-    &:hover {
+    &:hover:not([aria-disabled="true"]) {
         background-color: var(--ControlFillColorSecondaryBrush);
     }
 
-    &:active {
+    &:active:not([aria-disabled="true"]) {
         color: var(--TextFillColorTertiaryBrush);
         background-color: var(--ControlFillColorTertiaryBrush);
     }
@@ -33,7 +33,9 @@
         outline: 2px solid var(--FocusStrokeColorOuterBrush);
     }
 
-    &:disabled {
+    &[aria-disabled="true"] {
+        opacity: 0.7;
+        cursor: default;
         background-color: var(--ControlFillColorDisabledBrush);
     }
 

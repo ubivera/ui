@@ -1,12 +1,16 @@
 import React from 'react';
 
 export interface ButtonContentProps {
-  Content?: string;
+  Content?: React.ReactNode;
   InheritContent?: boolean;
   children?: React.ReactNode;
 }
 
-const ButtonContent: React.FC<ButtonContentProps> = ({ Content: content, InheritContent: inheritContent, children }) => {
+const ButtonContent: React.FC<ButtonContentProps> = ({
+  Content: content,
+  InheritContent: inheritContent,
+  children,
+}) => {
   if (inheritContent) {
     return <>{content}</>;
   }
