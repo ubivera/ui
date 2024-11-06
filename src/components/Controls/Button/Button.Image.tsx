@@ -13,7 +13,7 @@ const ButtonImage: React.FC<ButtonImageProps> = ({
   Placement: placement = 'Left',
   Alt: alt = '',
   Style = '',
-  Classes,
+  Classes = {height: "24px"},
 }) => {
   const positionClass = placement === 'Right' ? 'rgt' : 'lft';
   const imageClassName = `img ${positionClass}${Style ? ' ' + Style : ''}`;
