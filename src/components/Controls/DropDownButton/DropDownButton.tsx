@@ -11,10 +11,12 @@ import React, {
 import Button, { ButtonProps, ButtonRef } from '../Button/Button';
 import DropDownButtonFlyout, { DropDownButtonFlyoutProps } from './DropDownButton.Flyout';
 import { MenuFlyoutContext } from '../../Dialogs/MenuFlyout/MenuFlyoutContext';
+import DropDownButtonContent, { DropDownButtonContentProps } from './DropDownButton.Content';
+import DropDownButtonImage, { DropDownButtonImageProps } from './DropDownButton.Image';
 import './DropDownButton.scss';
 
 export interface DropDownButtonProps extends ButtonProps {
-    content?: ReactNode;
+    Content?: ReactNode;
     children?: ReactNode;
 }
 
@@ -27,10 +29,12 @@ type DropDownButtonComponent = React.MemoExoticComponent<
     React.ForwardRefExoticComponent<DropDownButtonProps & React.RefAttributes<DropDownButtonRef>>
 > & {
     Flyout: React.FC<DropDownButtonFlyoutProps>;
+    Content: React.FC<DropDownButtonContentProps>;
+    Image: React.FC<DropDownButtonImageProps>;
 };
 
 const DropDownButton = React.memo(forwardRef<DropDownButtonRef, DropDownButtonProps>(
-    ({ content, children, ...buttonProps }, ref) => {
+    ({ Content, children, ...buttonProps }, ref) => {
         const [isFlyoutOpen, setIsFlyoutOpen] = useState(false);
         const buttonRef = useRef<ButtonRef>(null);
         const flyoutRef = useRef<HTMLDivElement>(null);
@@ -81,8 +85,33 @@ const DropDownButton = React.memo(forwardRef<DropDownButtonRef, DropDownButtonPr
             (child) => React.isValidElement(child) && child.type === DropDownButtonFlyout
         ) as ReactElement<DropDownButtonFlyoutProps> | undefined;
 
+        function isDropDownButtonContent(
+            element: ReactNode
+        ): element is ReactElement<DropDownButtonContentProps> {
+            return React.isValidElement(element) && element.type === DropDownButtonContent;
+        }
+
+        function isDropDownButtonImage(
+            element: ReactNode
+        ): element is ReactElement<DropDownButtonImageProps> {
+            return React.isValidElement(element) && element.type === DropDownButtonImage;
+        }
+
+        const childrenArray = React.Children.toArray(children);
+        const buttonChildren = childrenArray.filter((child) => child !== flyoutElement);
+
+        const mappedButtonChildren = buttonChildren.map((child) => {
+            if (isDropDownButtonContent(child)) {
+                return <Button.Content {...child.props} />;
+            } else if (isDropDownButtonImage(child)) {
+                return <Button.Image {...child.props} />;
+            } else {
+                return child;
+            }
+        });  
+
         return (
-            <div className="dropdown-button-container">
+            <div className="dropdown-button-container" aria-expanded={isFlyoutOpen} aria-haspopup="menu">
             <Button
                 {...buttonProps}
                 ref={buttonRef}
@@ -90,10 +119,12 @@ const DropDownButton = React.memo(forwardRef<DropDownButtonRef, DropDownButtonPr
                 buttonProps.Click && buttonProps.Click(e);
                 toggleFlyout();
                 }}
-                Content={content}
+                Content={Content}
                 aria-expanded={isFlyoutOpen}
                 aria-haspopup="menu"
-            />
+            >
+                {mappedButtonChildren}
+            </Button>
             {isFlyoutOpen && (
                 <>
                 <div
@@ -120,5 +151,7 @@ const DropDownButton = React.memo(forwardRef<DropDownButtonRef, DropDownButtonPr
 
 DropDownButton.displayName = 'DropDownButton';
 DropDownButton.Flyout = DropDownButtonFlyout;
+DropDownButton.Content = DropDownButtonContent;
+DropDownButton.Image = DropDownButtonImage;
 
 export default DropDownButton;
