@@ -1,0 +1,17 @@
+.flyout {
+    padding: var(--SpacingControlsLabels);
+    color: var(--TextFillColorPrimaryBrush);
+    background-color: var(--ControlFillColorDefaultBrush);
+
+    border: 1px solid var(--ControlElevationBorderBrush);
+    border-radius: var(--ControlCornerRadius);
+    transition: opacity 0.2s ease-in-out;
+
+    .flyout-itm {
+        cursor: pointer;
+    }
+
+    .flyout-itm:hover {
+        background-color: red;
+    }
+}

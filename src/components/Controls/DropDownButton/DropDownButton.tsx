@@ -100,18 +100,23 @@ const DropDownButton = React.memo(forwardRef<DropDownButtonRef, DropDownButtonPr
         const childrenArray = React.Children.toArray(children);
         const buttonChildren = childrenArray.filter((child) => child !== flyoutElement);
 
-        const mappedButtonChildren = buttonChildren.map((child) => {
+        const mappedButtonChildren = buttonChildren.map((child, index) => {
             if (isDropDownButtonContent(child)) {
-                return <Button.Content {...child.props} />;
+                return <Button.Content key={index} {...child.props} />;
             } else if (isDropDownButtonImage(child)) {
-                return <Button.Image {...child.props} />;
+                return <Button.Image key={index} {...child.props} />;
             } else {
-                return child;
+                return <React.Fragment key={index}>{child}</React.Fragment>;
             }
-        });  
+        });
+
+        const chevronSvgUri = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath d='M3 3 L5 5 L7 3' stroke='black' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E";
+        mappedButtonChildren.push(
+            <Button.Image key="chevron" Source={chevronSvgUri} Placement="Right" Alt="Expand menu" />
+        );
 
         return (
-            <div className="dropdown-button-container" aria-expanded={isFlyoutOpen} aria-haspopup="menu">
+            <div className="drp-btn-ctn" aria-expanded={isFlyoutOpen} aria-haspopup="menu">
             <Button
                 {...buttonProps}
                 ref={buttonRef}
@@ -128,7 +133,7 @@ const DropDownButton = React.memo(forwardRef<DropDownButtonRef, DropDownButtonPr
             {isFlyoutOpen && (
                 <>
                 <div
-                    className="dropdown-button-overlay"
+                    className="drp-btn-ovl"
                     onClick={(event) => {
                     event.preventDefault();
                     event.stopPropagation();
@@ -137,7 +142,7 @@ const DropDownButton = React.memo(forwardRef<DropDownButtonRef, DropDownButtonPr
                 />
                 {flyoutElement && (
                     <MenuFlyoutContext.Provider value={{ closeFlyout: () => setIsFlyoutOpen(false) }}>
-                    <div ref={flyoutRef} className="dropdown-button-flyout">
+                    <div ref={flyoutRef} className="drp-btn-fly">
                         {flyoutElement}
                     </div>
                     </MenuFlyoutContext.Provider>

@@ -1,9 +1,9 @@
-.dropdown-button-container {
+.drp-btn-ctn {
     position: relative;
     display: inline-block;
 }
 
-.dropdown-button-overlay {
+.drp-btn-ovl {
     position: fixed;
     top: 0;
     left: 0;
@@ -14,7 +14,7 @@
     pointer-events: auto;
 }
 
-.dropdown-button-flyout {
+.drp-btn-fly {
     position: absolute;
     z-index: 1000;
 }

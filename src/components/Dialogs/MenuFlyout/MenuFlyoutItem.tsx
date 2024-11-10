@@ -23,7 +23,7 @@ const MenuFlyoutItem: React.FC<MenuFlyoutItemProps> = ({
         if (Disabled) return;
 
         Click && Click();
-        
+
         if (AutoClose && closeFlyout) {
             closeFlyout();
         }
@@ -31,7 +31,7 @@ const MenuFlyoutItem: React.FC<MenuFlyoutItemProps> = ({
 
     return (
     <div
-        className={`menu-flyout-item${Disabled ? ' disabled' : ''}`}
+        className={`flyout-itm${Disabled ? ' disabled' : ''}`}
         role="menuitem"
         tabIndex={Disabled ? -1 : 0}
         onClick={handleClick}

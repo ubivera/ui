@@ -8,7 +8,7 @@ export interface MenuFlyoutProps {
 
 const MenuFlyout: React.FC<MenuFlyoutProps> = ({ children, Placement = 'Bottom' }) => {
     return (
-        <div className={`menu-flyout placement-${Placement.toLowerCase()}`} role="menu">
+        <div className={`flyout plc-${Placement.toLowerCase()}`} role="menu">
             {children}
         </div>
     );
