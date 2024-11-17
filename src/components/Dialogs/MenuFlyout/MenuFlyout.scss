@@ -1,17 +1,49 @@
 .flyout {
-    padding: var(--SpacingControlsLabels);
+    @include BodyTextBlockStyle;
+
+    min-width: 100px;
+    padding: var(--SpacingCompact);
     color: var(--TextFillColorPrimaryBrush);
     background-color: var(--ControlFillColorDefaultBrush);
-
+    
+    user-select: var(--GlobalUserSelectDefault);
     border: 1px solid var(--ControlElevationBorderBrush);
     border-radius: var(--ControlCornerRadius);
-    transition: opacity 0.2s ease-in-out;
+    transition: opacity var(--TransitionTimingDuration) ease-in-out;
+
+    &.plc-top {
+        margin-bottom: var(--SpacingCompact);
+    }
+
+    &.plc-right {
+        margin-left: var(--SpacingCompact);
+    }
+
+    &.plc-bottom {
+        margin-top: var(--SpacingCompact);
+    }
+
+    &.plc-left {
+        margin-right: var(--SpacingCompact);
+    }
 
     .flyout-itm {
         cursor: pointer;
+        border-radius: var(--ControlCornerRadius);
+        background-color: var(--SubtleFillColorTransparentBrush);
+        padding: var(--SpacingCompact) var(--SpacingControlsLabels);
+        transition: background-color var(--TransitionTimingDuration) var(--TransitionTimingFunction);
     }
 
     .flyout-itm:hover {
-        background-color: red;
+        background-color: var(--SubtleFillColorSecondaryBrush);
+    }
+
+    .flyout-itm:active {
+        background-color: var(--SubtleFillColorTertiaryBrush);
+    }
+
+    .flyout-itm:disabled {
+        background-color: var(--SubtleFillColorDisabledBrush);
     }
 }
