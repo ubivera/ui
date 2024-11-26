@@ -110,26 +110,43 @@ const DropDownButton = React.memo(forwardRef<DropDownButtonRef, DropDownButtonPr
             }
         });
 
-        const chevronSvgUri = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath d='M3 3 L5 5 L7 3' stroke='black' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E";
-        mappedButtonChildren.push(
-            <Button.Image key="chevron" Source={chevronSvgUri} Placement="Right" Alt="Expand menu" />
-        );
-
         return (
             <div className="drp-btn-ctn" aria-expanded={isFlyoutOpen} aria-haspopup="menu">
             <Button
                 {...buttonProps}
                 ref={buttonRef}
-                Click={(e: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement>) => {
-                buttonProps.Click && buttonProps.Click(e);
-                toggleFlyout();
-                }}
+                Click={
+                    (
+                        e: React.MouseEvent<HTMLButtonElement> |
+                        React.KeyboardEvent<HTMLButtonElement>
+                    ) => {
+                        buttonProps.Click && buttonProps.Click(e);
+                        toggleFlyout();
+                    }
+                }
                 Content={Content}
+                ExtendedContent={[
+                    <svg
+                        className="img rgt drp-dwn"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 10 10"
+                    >
+                        <path
+                            d="M3 3 L5 5 L7 3"
+                            strokeLinecap="round"
+                            strokeWidth="1.5"
+                            fill="none"
+                        />
+                    </svg>
+                ]}
                 aria-expanded={isFlyoutOpen}
                 aria-haspopup="menu"
             >
                 {mappedButtonChildren}
             </Button>
+
             {isFlyoutOpen && (
                 <>
                 <div

@@ -19,6 +19,7 @@ export interface ButtonProps {
     Classes?: React.CSSProperties;
     Disabled?: boolean;
     Content?: ReactNode;
+    ExtendedContent?: ReactNode[];
     children?: ReactNode;
     AriaLabel?: string;
     Style?: string;
@@ -57,6 +58,7 @@ const Button = React.memo(
         Classes,
         Disabled = false,
         Content,
+        ExtendedContent = [],
         children,
         AriaLabel,
         Style,
@@ -203,6 +205,7 @@ const Button = React.memo(
                 {contentChildren.length > 0 ? contentChildren : content}
             </span>
             {imageAfter}
+            {ExtendedContent}
         </button>
     );
 })) as ButtonComponent;
