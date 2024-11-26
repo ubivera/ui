@@ -1,6 +1,12 @@
 .drp-btn-ctn {
     position: relative;
     display: inline-block;
+
+    & button:active {
+        & .drp-dwn svg {
+            margin-top: 5px;
+        }
+    }
 }
 
 .drp-btn-ovl {
@@ -20,5 +26,16 @@
 }
 
 .drp-dwn {
+    pointer-events: none;
+    padding: 0 var(--SpacingCompact);
+
+    display: flex;
+    align-items: center;
+    align-content: center;
+}
+
+.drp-dwn svg {
+    width: var(--SpacingControlHeaderTextEdge);
+    height: var(--SpacingControlHeaderTextEdge);
     stroke: var(--TextFillColorPrimaryBrush);
 }

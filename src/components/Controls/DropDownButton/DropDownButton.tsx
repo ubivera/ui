@@ -126,20 +126,20 @@ const DropDownButton = React.memo(forwardRef<DropDownButtonRef, DropDownButtonPr
                 }
                 Content={Content}
                 ExtendedContent={[
-                    <svg
-                        className="img rgt drp-dwn"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 10 10"
-                    >
-                        <path
-                            d="M3 3 L5 5 L7 3"
-                            strokeLinecap="round"
-                            strokeWidth="1.5"
-                            fill="none"
-                        />
-                    </svg>
+                    <span className="drp-dwn">
+                        <svg
+                            className="img rgt"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 10 7"
+                        >
+                            <path
+                                d="M3 3 L5 5 L7 3"
+                                strokeLinecap="round"
+                                strokeWidth="1.5"
+                                fill="none"
+                            />
+                        </svg>
+                    </span>
                 ]}
                 aria-expanded={isFlyoutOpen}
                 aria-haspopup="menu"
