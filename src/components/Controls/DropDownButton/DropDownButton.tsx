@@ -133,9 +133,9 @@ const DropDownButton = React.memo(forwardRef<DropDownButtonRef, DropDownButtonPr
                             viewBox="0 0 10 7"
                         >
                             <path
-                                d="M3 3 L5 5 L7 3"
+                                d="M3 3 L5.5 5 L8 3"
                                 strokeLinecap="round"
-                                strokeWidth="1.5"
+                                strokeWidth="1"
                                 fill="none"
                             />
                         </svg>

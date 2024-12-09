@@ -1,10 +1,28 @@
+@keyframes drp-dwn-bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(2px);
+    }
+    80% {
+        transform: translateY(-1px);
+    }
+}
+
 .drp-btn-ctn {
     position: relative;
     display: inline-block;
 
-    & button:active {
+    &[aria-expanded="true"] {
         & .drp-dwn svg {
-            margin-top: 5px;
+            animation-name: drp-dwn-bounce;
+        }
+    }
+
+    &:hover {
+        & .drp-dwn svg {
+            stroke: var(--TextFillColorSecondaryBrush);
         }
     }
 }
@@ -38,4 +56,11 @@
     width: var(--SpacingControlHeaderTextEdge);
     height: var(--SpacingControlHeaderTextEdge);
     stroke: var(--TextFillColorPrimaryBrush);
+
+    animation-duration: 0.3s;
+    animation-timing-function: var(--TransitionTimingFunction);
+
+    transition-property: stroke;
+    transition-timing-function: var(--TransitionTimingFunction);
+    transition-duration: var(--TransitionTimingDuration);
 }
