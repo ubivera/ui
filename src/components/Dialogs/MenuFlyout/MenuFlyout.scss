@@ -1,7 +1,9 @@
 .flyout {
     @include BodyTextBlockStyle;
 
-    min-width: 100px;
+    min-width: 150px;
+    max-width: 550px;
+    width: fit-content;
     padding: var(--SpacingCompact);
     color: var(--TextFillColorPrimaryBrush);
     background-color: var(--ControlFillColorDefaultBrush);

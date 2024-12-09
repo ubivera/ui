@@ -101,12 +101,16 @@ const DropDownButton = React.memo(forwardRef<DropDownButtonRef, DropDownButtonPr
         const buttonChildren = childrenArray.filter((child) => child !== flyoutElement);
 
         const mappedButtonChildren = buttonChildren.map((child, index) => {
+            const key = React.isValidElement(child) && child.key ? child.key : index;
+
             if (isDropDownButtonContent(child)) {
-                return <Button.Content key={index} {...child.props} />;
+                return <Button.Content key={key} {...child.props} />;
             } else if (isDropDownButtonImage(child)) {
-                return <Button.Image key={index} {...child.props} />;
+                return <Button.Image key={key} {...child.props} />;
+            } else if (React.isValidElement(child)) {
+                return <React.Fragment key={key}>{child}</React.Fragment>;
             } else {
-                return <React.Fragment key={index}>{child}</React.Fragment>;
+                return <React.Fragment key={key}>{child}</React.Fragment>;
             }
         });
 
@@ -126,7 +130,7 @@ const DropDownButton = React.memo(forwardRef<DropDownButtonRef, DropDownButtonPr
                 }
                 Content={Content}
                 ExtendedContent={[
-                    <span className="drp-dwn">
+                    <span className="drp-dwn" key="dropdown-icon">
                         <svg
                             className="img rgt"
                             xmlns="http://www.w3.org/2000/svg"
