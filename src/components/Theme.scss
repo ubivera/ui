@@ -160,10 +160,10 @@
 
     --GlobalUserSelectDefault: none;
     --GlobalBackdropFilterDefault: blur(48px);
-    --GlobalTextShadowDefault: 1px 1px 1px hsla(0, 0%, 0%, 0.502);
+    --GlobalTextShadowDefault: 0 1px 1px hsla(0, 0%, 0%, 0.502);
     --GlobalBoxShadowDefault:
         inset 0 0 1px hsla(0, 0%, 13%, 0.4),
-        0 0 2px 2px hsla(0 0% 0% / 0.102);
+        0 0 0 1px hsla(0 0% 0% / 0.05);
     --GlobalBoxShadowActive:
         var(--GlobalBoxShadowDefault),
         0 0 0 2px var(--CardBackgroundFillColorDefaultBrush),
@@ -179,7 +179,6 @@
 
     color-scheme: light dark;
     color: var(--TextFillColorPrimaryBrush);
-    background-color: #202020;
 }
 
 ::after, ::before {
@@ -257,6 +256,8 @@
 
 @media (prefers-color-scheme: light) {
     :root {
+        background-color: #fff;
+
         --TextFillColorPrimaryBrush: var(--text-primary-light);
         --TextFillColorSecondaryBrush: var(--text-secondary-light);
         --TextFillColorTertiaryBrush: var(--text-tertiary-light);
@@ -337,6 +338,8 @@
 
 @media (prefers-color-scheme: dark) {
     :root {
+        background-color: #202020;
+
         --TextFillColorPrimaryBrush: var(--text-primary-dark);
         --TextFillColorSecondaryBrush: var(--text-secondary-dark);
         --TextFillColorTertiaryBrush: var(--text-tertiary-dark);
