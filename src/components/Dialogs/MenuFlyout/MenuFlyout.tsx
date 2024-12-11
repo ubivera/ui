@@ -1,4 +1,5 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useEffect, useRef } from 'react';
+import { ensureElementVisibility } from '../../../utils/VisibilityHelper';
 import './MenuFlyout.scss';
 
 export interface MenuFlyoutProps {
@@ -7,8 +8,22 @@ export interface MenuFlyoutProps {
 }
 
 const MenuFlyout: React.FC<MenuFlyoutProps> = ({ children, Placement = 'Bottom' }) => {
+    const flyoutRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const flyout = flyoutRef.current;
+
+        if (flyout) {
+            ensureElementVisibility(flyout, -10);
+        }
+    }, []);
+
     return (
-        <div className={`flyout plc-${Placement.toLowerCase()}`} role="menu">
+        <div
+            ref={flyoutRef}
+            className={`flyout placement-${Placement.toLowerCase()}`}
+            role="menu"
+        >
             {children}
         </div>
     );

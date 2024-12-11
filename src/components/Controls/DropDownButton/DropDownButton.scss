@@ -1,9 +1,33 @@
-.drp-btn-ctn {
-    position: relative;
-    display: inline-block;
+@keyframes dropdown-button-bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(2px);
+    }
+    80% {
+        transform: translateY(-1px);
+    }
 }
 
-.drp-btn-ovl {
+.dropdown-button-container {
+    position: relative;
+    display: inline-block;
+
+    &[aria-expanded="true"] {
+        & .dropdown-button svg {
+            animation-name: dropdown-button-bounce;
+        }
+    }
+
+    &:hover {
+        & .dropdown-button svg {
+            stroke: var(--TextFillColorSecondaryBrush);
+        }
+    }
+}
+
+.dropdown-button-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -14,7 +38,29 @@
     pointer-events: auto;
 }
 
-.drp-btn-fly {
+.dropdown-button-flyout {
     position: absolute;
     z-index: 1000;
+}
+
+.dropdown-button-icon {
+    pointer-events: none;
+    padding: 0 var(--SpacingCompact);
+
+    display: flex;
+    align-items: center;
+    align-content: center;
+
+    & svg {
+        width: var(--SpacingControlHeaderTextEdge);
+        height: var(--SpacingControlHeaderTextEdge);
+        stroke: var(--TextFillColorPrimaryBrush);
+
+        animation-duration: 0.3s;
+        animation-timing-function: var(--TransitionTimingFunction);
+
+        transition-property: stroke;
+        transition-timing-function: var(--TransitionTimingFunction);
+        transition-duration: var(--TransitionTimingDuration);
+    }
 }

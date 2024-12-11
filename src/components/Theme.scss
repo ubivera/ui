@@ -186,6 +186,33 @@
 	box-sizing: border-box;
 }
 
+@keyframes expanding-open {
+    0% {
+        opacity: 0.65;
+        max-height: 10px;
+    }
+    20% {
+        max-height: 40px;
+    }
+    100% {
+        opacity: 1;
+        max-height: 100vh;
+    }
+}
+
+@mixin OpeningAnimation {
+    max-height: 0;
+    opacity: 0.65;
+
+    transition: max-height var(--TransitionTimingDuration) var(--TransitionTimingFunction),
+                opacity var(--TransitionTimingDuration) var(--TransitionTimingFunction);
+
+    animation-name: expanding-open;
+    animation-duration: var(--TransitionTimingDuration);
+    animation-timing-function: var(--TransitionTimingFunction);
+    animation-fill-mode: forwards;
+}
+
 @mixin CaptionTextBlockStyle {
     font-size: 12px;
 }

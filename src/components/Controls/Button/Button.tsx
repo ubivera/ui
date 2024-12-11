@@ -19,6 +19,7 @@ export interface ButtonProps {
     Classes?: React.CSSProperties;
     Disabled?: boolean;
     Content?: ReactNode;
+    ExtendedContent?: ReactNode[];
     children?: ReactNode;
     AriaLabel?: string;
     Style?: string;
@@ -57,6 +58,7 @@ const Button = React.memo(
         Classes,
         Disabled = false,
         Content,
+        ExtendedContent = [],
         children,
         AriaLabel,
         Style,
@@ -178,7 +180,7 @@ const Button = React.memo(
         (child) => isButtonImage(child) && child.props.Placement === 'Right'
     );
 
-    const buttonClassName = `btn${Classes ? ' ' + Classes : ''}${
+    const buttonClassName = `button${Classes ? ' ' + Classes : ''}${
         Style ? ' ' + Style : ''
     }`;
 
@@ -199,10 +201,11 @@ const Button = React.memo(
             {...eventProps}
         >
             {imageBefore}
-            <span className='lbl'>
+            <span className='label'>
                 {contentChildren.length > 0 ? contentChildren : content}
             </span>
             {imageAfter}
+            {ExtendedContent}
         </button>
     );
 })) as ButtonComponent;

@@ -101,39 +101,60 @@ const DropDownButton = React.memo(forwardRef<DropDownButtonRef, DropDownButtonPr
         const buttonChildren = childrenArray.filter((child) => child !== flyoutElement);
 
         const mappedButtonChildren = buttonChildren.map((child, index) => {
+            const key = React.isValidElement(child) && child.key ? child.key : index;
+
             if (isDropDownButtonContent(child)) {
-                return <Button.Content key={index} {...child.props} />;
+                return <Button.Content key={key} {...child.props} />;
             } else if (isDropDownButtonImage(child)) {
-                return <Button.Image key={index} {...child.props} />;
+                return <Button.Image key={key} {...child.props} />;
+            } else if (React.isValidElement(child)) {
+                return <React.Fragment key={key}>{child}</React.Fragment>;
             } else {
-                return <React.Fragment key={index}>{child}</React.Fragment>;
+                return <React.Fragment key={key}>{child}</React.Fragment>;
             }
         });
 
-        const chevronSvgUri = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath d='M3 3 L5 5 L7 3' stroke='black' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E";
-        mappedButtonChildren.push(
-            <Button.Image key="chevron" Source={chevronSvgUri} Placement="Right" Alt="Expand menu" />
-        );
-
         return (
-            <div className="drp-btn-ctn" aria-expanded={isFlyoutOpen} aria-haspopup="menu">
+            <div className="dropdown-button-container" aria-expanded={isFlyoutOpen} aria-haspopup="menu">
             <Button
                 {...buttonProps}
                 ref={buttonRef}
-                Click={(e: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement>) => {
-                buttonProps.Click && buttonProps.Click(e);
-                toggleFlyout();
-                }}
+                Click={
+                    (
+                        e: React.MouseEvent<HTMLButtonElement> |
+                        React.KeyboardEvent<HTMLButtonElement>
+                    ) => {
+                        buttonProps.Click && buttonProps.Click(e);
+                        toggleFlyout();
+                    }
+                }
                 Content={Content}
+                ExtendedContent={[
+                    <span className="dropdown-button-icon" key="dropdown-button-icon">
+                        <svg
+                            className="image after"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 10 7"
+                        >
+                            <path
+                                d="M3 3 L5.5 5 L8 3"
+                                strokeLinecap="round"
+                                strokeWidth="1"
+                                fill="none"
+                            />
+                        </svg>
+                    </span>
+                ]}
                 aria-expanded={isFlyoutOpen}
                 aria-haspopup="menu"
             >
                 {mappedButtonChildren}
             </Button>
+
             {isFlyoutOpen && (
                 <>
                 <div
-                    className="drp-btn-ovl"
+                    className="dropdown-button-overlay"
                     onClick={(event) => {
                     event.preventDefault();
                     event.stopPropagation();
@@ -142,7 +163,7 @@ const DropDownButton = React.memo(forwardRef<DropDownButtonRef, DropDownButtonPr
                 />
                 {flyoutElement && (
                     <MenuFlyoutContext.Provider value={{ closeFlyout: () => setIsFlyoutOpen(false) }}>
-                    <div ref={flyoutRef} className="drp-btn-fly">
+                    <div ref={flyoutRef} className="dropdown-button-flyout">
                         {flyoutElement}
                     </div>
                     </MenuFlyoutContext.Provider>
