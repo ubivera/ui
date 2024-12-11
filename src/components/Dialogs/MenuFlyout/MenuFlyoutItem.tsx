@@ -31,7 +31,7 @@ const MenuFlyoutItem: React.FC<MenuFlyoutItemProps> = ({
 
     return (
     <div
-        className={`flyout-item${Disabled ? ' disabled' : ''}`}
+        className={`menu-flyout-item${Disabled ? ' disabled' : ''}`}
         role="menuitem"
         tabIndex={Disabled ? -1 : 0}
         onClick={handleClick}

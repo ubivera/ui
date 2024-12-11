@@ -1,4 +1,4 @@
-.flyout {
+.menu-flyout {
     @include BodyTextBlockStyle;
     @include OpeningAnimation;
 
@@ -30,23 +30,23 @@
         margin-right: var(--SpacingCompact);
     }
 
-    .flyout-item {
+    .menu-flyout-item {
         cursor: pointer;
         border-radius: var(--ControlCornerRadius);
         background-color: var(--SubtleFillColorTransparentBrush);
         padding: var(--SpacingCompact) var(--SpacingControlsLabels);
         transition: background-color var(--TransitionTimingDuration) var(--TransitionTimingFunction);
-    }
-
-    .flyout-item:hover {
-        background-color: var(--SubtleFillColorSecondaryBrush);
-    }
-
-    .flyout-item:active {
-        background-color: var(--SubtleFillColorTertiaryBrush);
-    }
-
-    .flyout-item:disabled {
-        background-color: var(--SubtleFillColorDisabledBrush);
+    
+        &:hover {
+            background-color: var(--SubtleFillColorSecondaryBrush);
+        }
+    
+        &:active {
+            background-color: var(--SubtleFillColorTertiaryBrush);
+        }
+    
+        &:disabled {
+            background-color: var(--SubtleFillColorDisabledBrush);
+        }
     }
 }
