@@ -1,1 +1,1 @@
-export {default as HyperlinkButton} from './HyperlinkButton';
+export { default as HyperlinkButton } from './HyperlinkButton';

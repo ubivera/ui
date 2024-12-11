@@ -3,36 +3,36 @@ import Button, { ButtonProps } from '../Button/Button';
 import '../Button/Button.scss';
 
 export interface HyperlinkButtonProps extends ButtonProps {
-  NavigateUri?: string;
+    NavigateUri?: string;
 }
 
 const HyperlinkButton: React.FC<HyperlinkButtonProps> = ({
-  NavigateUri,
-  Click,
-  Command,
-  ...props
+    NavigateUri,
+    Click,
+    Command,
+    ...props
 }) => {
-  const handleClick = (
-    event: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement>
-) => {
-    if (NavigateUri) {
-      window.open(NavigateUri, '_blank');
-    } else if (Click) {
-      Click(event);
-    }
+    const handleClick = (
+        event: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement>
+    ) => {
+        if (NavigateUri) {
+            window.open(NavigateUri, '_blank');
+        } else if (Click) {
+            Click(event);
+        }
 
-    if (Command) {
-      Command(event);
-    }
+        if (Command) {
+            Command(event);
+        }
   };
 
-  return (
-    <Button
-      {...props}
-      Click={handleClick}
-      Style={`hyperlink ${props.Style || ''}`.trim()}
-    />
-  );
+    return (
+        <Button
+            {...props}
+            Click={handleClick}
+            Style={`hyperlink ${props.Style || ''}`.trim()}
+        />
+    );
 };
 
 HyperlinkButton.displayName = 'HyperlinkButton';

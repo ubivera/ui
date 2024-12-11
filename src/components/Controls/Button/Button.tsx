@@ -15,6 +15,8 @@ export interface ButtonProps {
         event: React.MouseEvent<HTMLButtonElement>
         | React.KeyboardEvent<HTMLButtonElement>
     ) => void;
+    onMouseUp?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+    onMouseLeave?: (event: React.MouseEvent<HTMLButtonElement>) => void;
     ClickMode?: 'Release' | 'Press' | 'Hover';
     Classes?: React.CSSProperties;
     IsEnabled?: boolean;
@@ -125,22 +127,24 @@ const Button = React.memo(
     );
 
     const eventProps = useMemo(() => {
+        const baseProps: Record<string, any> = {};
         if (ClickMode === 'Press') {
-            return {
-                onMouseDown: handleMouseEvent,
-                onKeyDown: handleKeyEvent,
-            };
+            baseProps.onMouseDown = handleMouseEvent;
+            baseProps.onKeyDown = handleKeyEvent;
         } else if (ClickMode === 'Hover') {
-            return {
-                onMouseEnter: handleMouseEvent,
-            };
+            baseProps.onMouseEnter = handleMouseEvent;
         } else {
-            return {
-                onMouseUp: handleMouseEvent,
-                onKeyUp: handleKeyEvent,
-            };
+            baseProps.onMouseUp = handleMouseEvent;
+            baseProps.onKeyUp = handleKeyEvent;
         }
-    }, [ClickMode, handleMouseEvent, handleKeyEvent]);
+        if (props.onMouseUp) {
+            baseProps.onMouseUp = props.onMouseUp;
+        }
+        if (props.onMouseLeave) {
+            baseProps.onMouseLeave = props.onMouseLeave;
+        }
+        return baseProps;
+    }, [ClickMode, handleMouseEvent, handleKeyEvent, props.onMouseUp, props.onMouseLeave]);
 
     const childArray = React.Children.toArray(children || []);
 
