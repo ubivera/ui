@@ -1,4 +1,4 @@
-@keyframes drp-dwn-bounce {
+@keyframes dropdown-button-bounce {
     0%, 100% {
         transform: translateY(0);
     }
@@ -10,24 +10,24 @@
     }
 }
 
-.drp-btn-ctn {
+.dropdown-button-container {
     position: relative;
     display: inline-block;
 
     &[aria-expanded="true"] {
-        & .drp-dwn svg {
-            animation-name: drp-dwn-bounce;
+        & .dropdown-button svg {
+            animation-name: dropdown-button-bounce;
         }
     }
 
     &:hover {
-        & .drp-dwn svg {
+        & .dropdown-button svg {
             stroke: var(--TextFillColorSecondaryBrush);
         }
     }
 }
 
-.drp-btn-ovl {
+.dropdown-button-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -38,29 +38,29 @@
     pointer-events: auto;
 }
 
-.drp-btn-fly {
+.dropdown-button-flyout {
     position: absolute;
     z-index: 1000;
 }
 
-.drp-dwn {
+.dropdown-button-icon {
     pointer-events: none;
     padding: 0 var(--SpacingCompact);
 
     display: flex;
     align-items: center;
     align-content: center;
-}
 
-.drp-dwn svg {
-    width: var(--SpacingControlHeaderTextEdge);
-    height: var(--SpacingControlHeaderTextEdge);
-    stroke: var(--TextFillColorPrimaryBrush);
+    & svg {
+        width: var(--SpacingControlHeaderTextEdge);
+        height: var(--SpacingControlHeaderTextEdge);
+        stroke: var(--TextFillColorPrimaryBrush);
 
-    animation-duration: 0.3s;
-    animation-timing-function: var(--TransitionTimingFunction);
+        animation-duration: 0.3s;
+        animation-timing-function: var(--TransitionTimingFunction);
 
-    transition-property: stroke;
-    transition-timing-function: var(--TransitionTimingFunction);
-    transition-duration: var(--TransitionTimingDuration);
+        transition-property: stroke;
+        transition-timing-function: var(--TransitionTimingFunction);
+        transition-duration: var(--TransitionTimingDuration);
+    }
 }

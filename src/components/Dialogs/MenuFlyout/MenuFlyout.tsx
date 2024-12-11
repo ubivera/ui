@@ -21,7 +21,7 @@ const MenuFlyout: React.FC<MenuFlyoutProps> = ({ children, Placement = 'Bottom' 
     return (
         <div
             ref={flyoutRef}
-            className={`flyout plc-${Placement.toLowerCase()}`}
+            className={`flyout placement-${Placement.toLowerCase()}`}
             role="menu"
         >
             {children}

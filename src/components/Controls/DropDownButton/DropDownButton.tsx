@@ -115,7 +115,7 @@ const DropDownButton = React.memo(forwardRef<DropDownButtonRef, DropDownButtonPr
         });
 
         return (
-            <div className="drp-btn-ctn" aria-expanded={isFlyoutOpen} aria-haspopup="menu">
+            <div className="dropdown-button-container" aria-expanded={isFlyoutOpen} aria-haspopup="menu">
             <Button
                 {...buttonProps}
                 ref={buttonRef}
@@ -130,9 +130,9 @@ const DropDownButton = React.memo(forwardRef<DropDownButtonRef, DropDownButtonPr
                 }
                 Content={Content}
                 ExtendedContent={[
-                    <span className="drp-dwn" key="dropdown-icon">
+                    <span className="dropdown-button-icon" key="dropdown-button-icon">
                         <svg
-                            className="img rgt"
+                            className="image after"
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 10 7"
                         >
@@ -154,7 +154,7 @@ const DropDownButton = React.memo(forwardRef<DropDownButtonRef, DropDownButtonPr
             {isFlyoutOpen && (
                 <>
                 <div
-                    className="drp-btn-ovl"
+                    className="dropdown-button-overlay"
                     onClick={(event) => {
                     event.preventDefault();
                     event.stopPropagation();
@@ -163,7 +163,7 @@ const DropDownButton = React.memo(forwardRef<DropDownButtonRef, DropDownButtonPr
                 />
                 {flyoutElement && (
                     <MenuFlyoutContext.Provider value={{ closeFlyout: () => setIsFlyoutOpen(false) }}>
-                    <div ref={flyoutRef} className="drp-btn-fly">
+                    <div ref={flyoutRef} className="dropdown-button-flyout">
                         {flyoutElement}
                     </div>
                     </MenuFlyoutContext.Provider>

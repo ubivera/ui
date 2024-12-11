@@ -1,4 +1,4 @@
-.btn {
+.button {
     @include BodyTextBlockStyle;
 
     cursor: pointer;
@@ -58,20 +58,20 @@
         background-color: var(--AccentFillColorTertiaryBrush);
     }
 
-    .img {
+    .image {
         pointer-events: none;
         padding: 0 var(--SpacingCompact);
 
-        .lft {
+        .start {
             align-self: flex-start;
         }
 
-        .rgt {
+        .end {
             align-self: flex-end;
         }
     }
 
-    .lbl {
+    .label {
         align-content: center;
         vertical-align: middle;
         padding: 0 var(--SpacingCompact);

@@ -14,23 +14,23 @@
     border: 1px solid var(--ControlElevationBorderBrush);
     border-radius: var(--ControlCornerRadius);
 
-    &.plc-top {
+    &.placement-top {
         margin-bottom: var(--SpacingCompact);
     }
 
-    &.plc-right {
+    &.placement-right {
         margin-left: var(--SpacingCompact);
     }
 
-    &.plc-bottom {
+    &.placement-bottom {
         margin-top: var(--SpacingCompact);
     }
 
-    &.plc-left {
+    &.placement-left {
         margin-right: var(--SpacingCompact);
     }
 
-    .flyout-itm {
+    .flyout-item {
         cursor: pointer;
         border-radius: var(--ControlCornerRadius);
         background-color: var(--SubtleFillColorTransparentBrush);
@@ -38,15 +38,15 @@
         transition: background-color var(--TransitionTimingDuration) var(--TransitionTimingFunction);
     }
 
-    .flyout-itm:hover {
+    .flyout-item:hover {
         background-color: var(--SubtleFillColorSecondaryBrush);
     }
 
-    .flyout-itm:active {
+    .flyout-item:active {
         background-color: var(--SubtleFillColorTertiaryBrush);
     }
 
-    .flyout-itm:disabled {
+    .flyout-item:disabled {
         background-color: var(--SubtleFillColorDisabledBrush);
     }
 }

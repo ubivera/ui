@@ -10,13 +10,13 @@ export interface ButtonImageProps {
 
 const ButtonImage: React.FC<ButtonImageProps> = ({
   Source: source,
-  Placement: placement = 'Left',
+  Placement: placement = 'start',
   Alt: alt = '',
   Style = '',
   Classes = {height: "18px", width: "18px"},
 }) => {
-  const positionClass = placement === 'Right' ? 'rgt' : 'lft';
-  const imageClassName = `img ${positionClass}${Style ? ' ' + Style : ''}`;
+  const positionClass = placement === 'Right' ? 'end' : 'start';
+  const imageClassName = `image ${positionClass}${Style ? ' ' + Style : ''}`;
 
   return <img src={source} className={imageClassName} alt={alt} style={Classes} />;
 };
