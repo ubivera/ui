@@ -58,6 +58,18 @@
         background-color: var(--AccentFillColorTertiaryBrush);
     }
 
+    &.hyperlink {
+        box-shadow: none;
+        color: var(--AccentTextFillColorPrimaryBrush);
+        background-color: var(--ControlFillColorTransparentBrush);
+        border-color: var(--ControlFillColorTransparentBrush);
+    }
+
+    &.hyperlink[aria-disabled="true"] {
+        opacity: 1;
+        color: var(--AccentTextFillColorDisabledBrush);
+    }
+
     .image {
         pointer-events: none;
         padding: 0 var(--SpacingCompact);
