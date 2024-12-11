@@ -107,7 +107,7 @@ const Button = React.memo(
 
     const handleMouseEvent = useCallback(
         (event: React.MouseEvent<HTMLButtonElement>) => {
-            if (!enabled && OnClick) OnClick(event);
+            if (enabled && OnClick) OnClick(event);
             if (OnCommand) OnCommand(event);
         },
         [enabled, OnClick, OnCommand]
@@ -117,7 +117,7 @@ const Button = React.memo(
         (event: React.KeyboardEvent<HTMLButtonElement>) => {
             if (event.key === 'Enter' || event.key === ' ') {
                 if (event.key === ' ') event.preventDefault();
-                if (!enabled && OnClick) OnClick(event);
+                if (enabled && OnClick) OnClick(event);
                 if (OnCommand) OnCommand(event);
             }
         },
