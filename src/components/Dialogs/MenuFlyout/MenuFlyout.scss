@@ -1,8 +1,10 @@
 .flyout {
     @include BodyTextBlockStyle;
+    @include OpeningAnimation;
 
     min-width: 100px;
     max-width: 550px;
+    overflow: hidden;
     width: fit-content;
     padding: var(--SpacingCompact);
     color: var(--TextFillColorPrimaryBrush);
@@ -11,7 +13,6 @@
     user-select: var(--GlobalUserSelectDefault);
     border: 1px solid var(--ControlElevationBorderBrush);
     border-radius: var(--ControlCornerRadius);
-    transition: opacity var(--TransitionTimingDuration) ease-in-out;
 
     &.plc-top {
         margin-bottom: var(--SpacingCompact);

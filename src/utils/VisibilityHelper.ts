@@ -28,6 +28,4 @@ export function ensureElementVisibility(
     element.style.position = computedStyle.position === 'absolute' ? 'absolute' : 'fixed';
     element.style.top = `${adjustedTop}px`;
     element.style.left = `${adjustedLeft}px`;
-
-    console.log('Adjusted Position:', { top: adjustedTop, left: adjustedLeft });
 }
