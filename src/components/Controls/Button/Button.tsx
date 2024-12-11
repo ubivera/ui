@@ -17,7 +17,7 @@ export interface ButtonProps {
     ) => void;
     ClickMode?: 'Release' | 'Press' | 'Hover';
     Classes?: React.CSSProperties;
-    Disabled?: boolean;
+    IsEnabled?: boolean;
     Content?: ReactNode;
     ExtendedContent?: ReactNode[];
     children?: ReactNode;
@@ -30,8 +30,8 @@ export interface ButtonProps {
 export interface ButtonRef {
     GetContent: () => ReactNode;
     SetContent: (content: ReactNode) => void;
-    GetDisabled: () => boolean | undefined;
-    SetDisabled: (disabled: boolean) => void;
+    GetEnabled: () => boolean | undefined;
+    SetEnabled: (enabled: boolean) => void;
     FireClick: () => void;
     FireCommand: () => void;
     FocusButton: () => void;
@@ -56,7 +56,7 @@ const Button = React.memo(
         Command: OnCommand,
         ClickMode = 'Release',
         Classes,
-        Disabled = false,
+        IsEnabled: Enabled = true,
         Content,
         ExtendedContent = [],
         children,
@@ -68,15 +68,15 @@ const Button = React.memo(
 
       const buttonRef = useRef<HTMLButtonElement>(null);
       const [content, SetContent] = useState<ReactNode>(Content);
-      const [disabled, SetDisabled] = useState(Disabled);
+      const [enabled, SetEnabled] = useState(Enabled);
 
     useImperativeHandle(
         ref,
         () => ({
             GetContent: () => content,
             SetContent: (newContent: ReactNode) => SetContent(newContent),
-            GetDisabled: () => disabled,
-            SetDisabled: (newDisabled: boolean) => SetDisabled(newDisabled),
+            GetEnabled: () => enabled,
+            SetEnabled: (newEnabled: boolean) => SetEnabled(newEnabled),
             FireClick: () => {
                 if (OnClick && buttonRef.current) {
                 const event = new MouseEvent('click', {
@@ -102,26 +102,26 @@ const Button = React.memo(
             },
             Element: buttonRef.current,
         }),
-        [content, disabled, OnClick, OnCommand]
+        [content, enabled, OnClick, OnCommand]
     );
 
     const handleMouseEvent = useCallback(
         (event: React.MouseEvent<HTMLButtonElement>) => {
-            if (!disabled && OnClick) OnClick(event);
+            if (!enabled && OnClick) OnClick(event);
             if (OnCommand) OnCommand(event);
         },
-        [disabled, OnClick, OnCommand]
+        [enabled, OnClick, OnCommand]
     );
 
     const handleKeyEvent = useCallback(
         (event: React.KeyboardEvent<HTMLButtonElement>) => {
             if (event.key === 'Enter' || event.key === ' ') {
                 if (event.key === ' ') event.preventDefault();
-                if (!disabled && OnClick) OnClick(event);
+                if (!enabled && OnClick) OnClick(event);
                 if (OnCommand) OnCommand(event);
             }
         },
-        [disabled, OnClick, OnCommand]
+        [enabled, OnClick, OnCommand]
     );
 
     const eventProps = useMemo(() => {
@@ -193,8 +193,8 @@ const Button = React.memo(
                 (typeof content === 'string' ? content : 'Button')
               }
             className={buttonClassName}
-            disabled={disabled && !OnCommand}
-            aria-disabled={disabled}
+            disabled={!enabled && !OnCommand}
+            aria-disabled={!enabled}
             aria-expanded={AriaExpanded}
             aria-haspopup={AriaHasPopup}
             style={Classes}
