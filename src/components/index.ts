@@ -6,3 +6,5 @@ export { DropDownButton } from './Controls';
 export type { DropDownButtonRef } from './Controls';
 export { HyperlinkButton } from './Controls';
 export { RepeatButton } from './Controls';
+export { CheckBox } from './Controls';
+export type { CheckBoxRef } from './Controls';
