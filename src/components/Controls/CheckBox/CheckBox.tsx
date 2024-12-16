@@ -1,4 +1,4 @@
-import React, { useState, useRef, useImperativeHandle, forwardRef, useCallback, ReactNode, useEffect } from 'react';
+import React, {useState, useRef, useImperativeHandle, forwardRef, useCallback, ReactNode, useEffect} from 'react';
 import CheckBoxContent from './CheckBox.Content';
 import './CheckBox.scss';
 
@@ -66,9 +66,9 @@ const CheckBox = React.memo(
         }, [checkedState]);
 
         const handleChange = useCallback(() => {
-            const newCheckedState = checkedState === true ? false : true;
+            const newCheckedState = checkedState !== true;
             setCheckedState(newCheckedState);
-            if (newCheckedState === true) Checked?.();
+            if (newCheckedState) Checked?.();
             else Unchecked?.();
         }, [checkedState, Checked, Unchecked]);
 

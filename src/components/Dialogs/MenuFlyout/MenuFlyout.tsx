@@ -1,5 +1,5 @@
-import React, { ReactNode, useEffect, useRef } from 'react';
-import { ensureElementVisibility } from '../../../utils/VisibilityHelper';
+import React, {ReactNode, useEffect, useRef} from 'react';
+import {ensureElementVisibility} from '../../../utils';
 import './MenuFlyout.scss';
 
 export interface MenuFlyoutProps {
@@ -7,7 +7,7 @@ export interface MenuFlyoutProps {
     Placement?: 'Bottom' | 'Top' | 'Left' | 'Right';
 }
 
-const MenuFlyout: React.FC<MenuFlyoutProps> = ({ children, Placement = 'Bottom' }) => {
+const MenuFlyout: React.FC<MenuFlyoutProps> = ({children, Placement = 'Bottom'}) => {
     const flyoutRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {

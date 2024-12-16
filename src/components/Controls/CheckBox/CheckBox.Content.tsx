@@ -5,7 +5,7 @@ export interface CheckBoxContentProps {
     children?: React.ReactNode;
 }
 
-const CheckBoxContent: React.FC<CheckBoxContentProps> = ({ Content, children }) => {
+const CheckBoxContent: React.FC<CheckBoxContentProps> = ({Content, children}) => {
     return <>{children || Content}</>;
 };
 

@@ -1,99 +1,99 @@
 .button {
-    @include BodyTextBlockStyle;
+  @include BodyTextBlockStyle;
 
-    cursor: pointer;
-    height: fit-content;
-    display: inline-flex;
-    flex-direction: row;
-    align-items: stretch;
-    user-select: var(--GlobalUserSelectDefault);
+  cursor: pointer;
+  height: fit-content;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: stretch;
+  user-select: var(--GlobalUserSelectDefault);
 
-    padding: var(--SpacingControlsLabels);
-    color: var(--TextFillColorPrimaryBrush);
-    text-shadow: var(--GlobalTextShadowDefault);
-    backdrop-filter: var(--GlobalBackdropFilterDefault);
-    background-color: var(--ControlFillColorDefaultBrush);
+  padding: var(--SpacingControlsLabels);
+  color: var(--TextFillColorPrimaryBrush);
+  text-shadow: var(--GlobalTextShadowDefault);
+  backdrop-filter: var(--GlobalBackdropFilterDefault);
+  background-color: var(--ControlFillColorDefaultBrush);
 
-    border: 1px solid var(--ControlElevationBorderBrush);
-    border-radius: var(--ControlCornerRadius);
-    box-shadow: var(--GlobalBoxShadowDefault);
+  border: 1px solid var(--ControlElevationBorderBrush);
+  border-radius: var(--ControlCornerRadius);
+  box-shadow: var(--GlobalBoxShadowDefault);
 
-    transition-property: color, background-color;
-    transition-timing-function: var(--TransitionTimingFunction);
-    transition-duration: var(--TransitionTimingDuration);
+  transition-property: color, background-color;
+  transition-timing-function: var(--TransitionTimingFunction);
+  transition-duration: var(--TransitionTimingDuration);
 
 
-    &:hover:not([aria-disabled="true"]) {
-        background-color: var(--ControlFillColorSecondaryBrush);
+  &:hover:not([aria-disabled="true"]) {
+    background-color: var(--ControlFillColorSecondaryBrush);
+  }
+
+  &:active:not([aria-disabled="true"]) {
+    color: var(--TextFillColorTertiaryBrush);
+    background-color: var(--ControlFillColorTertiaryBrush);
+  }
+
+  &:focus-visible {
+    border-color: var(--FocusStrokeColorInnerBrush);
+    outline: 2px solid var(--FocusStrokeColorOuterBrush);
+  }
+
+  &[aria-disabled="true"] {
+    opacity: 0.7;
+    cursor: default;
+    background-color: var(--ControlFillColorDisabledBrush);
+  }
+
+  &.accent {
+    color: var(--TextOnAccentFillColorPrimaryBrush);
+    background-color: var(--AccentFillColorDefaultBrush);
+    border-color: var(--AccentFillColorDefaultBrush);
+  }
+
+  &.accent:hover {
+    background-color: var(--AccentFillColorSecondaryBrush);
+  }
+
+  &.accent:active {
+    color: var(--TextOnAccentFillColorSecondaryBrush);
+    background-color: var(--AccentFillColorTertiaryBrush);
+  }
+
+  &.hyperlink {
+    box-shadow: none;
+    color: var(--AccentTextFillColorPrimaryBrush);
+    background-color: var(--ControlFillColorTransparentBrush);
+    border-color: var(--ControlFillColorTransparentBrush);
+  }
+
+  &.hyperlink[aria-disabled="true"] {
+    opacity: 1;
+    color: var(--AccentTextFillColorDisabledBrush);
+  }
+
+  .image {
+    pointer-events: none;
+    padding: 0 var(--SpacingCompact);
+
+    .start {
+      align-self: flex-start;
     }
 
-    &:active:not([aria-disabled="true"]) {
-        color: var(--TextFillColorTertiaryBrush);
-        background-color: var(--ControlFillColorTertiaryBrush);
+    .end {
+      align-self: flex-end;
     }
+  }
 
-    &:focus-visible {
-        border-color: var(--FocusStrokeColorInnerBrush);
-        outline: 2px solid var(--FocusStrokeColorOuterBrush);
-    }
+  .label {
+    align-content: center;
+    vertical-align: middle;
+    padding: 0 var(--SpacingCompact);
+  }
 
-    &[aria-disabled="true"] {
-        opacity: 0.7;
-        cursor: default;
-        background-color: var(--ControlFillColorDisabledBrush);
-    }
+  :first-child {
+    padding-left: 0;
+  }
 
-    &.accent {
-        color: var(--TextOnAccentFillColorPrimaryBrush);
-        background-color: var(--AccentFillColorDefaultBrush);
-        border-color: var(--AccentFillColorDefaultBrush);
-    }
-
-    &.accent:hover {
-        background-color: var(--AccentFillColorSecondaryBrush);
-    }
-
-    &.accent:active {
-        color: var(--TextOnAccentFillColorSecondaryBrush);
-        background-color: var(--AccentFillColorTertiaryBrush);
-    }
-
-    &.hyperlink {
-        box-shadow: none;
-        color: var(--AccentTextFillColorPrimaryBrush);
-        background-color: var(--ControlFillColorTransparentBrush);
-        border-color: var(--ControlFillColorTransparentBrush);
-    }
-
-    &.hyperlink[aria-disabled="true"] {
-        opacity: 1;
-        color: var(--AccentTextFillColorDisabledBrush);
-    }
-
-    .image {
-        pointer-events: none;
-        padding: 0 var(--SpacingCompact);
-
-        .start {
-            align-self: flex-start;
-        }
-
-        .end {
-            align-self: flex-end;
-        }
-    }
-
-    .label {
-        align-content: center;
-        vertical-align: middle;
-        padding: 0 var(--SpacingCompact);
-    }
-
-    :first-child {
-        padding-left: 0;
-    }
-
-    :last-child {
-        padding-right: 0;
-    }
+  :last-child {
+    padding-right: 0;
+  }
 }

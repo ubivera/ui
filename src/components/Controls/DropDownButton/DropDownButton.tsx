@@ -8,11 +8,11 @@ import React, {
     ReactElement,
     useEffect,
 } from 'react';
-import Button, { ButtonProps, ButtonRef } from '../Button/Button';
-import DropDownButtonFlyout, { DropDownButtonFlyoutProps } from './DropDownButton.Flyout';
-import { MenuFlyoutContext } from '../../Dialogs/MenuFlyout/MenuFlyoutContext';
-import DropDownButtonContent, { DropDownButtonContentProps } from './DropDownButton.Content';
-import DropDownButtonImage, { DropDownButtonImageProps } from './DropDownButton.Image';
+import Button, {ButtonProps, ButtonRef} from '../Button/Button';
+import DropDownButtonFlyout, {DropDownButtonFlyoutProps} from './DropDownButton.Flyout';
+import {MenuFlyoutContext} from '../../Dialogs/MenuFlyout/MenuFlyoutContext';
+import DropDownButtonContent, {DropDownButtonContentProps} from './DropDownButton.Content';
+import DropDownButtonImage, {DropDownButtonImageProps} from './DropDownButton.Image';
 import './DropDownButton.scss';
 
 export interface DropDownButtonProps extends ButtonProps {
@@ -34,7 +34,7 @@ type DropDownButtonComponent = React.MemoExoticComponent<
 };
 
 const DropDownButton = React.memo(forwardRef<DropDownButtonRef, DropDownButtonProps>(
-    ({ Content, children, ...buttonProps }, ref) => {
+    ({Content, children, ...buttonProps}, ref) => {
         const [isFlyoutOpen, setIsFlyoutOpen] = useState(false);
         const buttonRef = useRef<ButtonRef>(null);
         const flyoutRef = useRef<HTMLDivElement>(null);
@@ -42,9 +42,9 @@ const DropDownButton = React.memo(forwardRef<DropDownButtonRef, DropDownButtonPr
         useImperativeHandle(
             ref,
             () => ({
-            ...buttonRef.current!,
-            openFlyout: () => setIsFlyoutOpen(true),
-            closeFlyout: () => setIsFlyoutOpen(false),
+                ...buttonRef.current!,
+                openFlyout: () => setIsFlyoutOpen(true),
+                closeFlyout: () => setIsFlyoutOpen(false),
             }),
             [buttonRef]
         );
@@ -60,8 +60,8 @@ const DropDownButton = React.memo(forwardRef<DropDownButtonRef, DropDownButtonPr
                     !flyoutRef.current.contains(event.target as Node) &&
                     buttonRef.current &&
                     !(
-                    buttonRef.current.Element &&
-                    buttonRef.current.Element.contains(event.target as Node)
+                        buttonRef.current.Element &&
+                        buttonRef.current.Element.contains(event.target as Node)
                     )
                 ) {
                     setIsFlyoutOpen(false);
@@ -116,21 +116,21 @@ const DropDownButton = React.memo(forwardRef<DropDownButtonRef, DropDownButtonPr
 
         return (
             <div className="dropdown-button-container" aria-expanded={isFlyoutOpen} aria-haspopup="menu">
-            <Button
-                {...buttonProps}
-                ref={buttonRef}
-                Click={
-                    (
-                        e: React.MouseEvent<HTMLButtonElement> |
-                        React.KeyboardEvent<HTMLButtonElement>
-                    ) => {
-                        buttonProps.Click && buttonProps.Click(e);
-                        toggleFlyout();
+                <Button
+                    {...buttonProps}
+                    ref={buttonRef}
+                    Click={
+                        (
+                            e: React.MouseEvent<HTMLButtonElement> |
+                                React.KeyboardEvent<HTMLButtonElement>
+                        ) => {
+                            buttonProps.Click && buttonProps.Click(e);
+                            toggleFlyout();
+                        }
                     }
-                }
-                Content={Content}
-                ExtendedContent={[
-                    <span className="dropdown-button-icon" key="dropdown-button-icon">
+                    Content={Content}
+                    ExtendedContent={[
+                        <span className="dropdown-button-icon" key="dropdown-button-icon">
                         <svg
                             className="image after"
                             xmlns="http://www.w3.org/2000/svg"
@@ -144,32 +144,32 @@ const DropDownButton = React.memo(forwardRef<DropDownButtonRef, DropDownButtonPr
                             />
                         </svg>
                     </span>
-                ]}
-                aria-expanded={isFlyoutOpen}
-                aria-haspopup="menu"
-            >
-                {mappedButtonChildren}
-            </Button>
+                    ]}
+                    aria-expanded={isFlyoutOpen}
+                    aria-haspopup="menu"
+                >
+                    {mappedButtonChildren}
+                </Button>
 
-            {isFlyoutOpen && (
-                <>
-                <div
-                    className="dropdown-button-overlay"
-                    onClick={(event) => {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    toggleFlyout();
-                    }}
-                />
-                {flyoutElement && (
-                    <MenuFlyoutContext.Provider value={{ closeFlyout: () => setIsFlyoutOpen(false) }}>
-                    <div ref={flyoutRef} className="dropdown-button-flyout">
-                        {flyoutElement}
-                    </div>
-                    </MenuFlyoutContext.Provider>
+                {isFlyoutOpen && (
+                    <>
+                        <div
+                            className="dropdown-button-overlay"
+                            onClick={(event) => {
+                                event.preventDefault();
+                                event.stopPropagation();
+                                toggleFlyout();
+                            }}
+                        />
+                        {flyoutElement && (
+                            <MenuFlyoutContext.Provider value={{closeFlyout: () => setIsFlyoutOpen(false)}}>
+                                <div ref={flyoutRef} className="dropdown-button-flyout">
+                                    {flyoutElement}
+                                </div>
+                            </MenuFlyoutContext.Provider>
+                        )}
+                    </>
                 )}
-                </>
-            )}
             </div>
         );
     }

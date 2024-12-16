@@ -1,52 +1,52 @@
 .menu-flyout {
-    @include BodyTextBlockStyle;
-    @include OpeningAnimation;
+  @include BodyTextBlockStyle;
+  @include OpeningAnimation;
 
-    min-width: 100px;
-    max-width: 550px;
-    overflow: hidden;
-    width: fit-content;
-    padding: var(--SpacingCompact);
-    color: var(--TextFillColorPrimaryBrush);
-    background-color: var(--ControlFillColorDefaultBrush);
-    
-    user-select: var(--GlobalUserSelectDefault);
-    border: 1px solid var(--ControlElevationBorderBrush);
+  min-width: 100px;
+  max-width: 550px;
+  overflow: hidden;
+  width: fit-content;
+  padding: var(--SpacingCompact);
+  color: var(--TextFillColorPrimaryBrush);
+  background-color: var(--ControlFillColorDefaultBrush);
+
+  user-select: var(--GlobalUserSelectDefault);
+  border: 1px solid var(--ControlElevationBorderBrush);
+  border-radius: var(--ControlCornerRadius);
+
+  &.placement-top {
+    margin-bottom: var(--SpacingCompact);
+  }
+
+  &.placement-right {
+    margin-left: var(--SpacingCompact);
+  }
+
+  &.placement-bottom {
+    margin-top: var(--SpacingCompact);
+  }
+
+  &.placement-left {
+    margin-right: var(--SpacingCompact);
+  }
+
+  .menu-flyout-item {
+    cursor: pointer;
     border-radius: var(--ControlCornerRadius);
+    background-color: var(--SubtleFillColorTransparentBrush);
+    padding: var(--SpacingCompact) var(--SpacingControlsLabels);
+    transition: background-color var(--TransitionTimingDuration) var(--TransitionTimingFunction);
 
-    &.placement-top {
-        margin-bottom: var(--SpacingCompact);
+    &:hover {
+      background-color: var(--SubtleFillColorSecondaryBrush);
     }
 
-    &.placement-right {
-        margin-left: var(--SpacingCompact);
+    &:active {
+      background-color: var(--SubtleFillColorTertiaryBrush);
     }
 
-    &.placement-bottom {
-        margin-top: var(--SpacingCompact);
+    &:disabled {
+      background-color: var(--SubtleFillColorDisabledBrush);
     }
-
-    &.placement-left {
-        margin-right: var(--SpacingCompact);
-    }
-
-    .menu-flyout-item {
-        cursor: pointer;
-        border-radius: var(--ControlCornerRadius);
-        background-color: var(--SubtleFillColorTransparentBrush);
-        padding: var(--SpacingCompact) var(--SpacingControlsLabels);
-        transition: background-color var(--TransitionTimingDuration) var(--TransitionTimingFunction);
-    
-        &:hover {
-            background-color: var(--SubtleFillColorSecondaryBrush);
-        }
-    
-        &:active {
-            background-color: var(--SubtleFillColorTertiaryBrush);
-        }
-    
-        &:disabled {
-            background-color: var(--SubtleFillColorDisabledBrush);
-        }
-    }
+  }
 }

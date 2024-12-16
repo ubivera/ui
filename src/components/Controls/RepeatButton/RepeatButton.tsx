@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
-import Button, { ButtonProps } from '../Button/Button';
+import React, {useRef} from 'react';
+import Button, {ButtonProps} from '../Button/Button';
 import '../Button/Button.scss';
 
 export interface RepeatButtonProps extends ButtonProps {
@@ -8,12 +8,12 @@ export interface RepeatButtonProps extends ButtonProps {
 }
 
 const RepeatButton: React.FC<RepeatButtonProps> = ({
-    Click,
-    Command,
-    Delay = 250,
-    Interval = 250,
-    ...props
-}) => {
+                                                       Click,
+                                                       Command,
+                                                       Delay = 250,
+                                                       Interval = 250,
+                                                       ...props
+                                                   }) => {
     const timerRef = useRef<NodeJS.Timeout | null>(null);
 
     const handleClick = (

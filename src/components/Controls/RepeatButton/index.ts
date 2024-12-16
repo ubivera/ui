@@ -1,1 +1,1 @@
-export { default as RepeatButton } from './RepeatButton';
+export {default as RepeatButton} from './RepeatButton';

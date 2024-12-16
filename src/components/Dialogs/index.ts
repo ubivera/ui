@@ -1,1 +1,1 @@
-export { MenuFlyout, MenuFlyoutItem } from './MenuFlyout';
+export {MenuFlyout, MenuFlyoutItem} from './MenuFlyout';

@@ -1,424 +1,281 @@
 :root {
-    --text-primary-light: #1a1a1a;
-    --text-primary-dark: #fff;
-    --text-secondary-light: #5c5c5c;
-    --text-secondary-dark: #ccc;
-    --text-tertiary-light: #868686;
-    --text-tertiary-dark: #969696;
-    --text-disabled-light: #9b9b9b;
-    --text-disabled-dark: #717171;
+  --text-primary-light: #1a1a1a;
+  --text-primary-dark: #fff;
+  --text-secondary-light: #5c5c5c;
+  --text-secondary-dark: #ccc;
+  --text-tertiary-light: #868686;
+  --text-tertiary-dark: #969696;
+  --text-disabled-light: #9b9b9b;
+  --text-disabled-dark: #717171;
 
-    --accent-text-primary-light: #003e92;
-    --accent-text-primary-dark: #99ebff;
-    --accent-text-secondary-light: #001a68;
-    --accent-text-secondary-dark: #99ebff;
-    --accent-text-tertiary-light: #0067c0;
-    --accent-text-tertiary-dark: #4cc2ff;
-    --accent-text-disabled-light: #9b9b9b;
-    --accent-text-disabled-dark: #717171;
+  --accent-text-primary-light: #003e92;
+  --accent-text-primary-dark: #99ebff;
+  --accent-text-secondary-light: #001a68;
+  --accent-text-secondary-dark: #99ebff;
+  --accent-text-tertiary-light: #0067c0;
+  --accent-text-tertiary-dark: #4cc2ff;
+  --accent-text-disabled-light: #9b9b9b;
+  --accent-text-disabled-dark: #717171;
 
-    --text-on-accent-primary-light: #fff;
-    --text-on-accent-primary-dark: #000;
-    --text-on-accent-secondary-light: #fbfbfb;
-    --text-on-accent-secondary-dark: #101010;
-    --text-on-accent-disabled-light: #fff;
-    --text-on-accent-disabled-dark: #969696;
-    --text-on-accent-selected-light: #fff;
-    --text-on-accent-selected-dark: #fff;
+  --text-on-accent-primary-light: #fff;
+  --text-on-accent-primary-dark: #000;
+  --text-on-accent-secondary-light: #fbfbfb;
+  --text-on-accent-secondary-dark: #101010;
+  --text-on-accent-disabled-light: #fff;
+  --text-on-accent-disabled-dark: #969696;
+  --text-on-accent-selected-light: #fff;
+  --text-on-accent-selected-dark: #fff;
 
-    --control-fill-default-light: #fbfbfb;
-    --control-fill-default-dark: #2d2d2d;
-    --control-fill-secondary-light: #f6f6f6;
-    --control-fill-secondary-dark: #323232;
-    --control-fill-tertiary-light: #f5f5f5;
-    --control-fill-tertiary-dark: #272727;
-    --control-fill-quaternary-light: #f5f5f5;
-    --control-fill-quaternary-dark: #272727;
-    --control-fill-disabled-light: #f5f5f5;
-    --control-fill-disabled-dark: #2a2a2a;
-    --control-fill-transparent-light: transparent;
-    --control-fill-transparent-dark: transparent;
-    --control-fill-input-active-light: #fff;
-    --control-fill-input-active-dark: #1f1f1f;
+  --control-fill-default-light: #fbfbfb;
+  --control-fill-default-dark: #2d2d2d;
+  --control-fill-secondary-light: #f6f6f6;
+  --control-fill-secondary-dark: #323232;
+  --control-fill-tertiary-light: #f5f5f5;
+  --control-fill-tertiary-dark: #272727;
+  --control-fill-quaternary-light: #f5f5f5;
+  --control-fill-quaternary-dark: #272727;
+  --control-fill-disabled-light: #f5f5f5;
+  --control-fill-disabled-dark: #2a2a2a;
+  --control-fill-transparent-light: transparent;
+  --control-fill-transparent-dark: transparent;
+  --control-fill-input-active-light: #fff;
+  --control-fill-input-active-dark: #1f1f1f;
 
-    --control-alt-fill-transparent-light: transparent;
-    --control-alt-fill-transparent-dark: transparent;
-    --control-alt-fill-secondary-light: #ededed;
-    --control-alt-fill-secondary-dark: #1d1d1d;
-    --control-alt-fill-tertiary-light: #e5e5e5;
-    --control-alt-fill-tertiary-dark: #2a2a2a;
-    --control-alt-fill-quaternary-light: #dcdcdc;
-    --control-alt-fill-quaternary-dark: #303030;
-    --control-alt-fill-disabled-light: #f3f3f3;
-    --control-alt-fill-disabled-dark: #202020;
+  --control-alt-fill-transparent-light: transparent;
+  --control-alt-fill-transparent-dark: transparent;
+  --control-alt-fill-secondary-light: #ededed;
+  --control-alt-fill-secondary-dark: #1d1d1d;
+  --control-alt-fill-tertiary-light: #e5e5e5;
+  --control-alt-fill-tertiary-dark: #2a2a2a;
+  --control-alt-fill-quaternary-light: #dcdcdc;
+  --control-alt-fill-quaternary-dark: #303030;
+  --control-alt-fill-disabled-light: #f3f3f3;
+  --control-alt-fill-disabled-dark: #202020;
 
-    --control-solid-fill-default-light: #fff;
-    --control-solid-fill-default-dark: #454545;
+  --control-solid-fill-default-light: #fff;
+  --control-solid-fill-default-dark: #454545;
 
-    --control-strong-fill-default-light: #868686;
-    --control-strong-fill-default-dark: #9a9a9a;
-    --control-strong-fill-disabled-light: #a6a6a6;
-    --control-strong-fill-disabled-dark: #575757;
+  --control-strong-fill-default-light: #868686;
+  --control-strong-fill-default-dark: #9a9a9a;
+  --control-strong-fill-disabled-light: #a6a6a6;
+  --control-strong-fill-disabled-dark: #575757;
 
-    --subtle-fill-transparent-light: transparent;
-    --subtle-fill-transparent-dark: transparent;
-    --subtle-fill-secondary-light: #eaeaea;
-    --subtle-fill-secondary-dark: #383838;
-    --subtle-fill-tertiary-light: #ededed;
-    --subtle-fill-tertiary-dark: #292929;
-    --subtle-fill-disabled-light: #f3f3f3;
-    --subtle-fill-disabled-dark: #202020;
+  --subtle-fill-transparent-light: transparent;
+  --subtle-fill-transparent-dark: transparent;
+  --subtle-fill-secondary-light: #eaeaea;
+  --subtle-fill-secondary-dark: #383838;
+  --subtle-fill-tertiary-light: #ededed;
+  --subtle-fill-tertiary-dark: #292929;
+  --subtle-fill-disabled-light: #f3f3f3;
+  --subtle-fill-disabled-dark: #202020;
 
-    --control-on-image-default-light: #fcfcfc;
-    --control-on-image-default-dark: #1e1e1e;
-    --control-on-image-secondary-light: #f3f3f3;
-    --control-on-image-secondary-dark: #1a1a1a;
-    --control-on-image-tertiary-light: #ebebeb;
-    --control-on-image-tertiary-dark: #131313;
-    --control-on-image-disabled-light: #f3f3f3;
-    --control-on-image-disabled-dark: #1e1e1e;
+  --control-on-image-default-light: #fcfcfc;
+  --control-on-image-default-dark: #1e1e1e;
+  --control-on-image-secondary-light: #f3f3f3;
+  --control-on-image-secondary-dark: #1a1a1a;
+  --control-on-image-tertiary-light: #ebebeb;
+  --control-on-image-tertiary-dark: #131313;
+  --control-on-image-disabled-light: #f3f3f3;
+  --control-on-image-disabled-dark: #1e1e1e;
 
-    --accent-fill-default-light: #0067c0;
-    --accent-fill-default-dark: #4cc2ef;
-    --accent-fill-secondary-light: #1975c5;
-    --accent-fill-secondary-dark: #47b1e8;
-    --accent-fill-tertiary-light: #3183ca;
-    --accent-fill-tertiary-dark: #42a1d2;
-    --accent-fill-disabled-light: #bfbfbf;
-    --accent-fill-disabled-dark: #434343;
-    --accent-fill-selected-light: #0078d4;
-    --accent-fill-selected-dark: #0078d4;
+  --accent-fill-default-light: #0067c0;
+  --accent-fill-default-dark: #4cc2ef;
+  --accent-fill-secondary-light: #1975c5;
+  --accent-fill-secondary-dark: #47b1e8;
+  --accent-fill-tertiary-light: #3183ca;
+  --accent-fill-tertiary-dark: #42a1d2;
+  --accent-fill-disabled-light: #bfbfbf;
+  --accent-fill-disabled-dark: #434343;
+  --accent-fill-selected-light: #0078d4;
+  --accent-fill-selected-dark: #0078d4;
 
-    --card-background-fill-default-light: #fbfbfb;
-    --card-background-fill-default-dark: #2b2b2b;
-    --card-background-fill-secondary-light: #f4f4f4;
-    --card-background-fill-secondary-dark: #272727;
-    --card-background-fill-tertiary-light: #fbfbfb;
-    --card-background-fill-tertiary-dark: #2b2b2b;
+  --card-background-fill-default-light: #fbfbfb;
+  --card-background-fill-default-dark: #2b2b2b;
+  --card-background-fill-secondary-light: #f4f4f4;
+  --card-background-fill-secondary-dark: #272727;
+  --card-background-fill-tertiary-light: #fbfbfb;
+  --card-background-fill-tertiary-dark: #2b2b2b;
 
-    --smoke-fill-default-light: #161616;
-    --smoke-fill-default-dark: #aaa;
+  --smoke-fill-default-light: #161616;
+  --smoke-fill-default-dark: #aaa;
 
-    --layer-fill-default-light: #f9f9f9;
-    --layer-fill-default-dark: #272727;
-    --layer-fill-alt-light: #fff;
-    --layer-fill-alt-dark: #2b2b2b;
+  --layer-fill-default-light: #f9f9f9;
+  --layer-fill-default-dark: #272727;
+  --layer-fill-alt-light: #fff;
+  --layer-fill-alt-dark: #2b2b2b;
 
-    --solid-fill-base-light: #f3f3f3;
-    --solid-fill-base-dark: #202020;
-    --solid-fill-base-alt-light: #dadada;
-    --solid-fill-base-alt-dark: #0a0a0a;
-    --solid-fill-secondary-light: #eee;
-    --solid-fill-secondary-dark: #1c1c1c;
-    --solid-fill-tertiary-light: #f9f9f9;
-    --solid-fill-tertiary-dark: #282828;
-    --solid-fill-quaternary-light: #fff;
-    --solid-fill-quaternary-dark: #2c2c2c;
+  --solid-fill-base-light: #f3f3f3;
+  --solid-fill-base-dark: #202020;
+  --solid-fill-base-alt-light: #dadada;
+  --solid-fill-base-alt-dark: #0a0a0a;
+  --solid-fill-secondary-light: #eee;
+  --solid-fill-secondary-dark: #1c1c1c;
+  --solid-fill-tertiary-light: #f9f9f9;
+  --solid-fill-tertiary-dark: #282828;
+  --solid-fill-quaternary-light: #fff;
+  --solid-fill-quaternary-dark: #2c2c2c;
 
-    --accent-background-base-light: #abe7f5;
-    --accent-background-base-dark: #0e3a77;
-    --accent-background-default-light: #ace8f6;
-    --accent-background-default-dark: #105794;
+  --accent-background-base-light: #abe7f5;
+  --accent-background-base-dark: #0e3a77;
+  --accent-background-default-light: #ace8f6;
+  --accent-background-default-dark: #105794;
 
-    --card-stroke-default-light: #e5e5e5;
-    --card-stroke-default-dark: #1d1d1d;
-    --card-stroke-default-solid-light: #ebebeb;
-    --card-stroke-default-solid-dark: #1c1c1c;
+  --card-stroke-default-light: #e5e5e5;
+  --card-stroke-default-dark: #1d1d1d;
+  --card-stroke-default-solid-light: #ebebeb;
+  --card-stroke-default-solid-dark: #1c1c1c;
 
-    --control-elevation-border-light: #ccc;
-    --control-elevation-border-dark: #303030;
-    --circle-elevation-border-light: #ccc;
-    --circle-elevation-border-dark: #353535;
-    --text-control-elevation-border-light: #868686;
-    --text-control-elevation-border-dark: #656565;
-    --text-control-elevation-border-focused-light: #0067c0;
-    --text-control-elevation-border-focused-dark: #4cc2ff;
-    --accent-control-elevation-border-light: #929292;
-    --accent-control-elevation-border-dark: #1c1c1c;
+  --control-elevation-border-light: #ccc;
+  --control-elevation-border-dark: #303030;
+  --circle-elevation-border-light: #ccc;
+  --circle-elevation-border-dark: #353535;
+  --text-control-elevation-border-light: #868686;
+  --text-control-elevation-border-dark: #656565;
+  --text-control-elevation-border-focused-light: #0067c0;
+  --text-control-elevation-border-focused-dark: #4cc2ff;
+  --accent-control-elevation-border-light: #929292;
+  --accent-control-elevation-border-dark: #1c1c1c;
 
-    --divider-stroke-default-light: #e5e5e5;
-    --divider-stroke-default-dark: #323232;
+  --divider-stroke-default-light: #e5e5e5;
+  --divider-stroke-default-dark: #323232;
 
-    --focus-stroke-outer-light: #1a1a1a;
-    --focus-stroke-outer-dark: #fff;
-    --focus-stroke-inner-light: #fbfbfb;
-    --focus-stroke-inner-dark: #0a0a0a;
+  --focus-stroke-outer-light: #1a1a1a;
+  --focus-stroke-outer-dark: #fff;
+  --focus-stroke-inner-light: #fbfbfb;
+  --focus-stroke-inner-dark: #0a0a0a;
 
-    --ControlCornerRadius: 4px;
-    --OverlayCornerRadius: 8px;
+  --ControlCornerRadius: 4px;
+  --OverlayCornerRadius: 8px;
 
-    --SpacingCompact: 4px;
-    --SpacingControlsLabels: 8px;
-    --SpacingControlHeaderTextEdge: 12px;
-    --SpacingListsCards: 16px;
-    --SpacingContentSections: 24px;
-    --SpacingPages: 36px;
-    --SpacingPageSectionsTitles: 48px;
+  --SpacingCompact: 4px;
+  --SpacingControlsLabels: 8px;
+  --SpacingControlHeaderTextEdge: 12px;
+  --SpacingListsCards: 16px;
+  --SpacingContentSections: 24px;
+  --SpacingPages: 36px;
+  --SpacingPageSectionsTitles: 48px;
 
-    --TransitionTimingFunction: cubic-bezier(0.4, 0, 0.2, 1);
-    --TransitionTimingDuration: 150ms;
+  --TransitionTimingFunction: cubic-bezier(0.4, 0, 0.2, 1);
+  --TransitionTimingDuration: 150ms;
 
-    --GlobalUserSelectDefault: none;
-    --GlobalBackdropFilterDefault: blur(48px);
-    --GlobalTextShadowDefault: 0 1px 1px hsla(0, 0%, 0%, 0.502);
-    --GlobalBoxShadowDefault:
-        inset 0 0 1px hsla(0, 0%, 13%, 0.4),
-        0 0 0 1px hsla(0 0% 0% / 0.05);
-    --GlobalBoxShadowActive:
-        var(--GlobalBoxShadowDefault),
-        0 0 0 2px var(--CardBackgroundFillColorDefaultBrush),
-        0 0 0 4px var(--AccentFillColorDefaultBrush);
+  --GlobalUserSelectDefault: none;
+  --GlobalBackdropFilterDefault: blur(48px);
+  --GlobalTextShadowDefault: 0 1px 1px hsla(0, 0%, 0%, 0.502);
+  --GlobalBoxShadowDefault: inset 0 0 1px hsla(0, 0%, 13%, 0.4),
+  0 0 0 1px hsla(0 0% 0% / 0.05);
+  --GlobalBoxShadowActive: var(--GlobalBoxShadowDefault),
+  0 0 0 2px var(--CardBackgroundFillColorDefaultBrush),
+  0 0 0 4px var(--AccentFillColorDefaultBrush);
 
-    font-family: system-ui, Helvetica, Arial, sans-serif;
-    font-feature-settings: 'liga' 1, 'calt' 1;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    line-height: 1.5;
-    font-weight: 400;
+  font-family: system-ui, Helvetica, Arial, sans-serif;
+  font-feature-settings: 'liga' 1, 'calt' 1;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+  font-weight: 400;
 
-    color-scheme: light dark;
-    color: var(--TextFillColorPrimaryBrush);
+  color-scheme: light dark;
+  color: var(--TextFillColorPrimaryBrush);
 }
 
 ::after, ::before {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 @keyframes expanding-open {
-    0% {
-        opacity: 0.65;
-        max-height: 10px;
-    }
-    20% {
-        max-height: 40px;
-    }
-    100% {
-        opacity: 1;
-        max-height: 100vh;
-    }
+  0% {
+    opacity: 0.65;
+    max-height: 10px;
+  }
+  20% {
+    max-height: 40px;
+  }
+  100% {
+    opacity: 1;
+    max-height: 100vh;
+  }
 }
 
 @mixin OpeningAnimation {
-    max-height: 0;
-    opacity: 0.65;
+  max-height: 0;
+  opacity: 0.65;
 
-    transition: max-height var(--TransitionTimingDuration) var(--TransitionTimingFunction),
-                opacity var(--TransitionTimingDuration) var(--TransitionTimingFunction);
+  transition: max-height var(--TransitionTimingDuration) var(--TransitionTimingFunction),
+  opacity var(--TransitionTimingDuration) var(--TransitionTimingFunction);
 
-    animation-name: expanding-open;
-    animation-duration: var(--TransitionTimingDuration);
-    animation-timing-function: var(--TransitionTimingFunction);
-    animation-fill-mode: forwards;
+  animation-name: expanding-open;
+  animation-duration: var(--TransitionTimingDuration);
+  animation-timing-function: var(--TransitionTimingFunction);
+  animation-fill-mode: forwards;
 }
 
 @mixin CaptionTextBlockStyle {
-    font-size: 12px;
+  font-size: 12px;
 }
 
 @mixin BodyTextBlockStyle {
-    font-size: 14px;
-    font-weight: normal;
+  font-size: 14px;
+  font-weight: normal;
 }
 
 @mixin BodyStrongTextBlockStyle {
-    font-size: 14px;
-    font-weight: bold;
+  font-size: 14px;
+  font-weight: bold;
 }
 
 @mixin SubtitleTextBlockStyle {
-    font-size: 20px;
-    font-weight: bold;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 @mixin TitleTextBlockStyle {
-    font-size: 28px;
-    font-weight: bold;
+  font-size: 28px;
+  font-weight: bold;
 }
 
 @mixin TitleLargeTextBlockStyle {
-    font-size: 40px;
-    font-weight: bold;
+  font-size: 40px;
+  font-weight: bold;
 }
 
 @mixin DisplayTextBlockStyle {
-    font-size: 68px;
-    font-weight: bold;
+  font-size: 68px;
+  font-weight: bold;
 }
 
-.caption-txt { @include CaptionTextBlockStyle; }
-.body-txt { @include BodyTextBlockStyle; }
-.body-txt-str { @include BodyStrongTextBlockStyle; }
-.sub-txt { @include SubtitleTextBlockStyle; }
-.tlt-txt { @include TitleTextBlockStyle; }
-.tlt-txt-lg { @include TitleLargeTextBlockStyle; }
-.dsp-txt { @include DisplayTextBlockStyle; }
+.caption-txt {
+  @include CaptionTextBlockStyle;
+}
+
+.body-txt {
+  @include BodyTextBlockStyle;
+}
+
+.body-txt-str {
+  @include BodyStrongTextBlockStyle;
+}
+
+.sub-txt {
+  @include SubtitleTextBlockStyle;
+}
+
+.tlt-txt {
+  @include TitleTextBlockStyle;
+}
+
+.tlt-txt-lg {
+  @include TitleLargeTextBlockStyle;
+}
+
+.dsp-txt {
+  @include DisplayTextBlockStyle;
+}
 
 @media (prefers-color-scheme: light) {
-    :root {
-        background-color: #fff;
+  :root {
+    background-color: #fff;
 
-        --TextFillColorPrimaryBrush: var(--text-primary-light);
-        --TextFillColorSecondaryBrush: var(--text-secondary-light);
-        --TextFillColorTertiaryBrush: var(--text-tertiary-light);
-        --TextFillColorDisabledBrush: var(--text-disabled-light);
-
-        --AccentTextFillColorPrimaryBrush: var(--accent-text-primary-light);
-        --AccentTextFillColorSecondaryBrush: var(--accent-text-secondary-light);
-        --AccentTextFillColorTertiaryBrush: var(--accent-text-tertiary-light);
-        --AccentTextFillColorDisabledBrush: var(--accent-text-disabled-light);
-
-        --TextOnAccentFillColorPrimaryBrush: var(--text-on-accent-primary-light);
-        --TextOnAccentFillColorSecondaryBrush: var(--text-on-accent-secondary-light);
-        --TextOnAccentFillColorDisabledBrush: var(--text-on-accent-disabled-light);
-        --TextOnAccentFillColorSelectedTextBrush: var(--text-on-accent-selected-light);
-
-        --ControlFillColorDefaultBrush: var(--control-fill-default-light);
-        --ControlFillColorSecondaryBrush: var(--control-fill-secondary-light);
-        --ControlFillColorTertiaryBrush: var(--control-fill-tertiary-light);
-        --ControlFillColorQuaternaryBrush: var(--control-fill-quaternary-light);
-        --ControlFillColorDisabledBrush: var(--control-fill-disabled-light);
-        --ControlFillColorTransparentBrush: var(--control-fill-transparent-light);
-        --ControlFillColorInputActiveBrush: var(--control-fill-input-active-light);
-
-        --ControlAltFillColorTransparentBrush: var(--control-alt-fill-transparent-light);
-        --ControlAltFillColorSecondaryBrush: var(--control-alt-fill-secondary-light);
-        --ControlAltFillColorTertiaryBrush: var(--control-alt-fill-tertiary-light);
-        --ControlAltFillColorQuaternaryBrush: var(--control-alt-fill-quaternary-light);
-        --ControlAltFillColorDisabledBrush: var(--control-alt-fill-disabled-light);
-
-        --ControlSolidFillColorDefaultBrush: var(--control-solid-fill-default-light);
-
-        --ControlStrongFillColorDefaultBrush: var(--control-strong-fill-default-light);
-        --ControlStrongFillColorDisabledBrush: var(--control-strong-fill-disabled-light);
-
-        --SubtleFillColorTransparentBrush: var(--subtle-fill-transparent-light);
-        --SubtleFillColorSecondaryBrush: var(--subtle-fill-secondary-light);
-        --SubtleFillColorTertiaryBrush: var(--subtle-fill-tertiary-light);
-        --SubtleFillColorDisabledBrush: var(--subtle-fill-disabled-light);
-
-        --ControlOnImageFillColorDefaultBrush: var(--control-on-image-default-light);
-        --ControlOnImageFillColorSecondaryBrush: var(--control-on-image-secondary-light);
-        --ControlOnImageFillColorTertiaryBrush: var(--control-on-image-tertiary-light);
-        --ControlOnImageFillColorDisabledBrush: var(--control-on-image-disabled-light);
-
-        --AccentFillColorDefaultBrush: var(--accent-fill-default-light);
-        --AccentFillColorSecondaryBrush: var(--accent-fill-secondary-light);
-        --AccentFillColorTertiaryBrush: var(--accent-fill-tertiary-light);
-        --AccentFillColorDisabledBrush: var(--accent-fill-disabled-light);
-        --AccentFillColorSelectedTextBackgroundBrush: var(--accent-fill-selected-light);
-
-        --CardBackgroundFillColorDefaultBrush: var(--card-background-fill-default-light);
-        --CardBackgroundFillColorSecondaryBrush: var(--card-background-fill-secondary-light);
-        --CardBackgroundTertiaryBrush: var(--card-background-fill-tertiary-light);
-
-        --SmokeFillColorDefaultBrush: var(--smoke-fill-default-light);
-
-        --LayerFillColorDefaultBrush: var(--layer-fill-default-light);
-        --LayerFillColorAltBrush: var(--layer-fill-alt-light);
-
-        --AccentAcrylicBackgroundFillColorBaseBrush: var(--accent-background-base-light);
-        --AccentAcrylicBackgroundFillColorDefaultBrush: var(--accent-background-default-light);
-
-        --CardStrokeColorDefaultBrush: var(--card-stroke-default-light);
-        --CardStrokeColorDefaultSolidBrush: var(--card-stroke-default-solid-light);
-
-        --ControlElevationBorderBrush: var(--control-elevation-border-light);
-        --CircleElevationBorderBrush: var(--circle-elevation-border-light);
-        --TextControlElevationBorderBrush: var(--text-control-elevation-border-light);
-        --TextControlElevationBorderFocusedBrush: var(--text-control-elevation-border-focused-light);
-        --AccentControlElevationBorderBrush: var(--accent-control-elevation-border-light);
-
-        --DividerStrokeColorDefaultBrush: var(--divider-stroke-default-light);
-
-        --FocusStrokeColorOuterBrush: var(--focus-stroke-outer-light);
-        --FocusStrokeColorInnerBrush: var(--focus-stroke-inner-light);
-    }
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        background-color: #202020;
-
-        --TextFillColorPrimaryBrush: var(--text-primary-dark);
-        --TextFillColorSecondaryBrush: var(--text-secondary-dark);
-        --TextFillColorTertiaryBrush: var(--text-tertiary-dark);
-        --TextFillColorDisabledBrush: var(--text-disabled-dark);
-
-        --AccentTextFillColorPrimaryBrush: var(--accent-text-primary-dark);
-        --AccentTextFillColorSecondaryBrush: var(--accent-text-secondary-dark);
-        --AccentTextFillColorTertiaryBrush: var(--accent-text-tertiary-dark);
-        --AccentTextFillColorDisabledBrush: var(--accent-text-disabled-dark);
-
-        --TextOnAccentFillColorPrimaryBrush: var(--text-on-accent-primary-dark);
-        --TextOnAccentFillColorSecondaryBrush: var(--text-on-accent-secondary-dark);
-        --TextOnAccentFillColorDisabledBrush: var(--text-on-accent-disabled-dark);
-        --TextOnAccentFillColorSelectedTextBrush: var(--text-on-accent-selected-dark);
-
-        --ControlFillColorDefaultBrush: var(--control-fill-default-dark);
-        --ControlFillColorSecondaryBrush: var(--control-fill-secondary-dark);
-        --ControlFillColorTertiaryBrush: var(--control-fill-tertiary-dark);
-        --ControlFillColorQuaternaryBrush: var(--control-fill-quaternary-dark);
-        --ControlFillColorDisabledBrush: var(--control-fill-disabled-dark);
-        --ControlFillColorTransparentBrush: var(--control-fill-transparent-dark);
-        --ControlFillColorInputActiveBrush: var(--control-fill-input-active-dark);
-
-        --ControlAltFillColorTransparentBrush: var(--control-alt-fill-transparent-dark);
-        --ControlAltFillColorSecondaryBrush: var(--control-alt-fill-secondary-dark);
-        --ControlAltFillColorTertiaryBrush: var(--control-alt-fill-tertiary-dark);
-        --ControlAltFillColorQuaternaryBrush: var(--control-alt-fill-quaternary-dark);
-        --ControlAltFillColorDisabledBrush: var(--control-alt-fill-disabled-dark);
-
-        --ControlSolidFillColorDefaultBrush: var(--control-solid-fill-default-dark);
-
-        --ControlStrongFillColorDefaultBrush: var(--control-strong-fill-default-dark);
-        --ControlStrongFillColorDisabledBrush: var(--control-strong-fill-disabled-dark);
-
-        --SubtleFillColorTransparentBrush: var(--subtle-fill-transparent-dark);
-        --SubtleFillColorSecondaryBrush: var(--subtle-fill-secondary-dark);
-        --SubtleFillColorTertiaryBrush: var(--subtle-fill-tertiary-dark);
-        --SubtleFillColorDisabledBrush: var(--subtle-fill-disabled-dark);
-
-        --ControlOnImageFillColorDefaultBrush: var(--control-on-image-default-dark);
-        --ControlOnImageFillColorSecondaryBrush: var(--control-on-image-secondary-dark);
-        --ControlOnImageFillColorTertiaryBrush: var(--control-on-image-tertiary-dark);
-        --ControlOnImageFillColorDisabledBrush: var(--control-on-image-disabled-dark);
-
-        --AccentFillColorDefaultBrush: var(--accent-fill-default-dark);
-        --AccentFillColorSecondaryBrush: var(--accent-fill-secondary-dark);
-        --AccentFillColorTertiaryBrush: var(--accent-fill-tertiary-dark);
-        --AccentFillColorDisabledBrush: var(--accent-fill-disabled-dark);
-        --AccentFillColorSelectedTextBackgroundBrush: var(--accent-fill-selected-dark);
-
-        --CardBackgroundFillColorDefaultBrush: var(--card-background-fill-default-dark);
-        --CardBackgroundFillColorSecondaryBrush: var(--card-background-fill-secondary-dark);
-        --CardBackgroundTertiaryBrush: var(--card-background-fill-tertiary-dark);
-
-        --SmokeFillColorDefaultBrush: var(--smoke-fill-default-dark);
-
-        --LayerFillColorDefaultBrush: var(--layer-fill-default-dark);
-        --LayerFillColorAltBrush: var(--layer-fill-alt-dark);
-
-        --AccentAcrylicBackgroundFillColorBaseBrush: var(--accent-background-base-dark);
-        --AccentAcrylicBackgroundFillColorDefaultBrush: var(--accent-background-default-dark);
-
-        --CardStrokeColorDefaultBrush: var(--card-stroke-default-dark);
-        --CardStrokeColorDefaultSolidBrush: var(--card-stroke-default-solid-dark);
-
-        --ControlElevationBorderBrush: var(--control-elevation-border-dark);
-        --CircleElevationBorderBrush: var(--circle-elevation-border-dark);
-        --TextControlElevationBorderBrush: var(--text-control-elevation-border-dark);
-        --TextControlElevationBorderFocusedBrush: var(--text-control-elevation-border-focused-dark);
-        --AccentControlElevationBorderBrush: var(--accent-control-elevation-border-dark);
-
-        --DividerStrokeColorDefaultBrush: var(--divider-stroke-default-dark);
-
-        --FocusStrokeColorOuterBrush: var(--focus-stroke-outer-dark);
-        --FocusStrokeColorInnerBrush: var(--focus-stroke-inner-dark);
-    }
-}
-
-.light {
     --TextFillColorPrimaryBrush: var(--text-primary-light);
     --TextFillColorSecondaryBrush: var(--text-secondary-light);
     --TextFillColorTertiaryBrush: var(--text-tertiary-light);
@@ -494,9 +351,13 @@
 
     --FocusStrokeColorOuterBrush: var(--focus-stroke-outer-light);
     --FocusStrokeColorInnerBrush: var(--focus-stroke-inner-light);
+  }
 }
-  
-.dark {
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    background-color: #202020;
+
     --TextFillColorPrimaryBrush: var(--text-primary-dark);
     --TextFillColorSecondaryBrush: var(--text-secondary-dark);
     --TextFillColorTertiaryBrush: var(--text-tertiary-dark);
@@ -572,4 +433,161 @@
 
     --FocusStrokeColorOuterBrush: var(--focus-stroke-outer-dark);
     --FocusStrokeColorInnerBrush: var(--focus-stroke-inner-dark);
+  }
+}
+
+.light {
+  --TextFillColorPrimaryBrush: var(--text-primary-light);
+  --TextFillColorSecondaryBrush: var(--text-secondary-light);
+  --TextFillColorTertiaryBrush: var(--text-tertiary-light);
+  --TextFillColorDisabledBrush: var(--text-disabled-light);
+
+  --AccentTextFillColorPrimaryBrush: var(--accent-text-primary-light);
+  --AccentTextFillColorSecondaryBrush: var(--accent-text-secondary-light);
+  --AccentTextFillColorTertiaryBrush: var(--accent-text-tertiary-light);
+  --AccentTextFillColorDisabledBrush: var(--accent-text-disabled-light);
+
+  --TextOnAccentFillColorPrimaryBrush: var(--text-on-accent-primary-light);
+  --TextOnAccentFillColorSecondaryBrush: var(--text-on-accent-secondary-light);
+  --TextOnAccentFillColorDisabledBrush: var(--text-on-accent-disabled-light);
+  --TextOnAccentFillColorSelectedTextBrush: var(--text-on-accent-selected-light);
+
+  --ControlFillColorDefaultBrush: var(--control-fill-default-light);
+  --ControlFillColorSecondaryBrush: var(--control-fill-secondary-light);
+  --ControlFillColorTertiaryBrush: var(--control-fill-tertiary-light);
+  --ControlFillColorQuaternaryBrush: var(--control-fill-quaternary-light);
+  --ControlFillColorDisabledBrush: var(--control-fill-disabled-light);
+  --ControlFillColorTransparentBrush: var(--control-fill-transparent-light);
+  --ControlFillColorInputActiveBrush: var(--control-fill-input-active-light);
+
+  --ControlAltFillColorTransparentBrush: var(--control-alt-fill-transparent-light);
+  --ControlAltFillColorSecondaryBrush: var(--control-alt-fill-secondary-light);
+  --ControlAltFillColorTertiaryBrush: var(--control-alt-fill-tertiary-light);
+  --ControlAltFillColorQuaternaryBrush: var(--control-alt-fill-quaternary-light);
+  --ControlAltFillColorDisabledBrush: var(--control-alt-fill-disabled-light);
+
+  --ControlSolidFillColorDefaultBrush: var(--control-solid-fill-default-light);
+
+  --ControlStrongFillColorDefaultBrush: var(--control-strong-fill-default-light);
+  --ControlStrongFillColorDisabledBrush: var(--control-strong-fill-disabled-light);
+
+  --SubtleFillColorTransparentBrush: var(--subtle-fill-transparent-light);
+  --SubtleFillColorSecondaryBrush: var(--subtle-fill-secondary-light);
+  --SubtleFillColorTertiaryBrush: var(--subtle-fill-tertiary-light);
+  --SubtleFillColorDisabledBrush: var(--subtle-fill-disabled-light);
+
+  --ControlOnImageFillColorDefaultBrush: var(--control-on-image-default-light);
+  --ControlOnImageFillColorSecondaryBrush: var(--control-on-image-secondary-light);
+  --ControlOnImageFillColorTertiaryBrush: var(--control-on-image-tertiary-light);
+  --ControlOnImageFillColorDisabledBrush: var(--control-on-image-disabled-light);
+
+  --AccentFillColorDefaultBrush: var(--accent-fill-default-light);
+  --AccentFillColorSecondaryBrush: var(--accent-fill-secondary-light);
+  --AccentFillColorTertiaryBrush: var(--accent-fill-tertiary-light);
+  --AccentFillColorDisabledBrush: var(--accent-fill-disabled-light);
+  --AccentFillColorSelectedTextBackgroundBrush: var(--accent-fill-selected-light);
+
+  --CardBackgroundFillColorDefaultBrush: var(--card-background-fill-default-light);
+  --CardBackgroundFillColorSecondaryBrush: var(--card-background-fill-secondary-light);
+  --CardBackgroundTertiaryBrush: var(--card-background-fill-tertiary-light);
+
+  --SmokeFillColorDefaultBrush: var(--smoke-fill-default-light);
+
+  --LayerFillColorDefaultBrush: var(--layer-fill-default-light);
+  --LayerFillColorAltBrush: var(--layer-fill-alt-light);
+
+  --AccentAcrylicBackgroundFillColorBaseBrush: var(--accent-background-base-light);
+  --AccentAcrylicBackgroundFillColorDefaultBrush: var(--accent-background-default-light);
+
+  --CardStrokeColorDefaultBrush: var(--card-stroke-default-light);
+  --CardStrokeColorDefaultSolidBrush: var(--card-stroke-default-solid-light);
+
+  --ControlElevationBorderBrush: var(--control-elevation-border-light);
+  --CircleElevationBorderBrush: var(--circle-elevation-border-light);
+  --TextControlElevationBorderBrush: var(--text-control-elevation-border-light);
+  --TextControlElevationBorderFocusedBrush: var(--text-control-elevation-border-focused-light);
+  --AccentControlElevationBorderBrush: var(--accent-control-elevation-border-light);
+
+  --DividerStrokeColorDefaultBrush: var(--divider-stroke-default-light);
+
+  --FocusStrokeColorOuterBrush: var(--focus-stroke-outer-light);
+  --FocusStrokeColorInnerBrush: var(--focus-stroke-inner-light);
+}
+
+.dark {
+  --TextFillColorPrimaryBrush: var(--text-primary-dark);
+  --TextFillColorSecondaryBrush: var(--text-secondary-dark);
+  --TextFillColorTertiaryBrush: var(--text-tertiary-dark);
+  --TextFillColorDisabledBrush: var(--text-disabled-dark);
+
+  --AccentTextFillColorPrimaryBrush: var(--accent-text-primary-dark);
+  --AccentTextFillColorSecondaryBrush: var(--accent-text-secondary-dark);
+  --AccentTextFillColorTertiaryBrush: var(--accent-text-tertiary-dark);
+  --AccentTextFillColorDisabledBrush: var(--accent-text-disabled-dark);
+
+  --TextOnAccentFillColorPrimaryBrush: var(--text-on-accent-primary-dark);
+  --TextOnAccentFillColorSecondaryBrush: var(--text-on-accent-secondary-dark);
+  --TextOnAccentFillColorDisabledBrush: var(--text-on-accent-disabled-dark);
+  --TextOnAccentFillColorSelectedTextBrush: var(--text-on-accent-selected-dark);
+
+  --ControlFillColorDefaultBrush: var(--control-fill-default-dark);
+  --ControlFillColorSecondaryBrush: var(--control-fill-secondary-dark);
+  --ControlFillColorTertiaryBrush: var(--control-fill-tertiary-dark);
+  --ControlFillColorQuaternaryBrush: var(--control-fill-quaternary-dark);
+  --ControlFillColorDisabledBrush: var(--control-fill-disabled-dark);
+  --ControlFillColorTransparentBrush: var(--control-fill-transparent-dark);
+  --ControlFillColorInputActiveBrush: var(--control-fill-input-active-dark);
+
+  --ControlAltFillColorTransparentBrush: var(--control-alt-fill-transparent-dark);
+  --ControlAltFillColorSecondaryBrush: var(--control-alt-fill-secondary-dark);
+  --ControlAltFillColorTertiaryBrush: var(--control-alt-fill-tertiary-dark);
+  --ControlAltFillColorQuaternaryBrush: var(--control-alt-fill-quaternary-dark);
+  --ControlAltFillColorDisabledBrush: var(--control-alt-fill-disabled-dark);
+
+  --ControlSolidFillColorDefaultBrush: var(--control-solid-fill-default-dark);
+
+  --ControlStrongFillColorDefaultBrush: var(--control-strong-fill-default-dark);
+  --ControlStrongFillColorDisabledBrush: var(--control-strong-fill-disabled-dark);
+
+  --SubtleFillColorTransparentBrush: var(--subtle-fill-transparent-dark);
+  --SubtleFillColorSecondaryBrush: var(--subtle-fill-secondary-dark);
+  --SubtleFillColorTertiaryBrush: var(--subtle-fill-tertiary-dark);
+  --SubtleFillColorDisabledBrush: var(--subtle-fill-disabled-dark);
+
+  --ControlOnImageFillColorDefaultBrush: var(--control-on-image-default-dark);
+  --ControlOnImageFillColorSecondaryBrush: var(--control-on-image-secondary-dark);
+  --ControlOnImageFillColorTertiaryBrush: var(--control-on-image-tertiary-dark);
+  --ControlOnImageFillColorDisabledBrush: var(--control-on-image-disabled-dark);
+
+  --AccentFillColorDefaultBrush: var(--accent-fill-default-dark);
+  --AccentFillColorSecondaryBrush: var(--accent-fill-secondary-dark);
+  --AccentFillColorTertiaryBrush: var(--accent-fill-tertiary-dark);
+  --AccentFillColorDisabledBrush: var(--accent-fill-disabled-dark);
+  --AccentFillColorSelectedTextBackgroundBrush: var(--accent-fill-selected-dark);
+
+  --CardBackgroundFillColorDefaultBrush: var(--card-background-fill-default-dark);
+  --CardBackgroundFillColorSecondaryBrush: var(--card-background-fill-secondary-dark);
+  --CardBackgroundTertiaryBrush: var(--card-background-fill-tertiary-dark);
+
+  --SmokeFillColorDefaultBrush: var(--smoke-fill-default-dark);
+
+  --LayerFillColorDefaultBrush: var(--layer-fill-default-dark);
+  --LayerFillColorAltBrush: var(--layer-fill-alt-dark);
+
+  --AccentAcrylicBackgroundFillColorBaseBrush: var(--accent-background-base-dark);
+  --AccentAcrylicBackgroundFillColorDefaultBrush: var(--accent-background-default-dark);
+
+  --CardStrokeColorDefaultBrush: var(--card-stroke-default-dark);
+  --CardStrokeColorDefaultSolidBrush: var(--card-stroke-default-solid-dark);
+
+  --ControlElevationBorderBrush: var(--control-elevation-border-dark);
+  --CircleElevationBorderBrush: var(--circle-elevation-border-dark);
+  --TextControlElevationBorderBrush: var(--text-control-elevation-border-dark);
+  --TextControlElevationBorderFocusedBrush: var(--text-control-elevation-border-focused-dark);
+  --AccentControlElevationBorderBrush: var(--accent-control-elevation-border-dark);
+
+  --DividerStrokeColorDefaultBrush: var(--divider-stroke-default-dark);
+
+  --FocusStrokeColorOuterBrush: var(--focus-stroke-outer-dark);
+  --FocusStrokeColorInnerBrush: var(--focus-stroke-inner-dark);
 }
