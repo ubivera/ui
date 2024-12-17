@@ -73,7 +73,12 @@ const CheckBox = React.memo(
         }, [checkedState, Checked, Unchecked]);
 
         return (
-            <label className={`checkbox-label${Classes ? ' ' + Classes : ''}`}>
+            <label
+                className={`checkbox-label${Classes ? ' ' + Classes : ''}`}
+                htmlFor={Name}
+                aria-checked={checkedState === null ? 'mixed' : checkedState ? 'true' : 'false'}
+                role="checkbox"
+            >
                 <input
                     ref={checkboxRef}
                     id={Name}
@@ -81,6 +86,7 @@ const CheckBox = React.memo(
                     className="checkbox-input"
                     checked={checkedState === true}
                     onChange={handleChange}
+                    aria-checked={checkedState === null ? 'mixed' : checkedState ? 'true' : 'false'}
                 />
                 <span className="checkbox-content">
                     {children || Content}
