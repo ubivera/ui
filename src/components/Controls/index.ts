@@ -6,3 +6,5 @@ export {HyperlinkButton} from './HyperlinkButton';
 export {RepeatButton} from './RepeatButton';
 export {CheckBox} from './CheckBox';
 export type {CheckBoxRef} from './CheckBox'
+export {ToggleButton} from './ToggleButton';
+export type {ToggleButtonRef} from './ToggleButton';

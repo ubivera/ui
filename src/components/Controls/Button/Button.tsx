@@ -23,10 +23,12 @@ export interface ButtonProps {
     Content?: ReactNode;
     ExtendedContent?: ReactNode[];
     children?: ReactNode;
-    AriaLabel?: string;
     Style?: string;
+    AriaLabel?: string;
     AriaExpanded?: boolean;
     AriaHasPopup?: boolean | 'menu' | 'listbox' | 'tree' | 'grid' | 'dialog';
+    AriaPressed?: boolean;
+    AriaChecked?: boolean | 'mixed';
 }
 
 export interface ButtonRef {
@@ -65,7 +67,9 @@ const Button = React.memo(
             AriaLabel,
             Style,
             AriaExpanded,
-            AriaHasPopup
+            AriaHasPopup,
+            AriaPressed,
+            AriaChecked
         } = props;
 
         const buttonRef = useRef<HTMLButtonElement>(null);
@@ -201,6 +205,8 @@ const Button = React.memo(
                 aria-disabled={!enabled}
                 aria-expanded={AriaExpanded}
                 aria-haspopup={AriaHasPopup}
+                aria-pressed={AriaPressed}
+                aria-checked={AriaChecked}
                 style={Classes}
                 {...eventProps}
             >
