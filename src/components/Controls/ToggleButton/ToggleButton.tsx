@@ -1,5 +1,5 @@
-﻿import React, { useState, forwardRef, useImperativeHandle } from 'react';
-import Button, { ButtonProps } from '../Button/Button';
+﻿import React, {useState, forwardRef, useImperativeHandle} from 'react';
+import Button, {ButtonProps} from '../Button/Button';
 import './ToggleButton.scss';
 
 export interface ToggleButtonProps extends ButtonProps {
