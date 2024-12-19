@@ -1,66 +1,66 @@
 @keyframes dropdown-button-bounce {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(2px);
-    }
-    80% {
-        transform: translateY(-1px);
-    }
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(2px);
+  }
+  80% {
+    transform: translateY(-1px);
+  }
 }
 
 .dropdown-button-container {
-    position: relative;
-    display: inline-block;
+  position: relative;
+  display: inline-block;
 
-    &[aria-expanded="true"] {
-        & .dropdown-button svg {
-            animation-name: dropdown-button-bounce;
-        }
+  &[aria-expanded="true"] {
+    & .dropdown-button svg {
+      animation-name: dropdown-button-bounce;
     }
+  }
 
-    &:hover {
-        & .dropdown-button svg {
-            stroke: var(--TextFillColorSecondaryBrush);
-        }
+  &:hover {
+    & .dropdown-button svg {
+      stroke: var(--TextFillColorSecondaryBrush);
     }
+  }
 }
 
 .dropdown-button-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 999;
-    background: transparent;
-    pointer-events: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  background: transparent;
+  pointer-events: auto;
 }
 
 .dropdown-button-flyout {
-    position: absolute;
-    z-index: 1000;
+  position: absolute;
+  z-index: 1000;
 }
 
 .dropdown-button-icon {
-    pointer-events: none;
-    padding: 0 var(--SpacingCompact);
+  pointer-events: none;
+  padding: 0 var(--SpacingCompact);
 
-    display: flex;
-    align-items: center;
-    align-content: center;
+  display: flex;
+  align-items: center;
+  align-content: center;
 
-    & svg {
-        width: var(--SpacingControlHeaderTextEdge);
-        height: var(--SpacingControlHeaderTextEdge);
-        stroke: var(--TextFillColorPrimaryBrush);
+  & svg {
+    width: var(--SpacingControlHeaderTextEdge);
+    height: var(--SpacingControlHeaderTextEdge);
+    stroke: var(--TextFillColorPrimaryBrush);
 
-        animation-duration: 0.3s;
-        animation-timing-function: var(--TransitionTimingFunction);
+    animation-duration: 0.3s;
+    animation-timing-function: var(--TransitionTimingFunction);
 
-        transition-property: stroke;
-        transition-timing-function: var(--TransitionTimingFunction);
-        transition-duration: var(--TransitionTimingDuration);
-    }
+    transition-property: stroke;
+    transition-timing-function: var(--TransitionTimingFunction);
+    transition-duration: var(--TransitionTimingDuration);
+  }
 }

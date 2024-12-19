@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { MenuFlyoutContext } from './MenuFlyoutContext';
+import React, {useContext} from 'react';
+import {MenuFlyoutContext} from './MenuFlyoutContext';
 
 export interface MenuFlyoutItemProps {
     Text?: string;
@@ -10,12 +10,12 @@ export interface MenuFlyoutItemProps {
 }
 
 const MenuFlyoutItem: React.FC<MenuFlyoutItemProps> = ({
-    Text,
-    Click,
-    Disabled = false,
-    AutoClose = true,
-    children,
-}) => {
+                                                           Text,
+                                                           Click,
+                                                           Disabled = false,
+                                                           AutoClose = true,
+                                                           children,
+                                                       }) => {
     const context = useContext(MenuFlyoutContext);
     const closeFlyout = context?.closeFlyout;
 
@@ -30,26 +30,26 @@ const MenuFlyoutItem: React.FC<MenuFlyoutItemProps> = ({
     };
 
     return (
-    <div
-        className={`menu-flyout-item${Disabled ? ' disabled' : ''}`}
-        role="menuitem"
-        tabIndex={Disabled ? -1 : 0}
-        onClick={handleClick}
-        onKeyDown={(e) => {
-            if (Disabled) return;
+        <div
+            className={`menu-flyout-item${Disabled ? ' disabled' : ''}`}
+            role="menuitem"
+            tabIndex={Disabled ? -1 : 0}
+            onClick={handleClick}
+            onKeyDown={(e) => {
+                if (Disabled) return;
 
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                Click && Click();
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    Click && Click();
 
-                if (AutoClose && closeFlyout) {
-                    closeFlyout();
+                    if (AutoClose && closeFlyout) {
+                        closeFlyout();
+                    }
                 }
-            }
-        }}
-    >
-        {children || Text}
-    </div>
+            }}
+        >
+            {children || Text}
+        </div>
     );
 };
 

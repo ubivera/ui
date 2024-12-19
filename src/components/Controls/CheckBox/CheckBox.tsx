@@ -1,4 +1,4 @@
-import React, { useState, useRef, useImperativeHandle, forwardRef, useCallback, ReactNode, useEffect } from 'react';
+import React, {useState, useRef, useImperativeHandle, forwardRef, useCallback, ReactNode, useEffect} from 'react';
 import CheckBoxContent from './CheckBox.Content';
 import './CheckBox.scss';
 
@@ -66,14 +66,19 @@ const CheckBox = React.memo(
         }, [checkedState]);
 
         const handleChange = useCallback(() => {
-            const newCheckedState = checkedState === true ? false : true;
+            const newCheckedState = checkedState !== true;
             setCheckedState(newCheckedState);
-            if (newCheckedState === true) Checked?.();
+            if (newCheckedState) Checked?.();
             else Unchecked?.();
         }, [checkedState, Checked, Unchecked]);
 
         return (
-            <label className={`checkbox-label${Classes ? ' ' + Classes : ''}`}>
+            <label
+                className={`checkbox-label${Classes ? ' ' + Classes : ''}`}
+                htmlFor={Name}
+                aria-checked={checkedState === null ? 'mixed' : checkedState ? 'true' : 'false'}
+                role="checkbox"
+            >
                 <input
                     ref={checkboxRef}
                     id={Name}
@@ -81,6 +86,7 @@ const CheckBox = React.memo(
                     className="checkbox-input"
                     checked={checkedState === true}
                     onChange={handleChange}
+                    aria-checked={checkedState === null ? 'mixed' : checkedState ? 'true' : 'false'}
                 />
                 <span className="checkbox-content">
                     {children || Content}

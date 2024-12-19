@@ -1,10 +1,10 @@
-import React, { ReactNode } from 'react';
+import React, {ReactNode} from 'react';
 
 export interface DropDownButtonFlyoutProps {
     children: ReactNode;
 }
 
-const DropDownButtonFlyout: React.FC<DropDownButtonFlyoutProps> = ({ children }) => {
+const DropDownButtonFlyout: React.FC<DropDownButtonFlyoutProps> = ({children}) => {
     return <>{children}</>
 };
 

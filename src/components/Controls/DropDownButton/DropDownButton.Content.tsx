@@ -1,7 +1,8 @@
 import React from 'react';
-import ButtonContent, { ButtonContentProps } from '../Button/Button.Content';
+import ButtonContent, {ButtonContentProps} from '../Button/Button.Content';
 
-export interface DropDownButtonContentProps extends ButtonContentProps {}
+export interface DropDownButtonContentProps extends ButtonContentProps {
+}
 
 const DropDownButtonContent: React.FC<DropDownButtonContentProps> = (props) => {
     return <ButtonContent {...props} />;

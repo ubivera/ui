@@ -1,0 +1,6 @@
+﻿.button.toggle {
+  &[aria-checked="true"] {
+    color: var(--TextOnAccentFillColorPrimaryBrush);
+    background-color: var(--AccentFillColorDefaultBrush);
+  }
+}

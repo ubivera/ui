@@ -1,5 +1,5 @@
 import React from 'react';
-import Button, { ButtonProps } from '../Button/Button';
+import Button, {ButtonProps} from '../Button/Button';
 import '../Button/Button.scss';
 
 export interface HyperlinkButtonProps extends ButtonProps {
@@ -7,11 +7,11 @@ export interface HyperlinkButtonProps extends ButtonProps {
 }
 
 const HyperlinkButton: React.FC<HyperlinkButtonProps> = ({
-    NavigateUri,
-    Click,
-    Command,
-    ...props
-}) => {
+                                                             NavigateUri,
+                                                             Click,
+                                                             Command,
+                                                             ...props
+                                                         }) => {
     const handleClick = (
         event: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement>
     ) => {
@@ -24,7 +24,7 @@ const HyperlinkButton: React.FC<HyperlinkButtonProps> = ({
         if (Command) {
             Command(event);
         }
-  };
+    };
 
     return (
         <Button
